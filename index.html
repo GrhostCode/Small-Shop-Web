@@ -282,8 +282,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
             <div class="field">
               <span class="lbl" id="b-pkg-l" data-i18n="b.pkg">Paquete</span>
               <div class="seg" role="group" aria-labelledby="b-pkg-l">
-                <button type="button" id="pkg-basico" data-pkg="basico" aria-pressed="true">Básico · $200</button>
-                <button type="button" id="pkg-grande" data-pkg="grande" aria-pressed="false">Grande · $300</button>
+                <button type="button" id="pkg-basico" data-pkg="basico" aria-pressed="true" data-i18n="pk.basico">Básico · $200</button>
+                <button type="button" id="pkg-grande" data-pkg="grande" aria-pressed="false" data-i18n="pk.grande">Grande · $300</button>
               </div>
             </div>
           </div>
@@ -331,7 +331,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       </div>
       <div class="board">
         <article class="plan">
-          <h3>Básico</h3>
+          <h3 data-i18n="pn.basico">Básico</h3>
           <div class="price">$200<small data-i18n="p.once">pago único</small></div>
           <p data-i18n="p.basic">1 página con servicios, precios, horario, mapa y botón de WhatsApp.</p>
           <ul>
@@ -344,7 +344,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
         </article>
         <article class="plan feature">
           <span class="tag" data-i18n="p.full">Sitio completo</span>
-          <h3>Grande</h3>
+          <h3 data-i18n="pn.grande">Grande</h3>
           <div class="price">$300<small data-i18n="p.once">pago único</small></div>
           <p data-i18n="p.grande">Lo del Básico, más galería de fotos, preguntas frecuentes y enlaces a tus redes.</p>
           <ul>
@@ -491,6 +491,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "p.title": "Un solo pago por tu sitio. El plan mensual es opcional.", "p.once": "pago único", "p.month": "al mes",
       "p.basic": "1 página con servicios, precios, horario, mapa y botón de WhatsApp.",
       "p.b1": "Tu nombre, tu logo y tus colores", "p.b2": "Servicios con sus precios", "p.b3": "Horario, dirección y mapa de Google", "p.b4": "Botón de WhatsApp o mensaje de texto", "p.b5": "Se ve bien en el teléfono y en la computadora",
+      "pk.basico": "Básico · $200", "pk.grande": "Grande · $300", "pn.basico": "Básico", "pn.grande": "Grande", "pn.msg.basico": "Básico ($200)", "pn.msg.grande": "Grande ($300)",
       "p.full": "Sitio completo", "p.grande": "Lo del Básico, más galería de fotos, preguntas frecuentes y enlaces a tus redes.",
       "p.g1": "Todo lo del Básico", "p.g2": "Galería de fotos de tu trabajo", "p.g3": "Preguntas frecuentes", "p.g4": "Enlaces a tus redes sociales",
       "p.optional": "Opcional", "p.maint": "Mantenimiento", "p.maintd": "Hasta 3 cambios al mes: precios, horario, textos.",
@@ -541,15 +542,16 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "p.title": "One payment for your site. The monthly plan is optional.", "p.once": "one-time", "p.month": "per month",
       "p.basic": "1 page with services, prices, hours, map and a WhatsApp button.",
       "p.b1": "Your name, logo and colors", "p.b2": "Services with prices", "p.b3": "Hours, address and Google map", "p.b4": "WhatsApp or text message button", "p.b5": "Looks good on phones and computers",
-      "p.full": "Complete site", "p.grande": "Everything in Básico, plus a photo gallery, FAQ and links to your social media.",
-      "p.g1": "Everything in Básico", "p.g2": "Photo gallery of your work", "p.g3": "Frequently asked questions", "p.g4": "Links to your social media",
+      "pk.basico": "Basic · $200", "pk.grande": "Large · $300", "pn.basico": "Basic", "pn.grande": "Large", "pn.msg.basico": "Basic ($200)", "pn.msg.grande": "Large ($300)",
+      "p.full": "Complete site", "p.grande": "Everything in Basic, plus a photo gallery, FAQ and links to your social media.",
+      "p.g1": "Everything in Basic", "p.g2": "Photo gallery of your work", "p.g3": "Frequently asked questions", "p.g4": "Links to your social media",
       "p.optional": "Optional", "p.maint": "Maintenance", "p.maintd": "Up to 3 changes a month: prices, hours, text.",
       "p.m1": "Send me the change by message", "p.m2": "Cancel any time, no penalty", "p.m3": "The site stays yours",
       "p.draft": "Before you pay, you see a free first draft and ask for any changes you want.",
       "p.domain": "You buy the domain (yourbusiness.com) in your own name, for about $10 to $15 a year. I'll walk you through it.",
       "p.extra": "Any extra work is agreed and quoted with you before I do it.",
-      "ex.title": "What a finished site looks like", "ex.lead": "Two complete sites from the Grande package. Open them on your phone and try the buttons. Both businesses are made up.",
-      "ex.fict": "Fictional business · Grande package", "ex.barber": "Services with prices, WhatsApp booking, gallery, hours, map and FAQ.",
+      "ex.title": "What a finished site looks like", "ex.lead": "Two complete sites from the Large package. Open them on your phone and try the buttons. Both businesses are made up.",
+      "ex.fict": "Fictional business · Large package", "ex.barber": "Services with prices, WhatsApp booking, gallery, hours, map and FAQ.",
       "ex.food": "Menu with prices, WhatsApp ordering, gallery, hours, map and FAQ.", "ex.open": "See the full site →",
       "how.title": "Four steps, no tech skills needed",
       "how.1t": "We talk", "how.1": "You tell me your services, prices and hours, and send me your photos and logo.",
@@ -637,7 +639,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     html += '<div class="pv-foot">' + l["pv.made"] + '</div>';
     screen.innerHTML = html;
 
-    var pkgName = grande ? "Grande ($300)" : "Básico ($200)";
+    var pkgName = l[grande ? "pn.msg.grande" : "pn.msg.basico"];
     var typeName = typeEl.value === "otro" ? (otherEl.value.trim() || l["t.otro"]) : typeEl.options[typeEl.selectedIndex].textContent;
     var msg = l.msg(name, pkgName, typeName) + " Color: " + l.colors[state.color] + ".";
     cta.href = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg);
