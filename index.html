@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Small Shop Web</title>
-<meta name="description" content="Sitios web para negocios pequeños en Puerto Rico. Desde $200, pago único. Primer borrador gratis.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Sitios web para negocios pequeños en Puerto Rico. Primer borrador gratis.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -253,7 +254,6 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
         <h1 data-i18n="hero.title">Tu negocio, en internet, con su propia página.</h1>
         <p class="sub" data-i18n="hero.sub">Cuando alguien busca tu negocio en Google, un sitio web le dice en segundos tus servicios, tus precios, tu horario y cómo llegar, sin que tenga que escribirte primero.</p>
         <div class="chips">
-          <span class="chip sun" data-i18n="hero.from">Desde $200, pago único</span>
           <span class="chip" data-i18n="hero.draft">Primer borrador gratis</span>
         </div>
 
@@ -477,7 +477,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "hero.eyebrow": "Sitios web para negocios pequeños en Puerto Rico",
       "hero.title": "Tu negocio, en internet, con su propia página.",
       "hero.sub": "Cuando alguien busca tu negocio en Google, un sitio web le dice en segundos tus servicios, tus precios, tu horario y cómo llegar, sin que tenga que escribirte primero.",
-      "hero.from": "Desde $200, pago único", "hero.draft": "Primer borrador gratis",
+      "hero.draft": "Primer borrador gratis",
       "b.title": "Pruébalo con tu negocio", "b.name": "Nombre del negocio", "b.type": "Tipo de negocio", "b.pkg": "Paquete", "b.color": "Color",
       "b.note": "Los precios y el horario del ejemplo son inventados. En tu sitio van los tuyos.",
       "b.cta": "Quiero este sitio", "b.ctaSub": "Abre WhatsApp con tu mensaje ya escrito.", "b.live": "Vista previa en vivo",
@@ -527,7 +527,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "hero.eyebrow": "Websites for small businesses in Puerto Rico",
       "hero.title": "Your business on the web, with a page of its own.",
       "hero.sub": "When someone looks up your business on Google, a website shows your services, prices, hours and how to get there in seconds, without them having to message you first.",
-      "hero.from": "From $200, one-time payment", "hero.draft": "Free first draft",
+      "hero.draft": "Free first draft",
       "b.title": "Try it with your business", "b.name": "Business name", "b.type": "Type of business", "b.pkg": "Package", "b.color": "Color",
       "b.note": "The sample prices and hours are made up. Your site shows yours.",
       "b.cta": "I want this site", "b.ctaSub": "Opens WhatsApp with your message ready to send.", "b.live": "Live preview",
@@ -664,7 +664,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     document.querySelectorAll("[data-i18n-ph]").forEach(function (el) { var k = el.getAttribute("data-i18n-ph"); if (typeof d[k] === "string") el.setAttribute("placeholder", d[k]); });
     document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false"); });
     var tag = document.querySelector('meta[name="description"]');
-    if (tag) tag.setAttribute("content", lang === "es" ? "Sitios web para negocios pequeños en Puerto Rico. Desde $200, pago único. Primer borrador gratis." : "Websites for small businesses in Puerto Rico. From $200, one-time payment. Free first draft.");
+    if (tag) tag.setAttribute("content", lang === "es" ? "Sitios web para negocios pequeños en Puerto Rico. Primer borrador gratis." : "Websites for small businesses in Puerto Rico. Free first draft.");
     var wa = $("c-wa");
     wa.href = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(lang === "es" ? "Hola Adrian, vi Small Shop Web y quiero información sobre un sitio web para mi negocio." : "Hi Adrian, I saw Small Shop Web and I'd like information about a website for my business.");
     buildSwatches(); render();
