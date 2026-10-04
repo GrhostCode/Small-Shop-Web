@@ -657,10 +657,10 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     });
   }
 
-  function setLang(lang) {
+  function setLang(lang, auto) {
     state.lang = lang;
     document.documentElement.lang = lang;
-    try { localStorage.setItem("ssw-lang", lang); } catch (e) {}
+    if (!auto) { try { localStorage.setItem("ssw-lang", lang); } catch (e) {} }
     var d = T[lang];
     document.querySelectorAll("[data-i18n]").forEach(function (el) { var k = el.getAttribute("data-i18n"); if (typeof d[k] === "string") el.textContent = d[k]; });
     document.querySelectorAll("[data-i18n-ph]").forEach(function (el) { var k = el.getAttribute("data-i18n-ph"); if (typeof d[k] === "string") el.setAttribute("placeholder", d[k]); });
@@ -694,7 +694,38 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     });
   });
 
-  setLang(state.lang);
+  setLang(state.lang, true);
+
+  // Idioma por defecto según el país de la IP (solo si la persona nunca eligió uno).
+  var hasChoice = false;
+  try { hasChoice = !!localStorage.getItem("ssw-lang"); } catch (e) {}
+  if (!hasChoice) {
+    var ES = "PR DO MX ES CO AR CL PE VE EC GT CU BO HN PY SV NI CR PA UY GQ".split(" ");
+    var fromBrowser = function () { return /^es/i.test(navigator.language || "") ? "es" : "en"; };
+    var apply = function (cc) {
+      if (userPicked) return;
+      var lang = cc ? (ES.indexOf(cc) > -1 ? "es" : "en") : fromBrowser();
+      if (lang !== state.lang) setLang(lang, true);
+    };
+    var userPicked = false;
+    document.querySelectorAll(".lang button").forEach(function (b) { b.addEventListener("click", function () { userPicked = true; }); });
+    var cached = null;
+    try { cached = sessionStorage.getItem("ssw-cc"); } catch (e) {}
+    if (cached) { apply(cached); }
+    else if (window.fetch) {
+      var ctl = window.AbortController ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 3000);
+      fetch("https://api.country.is/", ctl ? { signal: ctl.signal } : {})
+        .then(function (res) { return res.json(); })
+        .then(function (j) {
+          clearTimeout(timer);
+          var cc = j && /^[A-Z]{2}$/.test(j.country) ? j.country : null;
+          if (cc) { try { sessionStorage.setItem("ssw-cc", cc); } catch (e) {} }
+          apply(cc);
+        })
+        .catch(function () { clearTimeout(timer); apply(null); });
+    } else { apply(null); }
+  }
 })();
 </script>
 </body>
