@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Barbería El Filo</title>
+<meta name="description" content="Sitio de ejemplo hecho por Small Shop Web. Barbería El Filo es un negocio ficticio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Manrope:wght@400;600;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a classic barbershop at night. Charcoal walls, brass trim, a barber-pole stripe as the one bold mark. Single dark look by design. */
+:root {
+  --bg: #121212;
+  --panel: #1B1A18;
+  --cream: #EFE7DA;
+  --dim: #A79E90;
+  --brass: #C9A15B;
+  --line: #2E2B27;
+  --pole-r: #B3261E;
+  --pole-b: #2B5DA8;
+  --demo: #FFC530;
+  --demo-ink: #12233A;
+  --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --body: "Manrope", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body { margin: 0; background: var(--bg); color: var(--cream); font-family: var(--body); font-size: 17px; line-height: 1.55; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+a { color: var(--brass); }
+:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; border-radius: 4px; }
+.wrap { width: min(1080px, 100%); margin-inline: auto; padding-inline: 20px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; line-height: .95; text-transform: uppercase; letter-spacing: .02em; text-wrap: balance; }
+h2 { font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 900; }
+h3 { font-size: 1.5rem; font-weight: 700; }
+p { margin: 0; }
+.kicker { font-family: var(--mono); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+
+/* Demo bar (Small Shop Web) */
+.demo { background: var(--demo); color: var(--demo-ink); font-size: .88rem; }
+.demo .wrap { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; min-height: 44px; padding-block: 6px; }
+.demo a { color: var(--demo-ink); font-weight: 800; text-decoration: none; }
+.demo .msg { flex: 1 1 220px; }
+.lang { display: inline-flex; border: 1.5px solid var(--demo-ink); border-radius: 999px; overflow: hidden; }
+.lang button { font: 700 .76rem var(--mono); padding: 5px 10px; border: 0; background: transparent; color: var(--demo-ink); cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--demo-ink); color: var(--demo); }
+
+/* Site nav */
+.nav { border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 10; }
+.nav .wrap { display: flex; align-items: center; gap: 18px; min-height: 60px; flex-wrap: wrap; }
+.logo { font-family: var(--display); font-weight: 900; font-size: 1.6rem; letter-spacing: .04em; text-transform: uppercase; color: var(--cream); text-decoration: none; }
+.logo span { color: var(--brass); }
+.nav nav { margin-left: auto; display: flex; gap: 18px; flex-wrap: wrap; }
+.nav nav a { color: var(--cream); text-decoration: none; font-weight: 600; font-size: .95rem; }
+.nav nav a:hover { color: var(--brass); }
+@media (max-width: 680px) { .nav nav { display: none; } }
+
+/* Hero */
+.hero { padding-block: 56px 64px; position: relative; overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: center; }
+.hero h1 { font-size: clamp(3.6rem, 12vw, 8rem); font-weight: 900; line-height: .85; }
+.hero h1 small { display: block; font-size: .28em; letter-spacing: .38em; color: var(--brass); margin-bottom: 14px; }
+.hero p.lead { font-size: 1.15rem; color: var(--dim); max-width: 30em; margin-top: 22px; }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 4px; font-weight: 800; text-decoration: none; font-size: 1rem; border: 2px solid var(--brass); cursor: pointer; font-family: var(--body); }
+.btn.solid { background: var(--brass); color: #16130E; }
+.btn.ghost { background: transparent; color: var(--cream); }
+.pole { width: 46px; height: min(420px, 60vw); border-radius: 23px; background: repeating-linear-gradient(-45deg, var(--pole-r) 0 16px, var(--cream) 16px 32px, var(--pole-b) 32px 48px, var(--cream) 48px 64px); background-size: 100% 181px; box-shadow: 0 0 0 6px var(--panel), 0 0 0 8px var(--brass); animation: spin 6s linear infinite; }
+@keyframes spin { to { background-position: 0 181px; } }
+@media (max-width: 600px) { .hero .wrap { grid-template-columns: 1fr; } .pole { display: none; } }
+.info-strip { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 34px; color: var(--dim); font-size: .95rem; }
+.info-strip b { color: var(--cream); display: block; font-size: 1rem; }
+
+section.s { padding-block: 72px; border-top: 1px solid var(--line); }
+.s-head { display: grid; gap: 10px; margin-bottom: 32px; }
+.s-head p { color: var(--dim); max-width: 36em; }
+
+/* Price list */
+.prices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; }
+@media (max-width: 720px) { .prices { grid-template-columns: 1fr; } }
+.pr { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 10px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+.pr .n { font-weight: 800; font-size: 1.08rem; }
+.pr .d { grid-column: 1 / -1; color: var(--dim); font-size: .92rem; margin-top: -6px; }
+.pr .dots { border-bottom: 2px dotted var(--line); transform: translateY(-5px); }
+.pr .p { font-family: var(--display); font-weight: 900; font-size: 1.7rem; color: var(--brass); font-variant-numeric: tabular-nums; }
+
+/* Booking */
+.book { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 40px; align-items: start; }
+@media (max-width: 820px) { .book { grid-template-columns: 1fr; } }
+form.card { background: var(--panel); border: 1px solid var(--line); border-top: 4px solid var(--brass); padding: 26px; display: grid; gap: 16px; border-radius: 4px; }
+.f { display: grid; gap: 6px; }
+.f label { font-weight: 700; font-size: .9rem; }
+.f select, .f input { font: inherit; font-size: 1rem; padding: 12px; border-radius: 4px; border: 1.5px solid var(--line); background: var(--bg); color: var(--cream); width: 100%; }
+.f select:focus, .f input:focus { border-color: var(--brass); outline: none; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 480px) { .two { grid-template-columns: 1fr; } }
+.small { font-size: .85rem; color: var(--dim); }
+
+/* Gallery */
+.gal { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 720px) { .gal { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tile { aspect-ratio: 4 / 5; max-width: 100%; border-radius: 4px; position: relative; overflow: hidden; display: grid; place-items: center; background: radial-gradient(circle at 30% 20%, #2C2822, #141312 70%); border: 1px solid var(--line); }
+.tile svg { width: 44%; height: auto; opacity: .9; }
+.tile .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 14px; background: linear-gradient(transparent, rgba(0,0,0,.75)); font-weight: 800; font-size: .95rem; }
+.tile .cap span { display: block; font: 500 .68rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--brass); }
+.tile.wide { grid-column: span 2; aspect-ratio: auto; }
+
+/* Hours + map */
+.visit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 40px; }
+@media (max-width: 820px) { .visit { grid-template-columns: 1fr; } }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 10px 24px; font-size: 1.02rem; }
+.hours span:nth-child(odd) { font-weight: 800; }
+.hours .closed { color: var(--dim); }
+.today { outline: 1px solid var(--brass); outline-offset: 4px; border-radius: 2px; }
+.map { border-radius: 4px; overflow: hidden; border: 1px solid var(--line); background: #1F1E1B; display: grid; }
+.map svg { width: 100%; height: auto; display: block; }
+.map .bar { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding: 14px 16px; flex-wrap: wrap; border-top: 1px solid var(--line); }
+
+/* FAQ */
+.faq { display: grid; gap: 0; max-width: 46em; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; font-weight: 800; padding: 18px 0; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--brass); font-family: var(--display); font-size: 1.6rem; line-height: .8; }
+.faq details[open] summary::after { content: "–"; }
+.faq p { color: var(--dim); padding-bottom: 18px; }
+
+footer { border-top: 1px solid var(--line); padding-block: 40px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: center; }
+.social { display: flex; gap: 10px; }
+.social button { font: 700 .9rem var(--body); padding: 10px 16px; border-radius: 4px; border: 1.5px solid var(--line); background: transparent; color: var(--cream); cursor: pointer; }
+.social button:hover { border-color: var(--brass); }
+.made { color: var(--dim); font-size: .85rem; text-decoration: underline; text-underline-offset: 3px; }
+.made:hover { color: var(--brass); }
+
+/* Demo modal */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); display: grid; place-items: center; padding: 20px; z-index: 50; }
+.sheet { background: #FFFFFF; color: #12233A; border-radius: 16px; max-width: 420px; width: 100%; padding: 22px; display: grid; gap: 14px; font-family: var(--body); }
+.sheet h3 { font-family: var(--body); text-transform: none; letter-spacing: 0; font-size: 1.1rem; font-weight: 800; }
+.bubble { background: #DCF8C6; color: #0B2A12; border-radius: 12px 12px 2px 12px; padding: 12px 14px; font-size: .98rem; justify-self: end; max-width: 92%; white-space: pre-wrap; overflow-wrap: anywhere; }
+.sheet p { font-size: .9rem; color: #4A5668; }
+.sheet button { justify-self: start; font: 800 .95rem var(--body); padding: 10px 18px; border-radius: 10px; border: 0; background: #12233A; color: #fff; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div class="demo">
+  <div class="wrap">
+    <a href="../index.html" data-i18n="demo.back">← Small Shop Web</a>
+    <span class="msg" data-i18n="demo.msg">Sitio de ejemplo · Barbería El Filo es un negocio ficticio.</span>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">El <span>Filo</span></a>
+    <nav aria-label="Secciones">
+      <a href="#servicios" data-i18n="nav.services">Servicios</a>
+      <a href="#cita" data-i18n="nav.book">Cita</a>
+      <a href="#galeria" data-i18n="nav.gallery">Galería</a>
+      <a href="#visitanos" data-i18n="nav.visit">Visítanos</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1><small data-i18n="hero.small">Barbería</small>El Filo</h1>
+        <p class="lead" data-i18n="hero.lead">Recortes clásicos y modernos, barba con navaja y toalla caliente. Llega sin cita o reserva tu turno por WhatsApp.</p>
+        <div class="btns">
+          <a class="btn solid" href="#cita" data-i18n="hero.book">Pedir cita</a>
+          <a class="btn ghost" href="#servicios" data-i18n="hero.prices">Ver precios</a>
+        </div>
+        <div class="info-strip">
+          <div><b data-i18n="strip.open">Mar – Sáb</b><span data-i18n="strip.hours">Abre 10:00 a.m. (sáb. 9:00)</span></div>
+          <div><b>Las Piedras, PR</b><span data-i18n="strip.parking">Estacionamiento al frente</span></div>
+          <div><b data-i18n="strip.pay">ATH Móvil y efectivo</b><span data-i18n="strip.payd">Pagas al terminar</span></div>
+        </div>
+      </div>
+      <div class="pole" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="s" id="servicios">
+    <div class="wrap">
+      <div class="s-head">
+        <span class="kicker" data-i18n="nav.services">Servicios</span>
+        <h2 data-i18n="srv.title">Precios</h2>
+      </div>
+      <div class="prices" id="prices"></div>
+    </div>
+  </section>
+
+  <section class="s" id="cita">
+    <div class="wrap book">
+      <div class="s-head">
+        <span class="kicker" data-i18n="nav.book">Cita</span>
+        <h2 data-i18n="book.title">Reserva tu turno</h2>
+        <p data-i18n="book.lead">Escoge el servicio, el día y la hora. El botón abre WhatsApp con tu mensaje listo y te confirmamos por ahí.</p>
+      </div>
+      <form class="card" id="book" autocomplete="off">
+        <div class="f">
+          <label for="bk-service" data-i18n="book.service">Servicio</label>
+          <select id="bk-service"></select>
+        </div>
+        <div class="two">
+          <div class="f">
+            <label for="bk-day" data-i18n="book.day">Día</label>
+            <select id="bk-day"></select>
+          </div>
+          <div class="f">
+            <label for="bk-time" data-i18n="book.time">Hora</label>
+            <select id="bk-time"></select>
+          </div>
+        </div>
+        <div class="f">
+          <label for="bk-name" data-i18n="book.name">Tu nombre</label>
+          <input id="bk-name" type="text" maxlength="40" value="Carlos">
+        </div>
+        <button class="btn solid" type="submit" data-i18n="book.send">Pedir cita por WhatsApp</button>
+        <p class="small" data-i18n="book.note">Te respondemos en horario de trabajo.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="s" id="galeria">
+    <div class="wrap">
+      <div class="s-head">
+        <span class="kicker" data-i18n="nav.gallery">Galería</span>
+        <h2 data-i18n="gal.title">Nuestro trabajo</h2>
+        <p data-i18n="gal.lead">En el sitio real aquí van fotos de tus recortes y de tu local.</p>
+      </div>
+      <div class="gal" id="gal"></div>
+    </div>
+  </section>
+
+  <section class="s" id="visitanos">
+    <div class="wrap visit">
+      <div class="s-head">
+        <span class="kicker" data-i18n="nav.visit">Visítanos</span>
+        <h2 data-i18n="visit.title">Horario</h2>
+        <div class="hours" id="hours"></div>
+      </div>
+      <div class="map">
+        <svg viewBox="0 0 600 300" role="img" aria-label="Mapa">
+          <rect width="600" height="300" fill="#22201C"/>
+          <g fill="#2B2823"><rect x="20" y="20" width="150" height="90" rx="4"/><rect x="200" y="20" width="170" height="90" rx="4"/><rect x="400" y="20" width="180" height="90" rx="4"/><rect x="20" y="150" width="150" height="130" rx="4"/><rect x="200" y="150" width="170" height="130" rx="4"/><rect x="400" y="150" width="180" height="130" rx="4"/></g>
+          <g stroke="#3A362F" stroke-width="16"><path d="M0 130H600"/><path d="M185 0V300"/><path d="M385 0V300"/></g>
+          <path d="M0 260 C 150 240, 300 300, 600 210" stroke="#3E5A3A" stroke-width="10" fill="none" opacity=".7"/>
+          <g transform="translate(300 118)"><path d="M0 0c-14-18-22-28-22-40a22 22 0 0 1 44 0c0 12-8 22-22 40z" fill="#C9A15B"/><circle cx="0" cy="-40" r="8" fill="#121212"/></g>
+          <text x="300" y="160" text-anchor="middle" fill="#EFE7DA" font-family="Manrope, sans-serif" font-weight="800" font-size="16">El Filo</text>
+        </svg>
+        <div class="bar">
+          <span data-i18n="visit.addr">Calle Ficticia #12, Las Piedras, PR 00771</span>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Las+Piedras,+Puerto+Rico" target="_blank" rel="noopener" data-i18n="visit.maps">Abrir en Google Maps →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="preguntas">
+    <div class="wrap">
+      <div class="s-head">
+        <span class="kicker">FAQ</span>
+        <h2 data-i18n="faq.title">Preguntas frecuentes</h2>
+      </div>
+      <div class="faq">
+        <details><summary data-i18n="faq.1q">¿Tengo que hacer cita?</summary><p data-i18n="faq.1a">No. Puedes llegar sin cita, pero con cita no tienes que esperar turno.</p></details>
+        <details><summary data-i18n="faq.2q">¿Cómo puedo pagar?</summary><p data-i18n="faq.2a">En efectivo o por ATH Móvil, al terminar el servicio.</p></details>
+        <details><summary data-i18n="faq.3q">¿Cortan pelo rizo?</summary><p data-i18n="faq.3a">Sí, trabajamos todo tipo de pelo.</p></details>
+        <details><summary data-i18n="faq.4q">¿Hay estacionamiento?</summary><p data-i18n="faq.4a">Sí, hay estacionamiento frente al local.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top">El <span>Filo</span></a>
+    <div class="social">
+      <button type="button" data-social="Instagram">Instagram</button>
+      <button type="button" data-social="Facebook">Facebook</button>
+    </div>
+    <a class="made" href="../index.html" data-i18n="foot.made">Sitio hecho por Small Shop Web</a>
+  </div>
+</footer>
+
+<div class="modal" id="modal" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="m-title">
+    <h3 id="m-title"></h3>
+    <div class="bubble" id="m-bubble"></div>
+    <p id="m-note"></p>
+    <button type="button" id="m-close"></button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var T = {
+    es: {
+      "demo.back": "← Small Shop Web", "demo.msg": "Sitio de ejemplo · Barbería El Filo es un negocio ficticio.",
+      "nav.services": "Servicios", "nav.book": "Cita", "nav.gallery": "Galería", "nav.visit": "Visítanos",
+      "hero.small": "Barbería", "hero.lead": "Recortes clásicos y modernos, barba con navaja y toalla caliente. Llega sin cita o reserva tu turno por WhatsApp.",
+      "hero.book": "Pedir cita", "hero.prices": "Ver precios",
+      "strip.open": "Mar – Sáb", "strip.hours": "Abre 10:00 a.m. (sáb. 9:00)", "strip.parking": "Estacionamiento al frente", "strip.pay": "ATH Móvil y efectivo", "strip.payd": "Pagas al terminar",
+      "srv.title": "Precios",
+      "book.title": "Reserva tu turno", "book.lead": "Escoge el servicio, el día y la hora. El botón abre WhatsApp con tu mensaje listo y te confirmamos por ahí.",
+      "book.service": "Servicio", "book.day": "Día", "book.time": "Hora", "book.name": "Tu nombre", "book.send": "Pedir cita por WhatsApp", "book.note": "Te respondemos en horario de trabajo.",
+      "gal.title": "Nuestro trabajo", "gal.lead": "En el sitio real aquí van fotos de tus recortes y de tu local.", "gal.tag": "Foto de ejemplo",
+      "visit.title": "Horario", "visit.addr": "Calle Ficticia #12, Las Piedras, PR 00771", "visit.maps": "Abrir en Google Maps →",
+      "faq.title": "Preguntas frecuentes",
+      "faq.1q": "¿Tengo que hacer cita?", "faq.1a": "No. Puedes llegar sin cita, pero con cita no tienes que esperar turno.",
+      "faq.2q": "¿Cómo puedo pagar?", "faq.2a": "En efectivo o por ATH Móvil, al terminar el servicio.",
+      "faq.3q": "¿Cortan pelo rizo?", "faq.3a": "Sí, trabajamos todo tipo de pelo.",
+      "faq.4q": "¿Hay estacionamiento?", "faq.4a": "Sí, hay estacionamiento frente al local.",
+      "foot.made": "Sitio hecho por Small Shop Web",
+      "m.title": "Así llega el mensaje", "m.note": "En un sitio real, este botón abre el WhatsApp de la barbería con este mensaje listo para enviar. En este ejemplo no se envía nada.",
+      "m.social": "En un sitio real, este botón abre el {x} del negocio.", "m.socialTitle": "Enlace a redes", "m.close": "Entendido",
+      "msg": function (n, s, d, t) { return "Hola, soy " + n + ". Quiero una cita para " + s + " el " + d + " (" + t + "). ¿Está disponible?"; },
+      "anon": "un cliente"
+    },
+    en: {
+      "demo.back": "← Small Shop Web", "demo.msg": "Example site · Barbería El Filo is a fictional business.",
+      "nav.services": "Services", "nav.book": "Book", "nav.gallery": "Gallery", "nav.visit": "Visit us",
+      "hero.small": "Barbershop", "hero.lead": "Classic and modern cuts, straight-razor beard trims with a hot towel. Walk in or book your spot on WhatsApp.",
+      "hero.book": "Book now", "hero.prices": "See prices",
+      "strip.open": "Tue – Sat", "strip.hours": "Opens 10:00 a.m. (Sat 9:00)", "strip.parking": "Parking out front", "strip.pay": "ATH Móvil and cash", "strip.payd": "Pay when you're done",
+      "srv.title": "Prices",
+      "book.title": "Book your spot", "book.lead": "Pick the service, day and time. The button opens WhatsApp with your message ready, and we confirm there.",
+      "book.service": "Service", "book.day": "Day", "book.time": "Time", "book.name": "Your name", "book.send": "Book on WhatsApp", "book.note": "We reply during business hours.",
+      "gal.title": "Our work", "gal.lead": "On a real site, this is where photos of your cuts and your shop go.", "gal.tag": "Sample photo",
+      "visit.title": "Hours", "visit.addr": "12 Fictional St., Las Piedras, PR 00771", "visit.maps": "Open in Google Maps →",
+      "faq.title": "FAQ",
+      "faq.1q": "Do I need an appointment?", "faq.1a": "No. You can walk in, but with an appointment you don't wait for a turn.",
+      "faq.2q": "How can I pay?", "faq.2a": "Cash or ATH Móvil, when the service is done.",
+      "faq.3q": "Do you cut curly hair?", "faq.3a": "Yes, we work with every hair type.",
+      "faq.4q": "Is there parking?", "faq.4a": "Yes, there's parking in front of the shop.",
+      "foot.made": "Site made by Small Shop Web",
+      "m.title": "This is the message that gets sent", "m.note": "On a real site, this button opens the barbershop's WhatsApp with this message ready to send. Nothing is sent from this example.",
+      "m.social": "On a real site, this button opens the business's {x}.", "m.socialTitle": "Social link", "m.close": "Got it",
+      "msg": function (n, s, d, t) { return "Hi, I'm " + n + ". I'd like an appointment for " + s + " on " + d + " (" + t + "). Is it available?"; },
+      "anon": "a customer"
+    }
+  };
+  var SERVICES = [
+    { es: "Recorte", en: "Haircut", des: "Con lavado y peinado", den: "With wash and style", p: "$15" },
+    { es: "Recorte + barba", en: "Cut + beard", des: "El combo completo", den: "The full combo", p: "$20" },
+    { es: "Barba con navaja", en: "Straight-razor beard", des: "Con toalla caliente", den: "With a hot towel", p: "$10" },
+    { es: "Niños (hasta 12 años)", en: "Kids (up to 12)", des: "Recorte con paciencia", den: "A patient cut", p: "$12" },
+    { es: "Diseño o línea", en: "Design or line", des: "Se añade a cualquier recorte", den: "Add to any cut", p: "$5" },
+    { es: "Cejas", en: "Eyebrows", des: "Perfilado con navaja", den: "Razor shaping", p: "$5" }
+  ];
+  var DAYS = { es: ["Martes", "Miércoles", "Jueves", "Viernes", "Sábado"], en: ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] };
+  var TIMES = ["10:00 a.m.", "11:00 a.m.", "12:00 p.m.", "1:00 p.m.", "2:00 p.m.", "3:00 p.m.", "4:00 p.m."];
+  var HOURS = {
+    es: [["Lunes", "Cerrado"], ["Martes", "10:00 a.m. – 7:00 p.m."], ["Miércoles", "10:00 a.m. – 7:00 p.m."], ["Jueves", "10:00 a.m. – 7:00 p.m."], ["Viernes", "10:00 a.m. – 7:00 p.m."], ["Sábado", "9:00 a.m. – 5:00 p.m."], ["Domingo", "Cerrado"]],
+    en: [["Monday", "Closed"], ["Tuesday", "10:00 a.m. – 7:00 p.m."], ["Wednesday", "10:00 a.m. – 7:00 p.m."], ["Thursday", "10:00 a.m. – 7:00 p.m."], ["Friday", "10:00 a.m. – 7:00 p.m."], ["Saturday", "9:00 a.m. – 5:00 p.m."], ["Sunday", "Closed"]]
+  };
+  var GAL = [
+    { es: "Fade clásico", en: "Classic fade", icon: "scissors" },
+    { es: "Barba perfilada", en: "Shaped beard", icon: "razor" },
+    { es: "Diseño con línea", en: "Line design", icon: "comb" },
+    { es: "Corte de niño", en: "Kids' cut", icon: "scissors" },
+    { es: "Toalla caliente", en: "Hot towel", icon: "razor" },
+    { es: "El local", en: "The shop", icon: "chair" }
+  ];
+  var ICON = {
+    scissors: '<svg viewBox="0 0 64 64" fill="none" stroke="#C9A15B" stroke-width="3.5" stroke-linecap="round"><circle cx="16" cy="16" r="8"/><circle cx="16" cy="48" r="8"/><path d="M22 21 56 54M22 43 56 10"/></svg>',
+    razor: '<svg viewBox="0 0 64 64" fill="none" stroke="#C9A15B" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8 40 40 8l8 8-26 26z"/><path d="M22 42c8 8 14 14 24 14 4 0 8-4 8-8 0-10-6-16-14-24"/></svg>',
+    comb: '<svg viewBox="0 0 64 64" fill="none" stroke="#C9A15B" stroke-width="3.5" stroke-linecap="round"><rect x="6" y="18" width="52" height="10" rx="3"/><path d="M12 28v20M18 28v20M24 28v20M30 28v20M36 28v20M42 28v20M48 28v20M54 28v14"/></svg>',
+    chair: '<svg viewBox="0 0 64 64" fill="none" stroke="#C9A15B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h28v18H18zM14 30h36v8H14zM20 38l-4 14M44 38l4 14M32 38v18M22 56h20"/></svg>'
+  };
+
+  var lang = "es";
+  try { var s = localStorage.getItem("ssw-lang"); if (s === "en" || s === "es") lang = s; } catch (e) {}
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(v) { return String(v).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+
+  function fill(sel, opts, keep) {
+    var i = keep ? sel.selectedIndex : 0;
+    sel.innerHTML = opts.map(function (o) { return "<option>" + esc(o) + "</option>"; }).join("");
+    sel.selectedIndex = Math.max(0, i);
+  }
+
+  function render() {
+    var d = T[lang];
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) { var k = el.getAttribute("data-i18n"); if (typeof d[k] === "string") el.textContent = d[k]; });
+    document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false"); });
+    $("prices").innerHTML = SERVICES.map(function (x) {
+      return '<div class="pr"><span class="n">' + esc(x[lang]) + '</span><span class="dots"></span><span class="p">' + x.p + '</span><span class="d">' + esc(lang === "es" ? x.des : x.den) + '</span></div>';
+    }).join("");
+    fill($("bk-service"), SERVICES.map(function (x) { return x[lang] + " · " + x.p; }), true);
+    fill($("bk-day"), DAYS[lang], true);
+    fill($("bk-time"), TIMES, true);
+    var today = (new Date().getDay() + 6) % 7;
+    $("hours").innerHTML = HOURS[lang].map(function (h, i) {
+      var c = i === today ? ' class="today"' : "";
+      return "<span" + c + ">" + h[0] + '</span><span class="' + (h[1] === "Cerrado" || h[1] === "Closed" ? "closed" : "") + '">' + h[1] + "</span>";
+    }).join("");
+    $("gal").innerHTML = GAL.map(function (g) {
+      return '<div class="tile">' + ICON[g.icon] + '<div class="cap"><span>' + d["gal.tag"] + "</span>" + esc(g[lang]) + "</div></div>";
+    }).join("");
+  }
+
+  function openModal(title, bubble, note) {
+    $("m-title").textContent = title;
+    $("m-bubble").textContent = bubble;
+    $("m-bubble").hidden = !bubble;
+    $("m-note").textContent = note;
+    $("m-close").textContent = T[lang]["m.close"];
+    $("modal").hidden = false;
+    $("m-close").focus();
+  }
+  $("m-close").addEventListener("click", function () { $("modal").hidden = true; });
+  $("modal").addEventListener("click", function (e) { if (e.target === $("modal")) $("modal").hidden = true; });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") $("modal").hidden = true; });
+
+  $("book").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var d = T[lang];
+    var svc = SERVICES[$("bk-service").selectedIndex][lang].toLowerCase();
+    var name = $("bk-name").value.trim() || d.anon;
+    var day = lang === "es" ? $("bk-day").value.toLowerCase() : $("bk-day").value;
+    var msg = d.msg(name, lang === "es" ? svc : SERVICES[$("bk-service").selectedIndex][lang], day, $("bk-time").value);
+    openModal(d["m.title"], msg, d["m.note"]);
+  });
+  document.querySelectorAll("[data-social]").forEach(function (b) {
+    b.addEventListener("click", function () { var d = T[lang]; openModal(d["m.socialTitle"], "", d["m.social"].replace("{x}", b.getAttribute("data-social"))); });
+  });
+  document.querySelectorAll(".lang button").forEach(function (b) {
+    b.addEventListener("click", function () { lang = b.getAttribute("data-lang"); try { localStorage.setItem("ssw-lang", lang); } catch (e) {} render(); });
+  });
+  render();
+})();
+</script>
+</body>
+</html>

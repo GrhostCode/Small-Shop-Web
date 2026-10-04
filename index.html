@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Small Shop Web</title>
+<meta name="description" content="Sitios web para negocios pequeños en Puerto Rico. Desde $200, pago único. Primer borrador gratis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a storefront. Striped awning across the top, the shop window (live preview) as the hero, then the price board and finished examples. */
+:root {
+  --paper: #F3F6F5;
+  --card: #FFFFFF;
+  --ink: #12233A;
+  --muted: #56657A;
+  --line: #D6DEE2;
+  --sun: #FFC530;
+  --sun-ink: #12233A;
+  --sea: #0B7A71;
+  --aw1: #FFC530;
+  --aw2: #12233A;
+  --shadow: 0 18px 40px -22px rgba(18, 35, 58, .45);
+  --display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0C1626; --card: #132238; --ink: #EEF2F5; --muted: #9DABBB; --line: #24364D;
+    --sun: #FFC530; --sun-ink: #12233A; --sea: #43C4B7; --aw1: #FFC530; --aw2: #EEF2F5;
+    --shadow: 0 18px 40px -22px rgba(0, 0, 0, .8); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0C1626; --card: #132238; --ink: #EEF2F5; --muted: #9DABBB; --line: #24364D;
+  --sun: #FFC530; --sun-ink: #12233A; --sea: #43C4B7; --aw1: #FFC530; --aw2: #EEF2F5;
+  --shadow: 0 18px 40px -22px rgba(0, 0, 0, .8); color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.55; }
+a { color: var(--sea); }
+:focus-visible { outline: 3px solid var(--sea); outline-offset: 2px; border-radius: 4px; }
+.wrap { width: min(1140px, 100%); margin-inline: auto; padding-inline: 20px; }
+h1, h2, h3 { font-family: var(--display); font-stretch: 112%; line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+h1 { font-size: clamp(2.3rem, 5.4vw, 4.1rem); font-weight: 900; font-stretch: 118%; }
+h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 850; }
+h3 { font-size: 1.25rem; font-weight: 800; }
+p { margin: 0; }
+.eyebrow { font-family: var(--mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+/* Header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--paper); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 16px; min-height: 64px; flex-wrap: wrap; padding-block: 8px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-family: var(--display); font-weight: 900; font-stretch: 120%; font-size: 1.15rem; letter-spacing: -.01em; }
+.brand svg { flex: none; }
+.nav { display: flex; gap: 18px; margin-left: auto; flex-wrap: wrap; }
+.nav a { color: var(--ink); text-decoration: none; font-weight: 700; font-size: .95rem; }
+.nav a:hover { color: var(--sea); }
+.lang { display: inline-flex; border: 1.5px solid var(--ink); border-radius: 999px; overflow: hidden; }
+.lang button { font: 700 .8rem var(--mono); padding: 6px 11px; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+@media (max-width: 760px) { .nav { display: none; } .lang { margin-left: auto; } }
+
+/* Awning */
+.awning { height: 58px; position: relative; }
+.awning::before { content: ""; position: absolute; inset: 0 0 20px 0; background: repeating-linear-gradient(90deg, var(--aw1) 0 40px, var(--aw2) 40px 80px); }
+.awning::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 20px;
+  background:
+    radial-gradient(circle at 20px 0, var(--aw1) 19.5px, transparent 20px) 0 0 / 80px 20px repeat-x,
+    radial-gradient(circle at 60px 0, var(--aw2) 19.5px, transparent 20px) 0 0 / 80px 20px repeat-x; }
+
+/* Hero */
+.hero { padding-block: 36px 72px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: 48px; align-items: start; }
+.hero-copy { display: grid; gap: 20px; min-width: 0; }
+.hero-copy .sub { color: var(--muted); font-size: 1.12rem; max-width: 34em; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; font-weight: 700; font-size: .92rem; border: 1.5px solid var(--ink); }
+.chip.sun { background: var(--sun); color: var(--sun-ink); border-color: var(--sun); }
+
+.builder { background: var(--card); border: 1.5px solid var(--line); border-radius: 18px; padding: 22px; display: grid; gap: 16px; box-shadow: var(--shadow); }
+.builder h2 { font-size: 1.35rem; }
+.field { display: grid; gap: 6px; }
+.field label, .field .lbl { font-weight: 700; font-size: .9rem; }
+.field input[type="text"], .field select { font: inherit; font-size: 1rem; padding: 11px 13px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--paper); color: var(--ink); width: 100%; }
+.field input[type="text"]:focus, .field select:focus { border-color: var(--sea); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--sea) 25%, transparent); }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+#b-other-wrap { margin-top: 8px; }
+@media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } }
+.swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+.swatch { width: 34px; height: 34px; border-radius: 50%; border: 3px solid var(--card); box-shadow: 0 0 0 1.5px var(--line); cursor: pointer; padding: 0; }
+.swatch[aria-checked="true"] { box-shadow: 0 0 0 2.5px var(--ink); }
+.seg { display: inline-grid; grid-template-columns: 1fr 1fr; border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
+.seg button { font: 700 .9rem var(--body); padding: 10px 8px; white-space: nowrap; border: 0; background: var(--paper); color: var(--ink); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.note { font-size: .85rem; color: var(--muted); }
+.cta { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 20px; border-radius: 12px; background: var(--sea); color: #fff; font-weight: 700; font-size: 1.05rem; text-decoration: none; border: 0; cursor: pointer; }
+.cta:hover { filter: brightness(1.08); }
+:root[data-theme="dark"] .cta { color: #06201D; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cta { color: #06201D; } }
+.cta-row { display: grid; gap: 6px; }
+
+/* Phone preview */
+.window { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 84px); display: grid; justify-items: center; gap: 12px; min-width: 0; }
+.window .eyebrow { text-align: center; }
+.phone { width: min(340px, 100%); max-width: 100%; aspect-ratio: 9 / 18.5; background: #0B0F16; border-radius: 42px; padding: 12px; box-shadow: var(--shadow), 0 0 0 1.5px #2A3140 inset; position: relative; }
+.phone::before { content: ""; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 84px; height: 22px; border-radius: 12px; background: #0B0F16; z-index: 3; }
+.screen { width: 100%; height: 100%; border-radius: 31px; overflow: hidden auto; background: #FAFAF8; color: #1B1F27; font-family: var(--body); font-size: 14px; scrollbar-width: none; }
+.screen::-webkit-scrollbar { display: none; }
+.pv-hero { padding: 54px 18px 22px; color: #fff; display: grid; gap: 10px; }
+.pv-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(255,255,255,.18); display: grid; place-items: center; }
+.pv-name { font-family: var(--display); font-weight: 900; font-stretch: 110%; font-size: 1.55rem; line-height: 1.05; overflow-wrap: anywhere; }
+.pv-tag { opacity: .92; font-size: .92rem; }
+.pv-btn { display: block; text-align: center; padding: 11px; border-radius: 10px; background: #fff; font-weight: 700; font-size: .92rem; margin-top: 4px; }
+.pv-sec { padding: 16px 18px; border-bottom: 1px solid #ECECE8; display: grid; gap: 8px; }
+.pv-h { font-family: var(--display); font-weight: 800; font-size: 1rem; }
+.pv-item { display: flex; justify-content: space-between; gap: 10px; font-size: .9rem; }
+.pv-item b { font-variant-numeric: tabular-nums; }
+.pv-hours { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; font-size: .88rem; }
+.pv-map { height: 78px; border-radius: 10px; background:
+  linear-gradient(90deg, transparent 46%, #fff 46% 50%, transparent 50%),
+  linear-gradient(0deg, transparent 58%, #fff 58% 62%, transparent 62%),
+  linear-gradient(35deg, transparent 70%, #fff 70% 73%, transparent 73%),
+  #DDE6DF; position: relative; }
+.pv-map::after { content: ""; position: absolute; left: 47%; top: 30%; width: 16px; height: 16px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--pin, #C0392B); }
+.pv-gal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.pv-gal div { aspect-ratio: 1; border-radius: 8px; }
+.pv-faq { font-size: .86rem; display: grid; gap: 6px; }
+.pv-faq div { background: #F0F0EC; border-radius: 8px; padding: 8px 10px; }
+.pv-social { display: flex; gap: 8px; }
+.pv-social span { padding: 6px 12px; border-radius: 999px; font-size: .8rem; font-weight: 700; color: #fff; }
+.pv-foot { padding: 14px 18px 26px; font-size: .75rem; color: #7A7F88; text-align: center; }
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .window { position: static; }
+}
+
+/* Sections */
+section.block { padding-block: 72px; border-top: 1px solid var(--line); }
+.head { display: grid; gap: 12px; margin-bottom: 34px; max-width: 46em; }
+.head p { color: var(--muted); font-size: 1.08rem; }
+
+.why { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 28px 32px; }
+.why div { display: grid; gap: 6px; border-top: 3px solid var(--ink); padding-top: 14px; }
+.why p { color: var(--muted); }
+
+/* Price board */
+.board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+@media (max-width: 900px) { .board { grid-template-columns: 1fr; } }
+.plan { background: var(--card); border: 1.5px solid var(--line); border-radius: 18px; padding: 26px; display: grid; gap: 14px; align-content: start; }
+.plan.feature { border: 2.5px solid var(--ink); }
+.plan .tag { justify-self: start; font: 500 .74rem var(--mono); letter-spacing: .06em; text-transform: uppercase; background: var(--sun); color: var(--sun-ink); padding: 4px 10px; border-radius: 6px; }
+.price { font-family: var(--display); font-weight: 900; font-stretch: 115%; font-size: 3rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.price small { font-family: var(--body); font-weight: 700; font-size: .95rem; color: var(--muted); font-stretch: 100%; margin-left: 6px; }
+.plan ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.plan li { display: grid; grid-template-columns: 20px 1fr; gap: 8px; }
+.plan li::before { content: ""; width: 14px; height: 8px; border-left: 3px solid var(--sea); border-bottom: 3px solid var(--sea); transform: rotate(-45deg) translate(1px, 6px); }
+.fine { margin-top: 22px; display: grid; gap: 8px; color: var(--muted); font-size: .98rem; max-width: 52em; }
+
+/* Examples */
+.examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 760px) { .examples { grid-template-columns: 1fr; } }
+.ex { display: grid; background: var(--card); border: 1.5px solid var(--line); border-radius: 18px; overflow: hidden; text-decoration: none; color: var(--ink); transition: transform .2s ease, box-shadow .2s ease; }
+.ex:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.ex-art { height: 210px; position: relative; overflow: hidden; display: grid; place-items: center; }
+.ex-body { padding: 20px 22px 22px; display: grid; gap: 8px; }
+.ex-body p { color: var(--muted); }
+.ex-go { font-weight: 700; color: var(--sea); }
+.art-barber { background: #141414; }
+.art-barber .pole { position: absolute; right: 26px; top: 22px; bottom: 22px; width: 22px; border-radius: 11px; background: repeating-linear-gradient(-45deg, #B3261E 0 10px, #F4EFE6 10px 20px, #1F4E8C 20px 30px, #F4EFE6 30px 40px); }
+.art-barber .t { font-family: "Archivo", sans-serif; font-weight: 900; font-stretch: 75%; font-size: 3.4rem; letter-spacing: .04em; color: #E9DFCF; text-transform: uppercase; line-height: .9; text-align: center; }
+.art-barber .t span { display: block; font-size: .9rem; letter-spacing: .4em; color: #C9A15B; font-stretch: 100%; margin-bottom: 8px; }
+.art-food { background: #FBF7EE; }
+.art-food .tiles { position: absolute; inset: 0; background:
+  linear-gradient(45deg, #2F6B3A 25%, transparent 25% 75%, #2F6B3A 75%) 0 0 / 28px 28px,
+  linear-gradient(45deg, #2F6B3A 25%, transparent 25% 75%, #2F6B3A 75%) 14px 14px / 28px 28px; opacity: .12; }
+.art-food .t { position: relative; font-family: "Archivo", sans-serif; font-weight: 900; font-stretch: 125%; font-size: 2.3rem; color: #C8372D; text-align: center; line-height: 1; }
+.art-food .t span { display: block; font-size: .85rem; letter-spacing: .3em; color: #2F6B3A; font-weight: 800; margin-top: 10px; text-transform: uppercase; }
+.fict { font: 500 .72rem var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; counter-reset: s; list-style: none; padding: 0; margin: 0; }
+@media (max-width: 900px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+.steps li { counter-increment: s; display: grid; gap: 8px; align-content: start; }
+.steps li::before { content: counter(s); font-family: var(--display); font-weight: 900; font-stretch: 120%; font-size: 1.3rem; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--sun); color: var(--sun-ink); }
+.steps p { color: var(--muted); }
+
+/* FAQ */
+.faq { display: grid; gap: 10px; max-width: 52em; }
+.faq details { background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; padding: 4px 18px; }
+.faq summary { cursor: pointer; font-weight: 700; padding: 14px 0; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: var(--display); font-weight: 900; font-size: 1.3rem; line-height: 1; color: var(--sea); }
+.faq details[open] summary::after { content: "–"; }
+.faq details p { padding-bottom: 16px; color: var(--muted); }
+
+/* Contact */
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+@media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+.card-contact { background: var(--card); border: 2.5px solid var(--ink); border-radius: 18px; padding: 26px; display: grid; gap: 18px; }
+.who { display: grid; gap: 2px; }
+.who b { font-family: var(--display); font-stretch: 112%; font-size: 1.3rem; }
+.who span { color: var(--muted); }
+.line { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 14px; }
+.line .k { font-size: .85rem; color: var(--muted); display: block; }
+.line .v { font-family: var(--mono); font-size: 1.02rem; user-select: all; overflow-wrap: anywhere; }
+.line .v a { color: var(--ink); text-decoration: none; }
+.copy { font: 700 .85rem var(--body); padding: 8px 14px; border-radius: 10px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+.copy.done { background: var(--ink); color: var(--paper); }
+
+footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var(--muted); font-size: .9rem; }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Small Shop Web">
+      <svg width="34" height="30" viewBox="0 0 34 30" aria-hidden="true">
+        <rect x="3" y="12" width="28" height="17" rx="2" fill="none" stroke="currentColor" stroke-width="2.5"/>
+        <rect x="13" y="19" width="8" height="10" fill="currentColor"/>
+        <path d="M1 3h32v6a4 4 0 0 1-8 0a4 4 0 0 1-8 0a4 4 0 0 1-8 0a4 4 0 0 1-8 0z" fill="#FFC530" stroke="currentColor" stroke-width="2"/>
+        <path d="M9 3v6M17 3v6M25 3v6" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      Small Shop Web
+    </a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#precios" data-i18n="nav.prices">Precios</a>
+      <a href="#ejemplos" data-i18n="nav.examples">Ejemplos</a>
+      <a href="#como" data-i18n="nav.how">Cómo funciona</a>
+      <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<div class="awning" aria-hidden="true"></div>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow" data-i18n="hero.eyebrow">Sitios web para negocios pequeños en Puerto Rico</span>
+        <h1 data-i18n="hero.title">Tu negocio, en internet, con su propia página.</h1>
+        <p class="sub" data-i18n="hero.sub">Cuando alguien busca tu negocio en Google, un sitio web le dice en segundos tus servicios, tus precios, tu horario y cómo llegar, sin que tenga que escribirte primero.</p>
+        <div class="chips">
+          <span class="chip sun" data-i18n="hero.from">Desde $200, pago único</span>
+          <span class="chip" data-i18n="hero.draft">Primer borrador gratis</span>
+        </div>
+
+        <form class="builder" id="builder" autocomplete="off">
+          <h2 data-i18n="b.title">Pruébalo con tu negocio</h2>
+          <div class="field">
+            <label for="b-name" data-i18n="b.name">Nombre del negocio</label>
+            <input type="text" id="b-name" maxlength="40" value="Barbería Don Pepe">
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="b-type" data-i18n="b.type">Tipo de negocio</label>
+              <select id="b-type">
+                <option value="barberia" data-i18n="t.barberia">Barbería</option>
+                <option value="restaurante" data-i18n="t.restaurante">Restaurante o comida</option>
+                <option value="salon" data-i18n="t.salon">Salón de belleza</option>
+                <option value="tienda" data-i18n="t.tienda">Tienda de regalos</option>
+                <option value="taller" data-i18n="t.taller">Taller mecánico</option>
+                <option value="otro" data-i18n="t.otro">Otro</option>
+              </select>
+              <div class="field" id="b-other-wrap" hidden>
+                <label for="b-other" data-i18n="b.other">¿Qué tipo de negocio es?</label>
+                <input type="text" id="b-other" maxlength="40" placeholder="Ej. floristería, panadería, gimnasio" data-i18n-ph="b.otherPh">
+              </div>
+            </div>
+            <div class="field">
+              <span class="lbl" id="b-pkg-l" data-i18n="b.pkg">Paquete</span>
+              <div class="seg" role="group" aria-labelledby="b-pkg-l">
+                <button type="button" id="pkg-basico" data-pkg="basico" aria-pressed="true">Básico · $200</button>
+                <button type="button" id="pkg-grande" data-pkg="grande" aria-pressed="false">Grande · $300</button>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <span class="lbl" id="b-color-l" data-i18n="b.color">Color</span>
+            <div class="swatches" id="swatches" role="radiogroup" aria-labelledby="b-color-l"></div>
+          </div>
+          <p class="note" data-i18n="b.note">Los precios y el horario del ejemplo son inventados. En tu sitio van los tuyos.</p>
+          <div class="cta-row">
+            <a class="cta" id="b-cta" href="https://wa.me/19394086784" target="_blank" rel="noopener">
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.2-.2-.5-.3z"/></svg>
+              <span data-i18n="b.cta">Quiero este sitio</span>
+            </a>
+            <span class="note" data-i18n="b.ctaSub">Abre WhatsApp con tu mensaje ya escrito.</span>
+          </div>
+        </form>
+      </div>
+
+      <div class="window">
+        <span class="eyebrow" data-i18n="b.live">Vista previa en vivo</span>
+        <div class="phone"><div class="screen" id="screen" aria-live="polite"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="head">
+        <h2 data-i18n="why.title">Por qué un sitio web</h2>
+      </div>
+      <div class="why">
+        <div><h3 data-i18n="why.1t">Te encuentran a cualquier hora.</h3><p data-i18n="why.1">Tu sitio responde las preguntas de siempre (¿a qué hora abren?, ¿cuánto cobran?, ¿dónde están?) aunque estés ocupado o cerrado.</p></div>
+        <div><h3 data-i18n="why.2t">Se ve serio.</h3><p data-i18n="why.2">Un negocio con página propia da más confianza que uno que solo tiene redes.</p></div>
+        <div><h3 data-i18n="why.3t">Pedir cita es fácil.</h3><p data-i18n="why.3">Un botón abre tu WhatsApp con el mensaje ya escrito. El cliente solo le da enviar.</p></div>
+        <div><h3 data-i18n="why.4t">Es tuyo.</h3><p data-i18n="why.4">El dominio (tunegocio.com) queda a tu nombre. No depende de lo que haga o cambie una red social.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="precios">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow" data-i18n="nav.prices">Precios</span>
+        <h2 data-i18n="p.title">Un solo pago por tu sitio. El plan mensual es opcional.</h2>
+      </div>
+      <div class="board">
+        <article class="plan">
+          <h3>Básico</h3>
+          <div class="price">$200<small data-i18n="p.once">pago único</small></div>
+          <p data-i18n="p.basic">1 página con servicios, precios, horario, mapa y botón de WhatsApp.</p>
+          <ul>
+            <li data-i18n="p.b1">Tu nombre, tu logo y tus colores</li>
+            <li data-i18n="p.b2">Servicios con sus precios</li>
+            <li data-i18n="p.b3">Horario, dirección y mapa de Google</li>
+            <li data-i18n="p.b4">Botón de WhatsApp o mensaje de texto</li>
+            <li data-i18n="p.b5">Se ve bien en el teléfono y en la computadora</li>
+          </ul>
+        </article>
+        <article class="plan feature">
+          <span class="tag" data-i18n="p.full">Sitio completo</span>
+          <h3>Grande</h3>
+          <div class="price">$300<small data-i18n="p.once">pago único</small></div>
+          <p data-i18n="p.grande">Lo del Básico, más galería de fotos, preguntas frecuentes y enlaces a tus redes.</p>
+          <ul>
+            <li data-i18n="p.g1">Todo lo del Básico</li>
+            <li data-i18n="p.g2">Galería de fotos de tu trabajo</li>
+            <li data-i18n="p.g3">Preguntas frecuentes</li>
+            <li data-i18n="p.g4">Enlaces a tus redes sociales</li>
+          </ul>
+        </article>
+        <article class="plan">
+          <span class="tag" data-i18n="p.optional">Opcional</span>
+          <h3 data-i18n="p.maint">Mantenimiento</h3>
+          <div class="price">$15<small data-i18n="p.month">al mes</small></div>
+          <p data-i18n="p.maintd">Hasta 3 cambios al mes: precios, horario, textos.</p>
+          <ul>
+            <li data-i18n="p.m1">Me mandas el cambio por mensaje</li>
+            <li data-i18n="p.m2">Lo cancelas cuando quieras, sin penalidad</li>
+            <li data-i18n="p.m3">El sitio sigue siendo tuyo</li>
+          </ul>
+        </article>
+      </div>
+      <div class="fine">
+        <p data-i18n="p.draft">Antes de pagar ves un primer borrador gratis y pides los cambios que quieras.</p>
+        <p data-i18n="p.domain">El dominio (tunegocio.com) lo compras tú, a tu nombre, por unos $10 a $15 al año. Yo te guío.</p>
+        <p data-i18n="p.extra">Cualquier trabajo extra se acuerda y se cotiza contigo antes de hacerlo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="ejemplos">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow" data-i18n="nav.examples">Ejemplos</span>
+        <h2 data-i18n="ex.title">Así se ve un sitio terminado</h2>
+        <p data-i18n="ex.lead">Dos sitios completos del paquete Grande. Ábrelos en tu teléfono y prueba los botones. Los dos negocios son inventados.</p>
+      </div>
+      <div class="examples">
+        <a class="ex" href="ejemplos/barberia.html">
+          <div class="ex-art art-barber" aria-hidden="true"><div class="t"><span>Barbería</span>El Filo</div><div class="pole"></div></div>
+          <div class="ex-body">
+            <span class="fict" data-i18n="ex.fict">Negocio ficticio · Paquete Grande</span>
+            <h3>Barbería El Filo</h3>
+            <p data-i18n="ex.barber">Servicios con precios, citas por WhatsApp, galería, horario, mapa y preguntas frecuentes.</p>
+            <span class="ex-go" data-i18n="ex.open">Ver sitio completo →</span>
+          </div>
+        </a>
+        <a class="ex" href="ejemplos/restaurante.html">
+          <div class="ex-art art-food" aria-hidden="true"><div class="tiles"></div><div class="t">El Fogón<br>de Titi<span>Comida criolla</span></div></div>
+          <div class="ex-body">
+            <span class="fict" data-i18n="ex.fict">Negocio ficticio · Paquete Grande</span>
+            <h3>El Fogón de Titi</h3>
+            <p data-i18n="ex.food">Menú con precios, pedidos por WhatsApp, galería, horario, mapa y preguntas frecuentes.</p>
+            <span class="ex-go" data-i18n="ex.open">Ver sitio completo →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="como">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow" data-i18n="nav.how">Cómo funciona</span>
+        <h2 data-i18n="how.title">Cuatro pasos, sin saber nada de tecnología</h2>
+      </div>
+      <ol class="steps">
+        <li><h3 data-i18n="how.1t">Conversamos</h3><p data-i18n="how.1">Me dices tus servicios, precios y horario, y me das tus fotos y tu logo.</p></li>
+        <li><h3 data-i18n="how.2t">Te muestro un borrador gratis</h3><p data-i18n="how.2">Lo ves en tu teléfono y me dices qué cambiar.</p></li>
+        <li><h3 data-i18n="how.3t">Lo apruebas</h3><p data-i18n="how.3">Haces los cambios que quieras y me dices por mensaje cuándo está listo.</p></li>
+        <li><h3 data-i18n="how.4t">Lo publico</h3><p data-i18n="how.4">Pagas, compras tu dominio a tu nombre (yo te guío) y el sitio queda en línea.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="preguntas">
+    <div class="wrap">
+      <div class="head">
+        <h2 data-i18n="faq.title">Preguntas frecuentes</h2>
+      </div>
+      <div class="faq">
+        <details><summary data-i18n="faq.1q">¿El sitio es mío?</summary><p data-i18n="faq.1a">Sí. El dominio y las cuentas quedan a tu nombre, y cuando pagas el sitio completo es tuyo.</p></details>
+        <details><summary data-i18n="faq.2q">¿Y si no me gusta?</summary><p data-i18n="faq.2a">Hacemos los cambios que pidas antes de publicar. No se publica nada sin que tú lo apruebes.</p></details>
+        <details><summary data-i18n="faq.3q">¿Tengo que pagar el plan mensual?</summary><p data-i18n="faq.3a">No, es opcional. Si lo tomas, lo puedes cancelar cuando quieras sin penalidad y el sitio sigue siendo tuyo.</p></details>
+        <details><summary data-i18n="faq.4q">¿Me aseguran más clientes?</summary><p data-i18n="faq.4a">No te prometo resultados. El sitio hace que sea más fácil encontrarte y escribirte, y eso ayuda.</p></details>
+        <details><summary data-i18n="faq.5q">¿Hay contrato?</summary><p data-i18n="faq.5a">Sí, uno sencillo y en español, para que los dos sepamos qué incluye el trabajo y cuánto cuesta.</p></details>
+        <details><summary data-i18n="faq.6q">¿Y las fotos de mis clientes?</summary><p data-i18n="faq.6a">Solo se publican las de personas que dijeron que sí.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contacto">
+    <div class="wrap contact">
+      <div class="head">
+        <span class="eyebrow" data-i18n="nav.contact">Contacto</span>
+        <h2 data-i18n="c.title">Hablemos de tu negocio</h2>
+        <p data-i18n="c.lead">El primer paso es una conversación corta: me cuentas de tu negocio, te enseño un ejemplo y te digo qué paquete te conviene.</p>
+      </div>
+      <div class="card-contact">
+        <div class="who"><b>Adrian Rodríguez Diaz</b><span data-i18n="c.role">Dueño de Small Shop Web</span></div>
+        <a class="cta" id="c-wa" href="https://wa.me/19394086784" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+          <span data-i18n="c.wa">Escribir por WhatsApp</span>
+        </a>
+        <div class="line">
+          <div><span class="k" data-i18n="c.phone">WhatsApp / teléfono</span><span class="v"><a href="tel:+19394086784">939-408-6784</a></span></div>
+          <button type="button" class="copy" data-copy="939-408-6784" data-i18n="c.copy">Copiar</button>
+        </div>
+        <div class="line">
+          <div><span class="k" data-i18n="c.email">Correo</span><span class="v"><a href="mailto:adrstack.dev@gmail.com">adrstack.dev@gmail.com</a></span></div>
+          <button type="button" class="copy" data-copy="adrstack.dev@gmail.com" data-i18n="c.copy">Copiar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Small Shop Web</span>
+    <span data-i18n="f.tag">Sitios web para negocios pequeños en Puerto Rico</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var PHONE = "19394086784";
+  var T = {
+    es: {
+      "nav.prices": "Precios", "nav.examples": "Ejemplos", "nav.how": "Cómo funciona", "nav.contact": "Contacto",
+      "hero.eyebrow": "Sitios web para negocios pequeños en Puerto Rico",
+      "hero.title": "Tu negocio, en internet, con su propia página.",
+      "hero.sub": "Cuando alguien busca tu negocio en Google, un sitio web le dice en segundos tus servicios, tus precios, tu horario y cómo llegar, sin que tenga que escribirte primero.",
+      "hero.from": "Desde $200, pago único", "hero.draft": "Primer borrador gratis",
+      "b.title": "Pruébalo con tu negocio", "b.name": "Nombre del negocio", "b.type": "Tipo de negocio", "b.pkg": "Paquete", "b.color": "Color",
+      "b.note": "Los precios y el horario del ejemplo son inventados. En tu sitio van los tuyos.",
+      "b.cta": "Quiero este sitio", "b.ctaSub": "Abre WhatsApp con tu mensaje ya escrito.", "b.live": "Vista previa en vivo",
+      "t.barberia": "Barbería", "t.restaurante": "Restaurante o comida", "t.salon": "Salón de belleza", "t.tienda": "Tienda de regalos", "t.taller": "Taller mecánico", "t.otro": "Otro",
+      "b.other": "¿Qué tipo de negocio es?", "b.otherPh": "Ej. floristería, panadería, gimnasio", "otro.tag": "Tu negocio, todo en un solo lugar",
+      "why.title": "Por qué un sitio web",
+      "why.1t": "Te encuentran a cualquier hora.", "why.1": "Tu sitio responde las preguntas de siempre (¿a qué hora abren?, ¿cuánto cobran?, ¿dónde están?) aunque estés ocupado o cerrado.",
+      "why.2t": "Se ve serio.", "why.2": "Un negocio con página propia da más confianza que uno que solo tiene redes.",
+      "why.3t": "Pedir cita es fácil.", "why.3": "Un botón abre tu WhatsApp con el mensaje ya escrito. El cliente solo le da enviar.",
+      "why.4t": "Es tuyo.", "why.4": "El dominio (tunegocio.com) queda a tu nombre. No depende de lo que haga o cambie una red social.",
+      "p.title": "Un solo pago por tu sitio. El plan mensual es opcional.", "p.once": "pago único", "p.month": "al mes",
+      "p.basic": "1 página con servicios, precios, horario, mapa y botón de WhatsApp.",
+      "p.b1": "Tu nombre, tu logo y tus colores", "p.b2": "Servicios con sus precios", "p.b3": "Horario, dirección y mapa de Google", "p.b4": "Botón de WhatsApp o mensaje de texto", "p.b5": "Se ve bien en el teléfono y en la computadora",
+      "p.full": "Sitio completo", "p.grande": "Lo del Básico, más galería de fotos, preguntas frecuentes y enlaces a tus redes.",
+      "p.g1": "Todo lo del Básico", "p.g2": "Galería de fotos de tu trabajo", "p.g3": "Preguntas frecuentes", "p.g4": "Enlaces a tus redes sociales",
+      "p.optional": "Opcional", "p.maint": "Mantenimiento", "p.maintd": "Hasta 3 cambios al mes: precios, horario, textos.",
+      "p.m1": "Me mandas el cambio por mensaje", "p.m2": "Lo cancelas cuando quieras, sin penalidad", "p.m3": "El sitio sigue siendo tuyo",
+      "p.draft": "Antes de pagar ves un primer borrador gratis y pides los cambios que quieras.",
+      "p.domain": "El dominio (tunegocio.com) lo compras tú, a tu nombre, por unos $10 a $15 al año. Yo te guío.",
+      "p.extra": "Cualquier trabajo extra se acuerda y se cotiza contigo antes de hacerlo.",
+      "ex.title": "Así se ve un sitio terminado", "ex.lead": "Dos sitios completos del paquete Grande. Ábrelos en tu teléfono y prueba los botones. Los dos negocios son inventados.",
+      "ex.fict": "Negocio ficticio · Paquete Grande", "ex.barber": "Servicios con precios, citas por WhatsApp, galería, horario, mapa y preguntas frecuentes.",
+      "ex.food": "Menú con precios, pedidos por WhatsApp, galería, horario, mapa y preguntas frecuentes.", "ex.open": "Ver sitio completo →",
+      "how.title": "Cuatro pasos, sin saber nada de tecnología",
+      "how.1t": "Conversamos", "how.1": "Me dices tus servicios, precios y horario, y me das tus fotos y tu logo.",
+      "how.2t": "Te muestro un borrador gratis", "how.2": "Lo ves en tu teléfono y me dices qué cambiar.",
+      "how.3t": "Lo apruebas", "how.3": "Haces los cambios que quieras y me dices por mensaje cuándo está listo.",
+      "how.4t": "Lo publico", "how.4": "Pagas, compras tu dominio a tu nombre (yo te guío) y el sitio queda en línea.",
+      "faq.title": "Preguntas frecuentes",
+      "faq.1q": "¿El sitio es mío?", "faq.1a": "Sí. El dominio y las cuentas quedan a tu nombre, y cuando pagas el sitio completo es tuyo.",
+      "faq.2q": "¿Y si no me gusta?", "faq.2a": "Hacemos los cambios que pidas antes de publicar. No se publica nada sin que tú lo apruebes.",
+      "faq.3q": "¿Tengo que pagar el plan mensual?", "faq.3a": "No, es opcional. Si lo tomas, lo puedes cancelar cuando quieras sin penalidad y el sitio sigue siendo tuyo.",
+      "faq.4q": "¿Me aseguran más clientes?", "faq.4a": "No te prometo resultados. El sitio hace que sea más fácil encontrarte y escribirte, y eso ayuda.",
+      "faq.5q": "¿Hay contrato?", "faq.5a": "Sí, uno sencillo y en español, para que los dos sepamos qué incluye el trabajo y cuánto cuesta.",
+      "faq.6q": "¿Y las fotos de mis clientes?", "faq.6a": "Solo se publican las de personas que dijeron que sí.",
+      "c.title": "Hablemos de tu negocio", "c.lead": "El primer paso es una conversación corta: me cuentas de tu negocio, te enseño un ejemplo y te digo qué paquete te conviene.",
+      "c.role": "Dueño de Small Shop Web", "c.wa": "Escribir por WhatsApp", "c.phone": "WhatsApp / teléfono", "c.email": "Correo", "c.copy": "Copiar", "c.copied": "Copiado",
+      "f.tag": "Sitios web para negocios pequeños en Puerto Rico",
+      "pv.services": "Servicios", "pv.menu": "Menú", "pv.hours": "Horario", "pv.where": "Ubicación", "pv.gallery": "Galería", "pv.faq": "Preguntas frecuentes", "pv.made": "Sitio hecho por Small Shop Web",
+      "pv.days": [["Lun – Vie", "9:00 a.m. – 6:00 p.m."], ["Sábado", "9:00 a.m. – 3:00 p.m."], ["Domingo", "Cerrado"]],
+      "pv.faq1": "¿Aceptan ATH Móvil?", "pv.faq2": "¿Tienen estacionamiento?",
+      "msg": function (n, p, t) { return "Hola Adrian, vi Small Shop Web y me interesa el paquete " + p + " para mi negocio \"" + n + "\" (" + t + ")."; },
+      "colors": ["Azul", "Rojo", "Verde", "Morado", "Anaranjado", "Turquesa", "Negro"]
+    },
+    en: {
+      "nav.prices": "Pricing", "nav.examples": "Examples", "nav.how": "How it works", "nav.contact": "Contact",
+      "hero.eyebrow": "Websites for small businesses in Puerto Rico",
+      "hero.title": "Your business on the web, with a page of its own.",
+      "hero.sub": "When someone looks up your business on Google, a website shows your services, prices, hours and how to get there in seconds, without them having to message you first.",
+      "hero.from": "From $200, one-time payment", "hero.draft": "Free first draft",
+      "b.title": "Try it with your business", "b.name": "Business name", "b.type": "Type of business", "b.pkg": "Package", "b.color": "Color",
+      "b.note": "The sample prices and hours are made up. Your site shows yours.",
+      "b.cta": "I want this site", "b.ctaSub": "Opens WhatsApp with your message ready to send.", "b.live": "Live preview",
+      "t.barberia": "Barbershop", "t.restaurante": "Restaurant or food", "t.salon": "Beauty salon", "t.tienda": "Gift shop", "t.taller": "Auto repair shop", "t.otro": "Other",
+      "b.other": "What type of business is it?", "b.otherPh": "E.g. flower shop, bakery, gym", "otro.tag": "Your business, all in one place",
+      "why.title": "Why a website",
+      "why.1t": "People find you any time.", "why.1": "Your site answers the usual questions (what time do you open? how much? where are you?) even when you're busy or closed.",
+      "why.2t": "It looks professional.", "why.2": "A business with its own page earns more trust than one that only has social media.",
+      "why.3t": "Booking is easy.", "why.3": "A button opens your WhatsApp with the message already written. The customer just taps send.",
+      "why.4t": "It's yours.", "why.4": "The domain (yourbusiness.com) is in your name. It doesn't depend on what a social network does or changes.",
+      "p.title": "One payment for your site. The monthly plan is optional.", "p.once": "one-time", "p.month": "per month",
+      "p.basic": "1 page with services, prices, hours, map and a WhatsApp button.",
+      "p.b1": "Your name, logo and colors", "p.b2": "Services with prices", "p.b3": "Hours, address and Google map", "p.b4": "WhatsApp or text message button", "p.b5": "Looks good on phones and computers",
+      "p.full": "Complete site", "p.grande": "Everything in Básico, plus a photo gallery, FAQ and links to your social media.",
+      "p.g1": "Everything in Básico", "p.g2": "Photo gallery of your work", "p.g3": "Frequently asked questions", "p.g4": "Links to your social media",
+      "p.optional": "Optional", "p.maint": "Maintenance", "p.maintd": "Up to 3 changes a month: prices, hours, text.",
+      "p.m1": "Send me the change by message", "p.m2": "Cancel any time, no penalty", "p.m3": "The site stays yours",
+      "p.draft": "Before you pay, you see a free first draft and ask for any changes you want.",
+      "p.domain": "You buy the domain (yourbusiness.com) in your own name, for about $10 to $15 a year. I'll walk you through it.",
+      "p.extra": "Any extra work is agreed and quoted with you before I do it.",
+      "ex.title": "What a finished site looks like", "ex.lead": "Two complete sites from the Grande package. Open them on your phone and try the buttons. Both businesses are made up.",
+      "ex.fict": "Fictional business · Grande package", "ex.barber": "Services with prices, WhatsApp booking, gallery, hours, map and FAQ.",
+      "ex.food": "Menu with prices, WhatsApp ordering, gallery, hours, map and FAQ.", "ex.open": "See the full site →",
+      "how.title": "Four steps, no tech skills needed",
+      "how.1t": "We talk", "how.1": "You tell me your services, prices and hours, and send me your photos and logo.",
+      "how.2t": "I show you a free draft", "how.2": "You look at it on your phone and tell me what to change.",
+      "how.3t": "You approve it", "how.3": "You make any changes you want and message me when it's ready.",
+      "how.4t": "I publish it", "how.4": "You pay, buy your domain in your name (I'll guide you) and the site goes live.",
+      "faq.title": "Frequently asked questions",
+      "faq.1q": "Is the site mine?", "faq.1a": "Yes. The domain and accounts are in your name, and once you pay in full the site is yours.",
+      "faq.2q": "What if I don't like it?", "faq.2a": "We make the changes you ask for before publishing. Nothing goes live without your approval.",
+      "faq.3q": "Do I have to pay for the monthly plan?", "faq.3a": "No, it's optional. If you take it, you can cancel any time with no penalty and the site stays yours.",
+      "faq.4q": "Will I get more customers?", "faq.4a": "I don't promise results. The site makes it easier for people to find you and message you, and that helps.",
+      "faq.5q": "Is there a contract?", "faq.5a": "Yes, a simple one in Spanish, so we both know what the work includes and what it costs.",
+      "faq.6q": "What about photos of my customers?", "faq.6a": "Only photos of people who said yes get published.",
+      "c.title": "Let's talk about your business", "c.lead": "The first step is a short conversation: you tell me about your business, I show you an example and tell you which package fits.",
+      "c.role": "Owner, Small Shop Web", "c.wa": "Message on WhatsApp", "c.phone": "WhatsApp / phone", "c.email": "Email", "c.copy": "Copy", "c.copied": "Copied",
+      "f.tag": "Websites for small businesses in Puerto Rico",
+      "pv.services": "Services", "pv.menu": "Menu", "pv.hours": "Hours", "pv.where": "Location", "pv.gallery": "Gallery", "pv.faq": "FAQ", "pv.made": "Site made by Small Shop Web",
+      "pv.days": [["Mon – Fri", "9:00 a.m. – 6:00 p.m."], ["Saturday", "9:00 a.m. – 3:00 p.m."], ["Sunday", "Closed"]],
+      "pv.faq1": "Do you take ATH Móvil?", "pv.faq2": "Is there parking?",
+      "msg": function (n, p, t) { return "Hi Adrian, I saw Small Shop Web and I'm interested in the " + p + " package for my business \"" + n + "\" (" + t + ")."; },
+      "colors": ["Blue", "Red", "Green", "Purple", "Orange", "Teal", "Black"]
+    }
+  };
+
+  var TYPES = {
+    barberia: { icon: "scissors", tag: ["Recortes, barba y diseños", "Cuts, beards and designs"], cta: ["Pedir cita por WhatsApp", "Book on WhatsApp"], menu: false,
+      items: [["Recorte", "Haircut", "$15"], ["Recorte + barba", "Cut + beard", "$20"], ["Barba", "Beard trim", "$8"], ["Niños", "Kids", "$12"]] },
+    restaurante: { icon: "plate", tag: ["Comida criolla hecha al momento", "Puerto Rican food made to order"], cta: ["Ordenar por WhatsApp", "Order on WhatsApp"], menu: true,
+      items: [["Mofongo con pollo", "Mofongo with chicken", "$12.00"], ["Arroz con habichuelas", "Rice and beans", "$10.00"], ["Pastelillo", "Pastelillo (turnover)", "$2.50"], ["Café", "Coffee", "$1.50"]] },
+    salon: { icon: "spark", tag: ["Cortes, color y uñas", "Cuts, color and nails"], cta: ["Pedir cita por WhatsApp", "Book on WhatsApp"], menu: false,
+      items: [["Corte de dama", "Women's cut", "$25"], ["Tinte", "Hair color", "$45"], ["Manicura", "Manicure", "$18"], ["Pedicura", "Pedicure", "$25"]] },
+    tienda: { icon: "gift", tag: ["Regalos personalizados para toda ocasión", "Custom gifts for every occasion"], cta: ["Hacer pedido por WhatsApp", "Order on WhatsApp"], menu: false,
+      items: [["Arreglo de globos", "Balloon arrangement", "$25"], ["Taza personalizada", "Custom mug", "$12"], ["Camiseta estampada", "Printed T-shirt", "$15"], ["Caja de regalo", "Gift box", "$20"]] },
+    taller: { icon: "wrench", tag: ["Mecánica general y diagnóstico", "General repair and diagnostics"], cta: ["Pedir cita por WhatsApp", "Book on WhatsApp"], menu: false,
+      items: [["Cambio de aceite", "Oil change", "$35"], ["Diagnóstico", "Diagnostics", "$25"], ["Frenos", "Brakes", "desde $80|from $80"], ["Rotación de gomas", "Tire rotation", "$15"]] },
+    otro: { icon: "store", tag: null, cta: ["Escribir por WhatsApp", "Message on WhatsApp"], menu: false,
+      items: [["Servicio 1", "Service 1", "$20"], ["Servicio 2", "Service 2", "$35"], ["Servicio 3", "Service 3", "$50"], ["Servicio 4", "Service 4", "$15"]] }
+  };
+  var COLORS = ["#1D3557", "#B3261E", "#2E7D4F", "#6A3D9A", "#D9661F", "#0E7C86", "#222222"];
+  var ICONS = {
+    scissors: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.1 8.1 20 20M8.1 15.9 20 4"/></svg>',
+    plate: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="7"/><circle cx="12" cy="13" r="3.5"/><path d="M3 3v5M21 3v18"/></svg>',
+    spark: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>',
+    gift: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1.5S10 9 12 9c2 0 6 .5 6-1.5S14 5 12 9z"/></svg>',
+    store: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 5 4h14l2 5"/><path d="M3 9c0 1.5 1 2.5 2.25 2.5S7.5 10.5 7.5 9c0 1.5 1 2.5 2.25 2.5S12 10.5 12 9c0 1.5 1 2.5 2.25 2.5S16.5 10.5 16.5 9c0 1.5 1 2.5 2.25 2.5S21 10.5 21 9"/><path d="M5 11.5V20h14v-8.5M10 20v-5h4v5"/></svg>',
+    wrench: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3a5 5 0 0 0-4.6 7L3 17.4V21h3.6l7.4-7.4A5 5 0 0 0 21 9l-3 3-3-1-1-3z"/></svg>'
+  };
+
+  var state = { lang: "es", pkg: "basico", color: 0 };
+  try { var saved = localStorage.getItem("ssw-lang"); if (saved === "en" || saved === "es") state.lang = saved; } catch (e) {}
+
+  var $ = function (id) { return document.getElementById(id); };
+  var nameEl = $("b-name"), typeEl = $("b-type"), otherEl = $("b-other"), otherWrap = $("b-other-wrap"), screen = $("screen"), cta = $("b-cta");
+
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function L() { return T[state.lang]; }
+  function pick(pair) { return pair[state.lang === "es" ? 0 : 1]; }
+  function priceText(p) { if (p.indexOf("|") > -1) { var s = p.split("|"); return state.lang === "es" ? s[0] : s[1]; } return p; }
+
+  function render() {
+    var t = TYPES[typeEl.value], c = COLORS[state.color], l = L();
+    var name = nameEl.value.trim() || (state.lang === "es" ? "Tu negocio" : "Your business");
+    var grande = state.pkg === "grande";
+    var html = '<div class="pv-hero" style="background:' + c + '">' +
+      '<div class="pv-icon">' + ICONS[t.icon] + '</div>' +
+      '<div class="pv-name">' + esc(name) + '</div>' +
+      '<div class="pv-tag">' + esc(t.tag ? pick(t.tag) : (otherEl.value.trim() || l["otro.tag"])) + '</div>' +
+      '<span class="pv-btn" style="color:' + c + '">' + esc(pick(t.cta)) + '</span></div>';
+    html += '<div class="pv-sec"><div class="pv-h">' + (t.menu ? l["pv.menu"] : l["pv.services"]) + '</div>';
+    t.items.forEach(function (it) { html += '<div class="pv-item"><span>' + esc(pick(it)) + '</span><b>' + esc(priceText(it[2])) + '</b></div>'; });
+    html += '</div>';
+    if (grande) {
+      html += '<div class="pv-sec"><div class="pv-h">' + l["pv.gallery"] + '</div><div class="pv-gal">';
+      [0.95, 0.7, 0.5, 0.6, 0.85, 0.4].forEach(function (o) { html += '<div style="background:' + c + ';opacity:' + o + '"></div>'; });
+      html += '</div></div>';
+    }
+    html += '<div class="pv-sec"><div class="pv-h">' + l["pv.hours"] + '</div><div class="pv-hours">';
+    l["pv.days"].forEach(function (d) { html += '<span>' + d[0] + '</span><span>' + d[1] + '</span>'; });
+    html += '</div></div>';
+    html += '<div class="pv-sec"><div class="pv-h">' + l["pv.where"] + '</div><div class="pv-map" style="--pin:' + c + '"></div></div>';
+    if (grande) {
+      html += '<div class="pv-sec"><div class="pv-h">' + l["pv.faq"] + '</div><div class="pv-faq"><div>' + l["pv.faq1"] + '</div><div>' + l["pv.faq2"] + '</div></div></div>';
+      html += '<div class="pv-sec"><div class="pv-social"><span style="background:' + c + '">Instagram</span><span style="background:' + c + '">Facebook</span></div></div>';
+    }
+    html += '<div class="pv-foot">' + l["pv.made"] + '</div>';
+    screen.innerHTML = html;
+
+    var pkgName = grande ? "Grande ($300)" : "Básico ($200)";
+    var typeName = typeEl.value === "otro" ? (otherEl.value.trim() || l["t.otro"]) : typeEl.options[typeEl.selectedIndex].textContent;
+    var msg = l.msg(name, pkgName, typeName) + " Color: " + l.colors[state.color] + ".";
+    cta.href = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg);
+  }
+
+  function buildSwatches() {
+    var box = $("swatches"); box.innerHTML = "";
+    COLORS.forEach(function (c, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "swatch"; b.style.background = c; b.id = "sw-" + i;
+      b.setAttribute("role", "radio"); b.setAttribute("aria-checked", i === state.color ? "true" : "false");
+      b.setAttribute("aria-label", L().colors[i]);
+      b.addEventListener("click", function () { state.color = i; buildSwatches(); render(); });
+      box.appendChild(b);
+    });
+  }
+
+  function setLang(lang) {
+    state.lang = lang;
+    document.documentElement.lang = lang;
+    try { localStorage.setItem("ssw-lang", lang); } catch (e) {}
+    var d = T[lang];
+    document.querySelectorAll("[data-i18n]").forEach(function (el) { var k = el.getAttribute("data-i18n"); if (typeof d[k] === "string") el.textContent = d[k]; });
+    document.querySelectorAll("[data-i18n-ph]").forEach(function (el) { var k = el.getAttribute("data-i18n-ph"); if (typeof d[k] === "string") el.setAttribute("placeholder", d[k]); });
+    document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false"); });
+    var tag = document.querySelector('meta[name="description"]');
+    if (tag) tag.setAttribute("content", lang === "es" ? "Sitios web para negocios pequeños en Puerto Rico. Desde $200, pago único. Primer borrador gratis." : "Websites for small businesses in Puerto Rico. From $200, one-time payment. Free first draft.");
+    var wa = $("c-wa");
+    wa.href = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(lang === "es" ? "Hola Adrian, vi Small Shop Web y quiero información sobre un sitio web para mi negocio." : "Hi Adrian, I saw Small Shop Web and I'd like information about a website for my business.");
+    buildSwatches(); render();
+  }
+
+  document.querySelectorAll(".lang button").forEach(function (b) { b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); }); });
+  document.querySelectorAll(".seg button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      state.pkg = b.getAttribute("data-pkg");
+      document.querySelectorAll(".seg button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      render();
+    });
+  });
+  nameEl.addEventListener("input", render);
+  typeEl.addEventListener("change", function () { otherWrap.hidden = typeEl.value !== "otro"; if (!otherWrap.hidden) otherEl.focus(); render(); });
+  otherEl.addEventListener("input", render);
+  $("builder").addEventListener("submit", function (e) { e.preventDefault(); });
+
+  document.querySelectorAll(".copy").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var text = btn.getAttribute("data-copy");
+      var done = function () { btn.textContent = L()["c.copied"]; btn.classList.add("done"); setTimeout(function () { btn.textContent = L()["c.copy"]; btn.classList.remove("done"); }, 1600); };
+      var fallback = function () { var v = btn.parentElement.querySelector(".v"); var r = document.createRange(); r.selectNodeContents(v); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); };
+      try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+    });
+  });
+
+  setLang(state.lang);
+})();
+</script>
+</body>
+</html>

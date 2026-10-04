@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>El Fogón de Titi</title>
+<meta name="description" content="Sitio de ejemplo hecho por Small Shop Web. El Fogón de Titi es un negocio ficticio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,900&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a neighborhood fonda. White tile wall with a green tile band, a hand-painted red sign for the name, the menu as the main event with a running order ticket. Single light look by design. */
+:root {
+  --wall: #FBFAF6;
+  --tile: #2F6B3A;
+  --red: #C8372D;
+  --ink: #1E2A22;
+  --dim: #5E6A61;
+  --line: #E4E1D6;
+  --plantain: #F2C14E;
+  --card: #FFFFFF;
+  --demo: #FFC530;
+  --demo-ink: #12233A;
+  --display: "Shrikhand", "Cooper Black", Georgia, serif;
+  --body: "Nunito Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body { margin: 0; background: var(--wall); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.55; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+a { color: var(--red); }
+:focus-visible { outline: 3px solid var(--tile); outline-offset: 2px; border-radius: 4px; }
+.wrap { width: min(1100px, 100%); margin-inline: auto; padding-inline: 20px; }
+h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; line-height: 1.05; text-wrap: balance; color: var(--red); }
+h2 { font-size: clamp(2rem, 4.6vw, 2.8rem); }
+h3 { margin: 0; font-weight: 900; font-size: 1.15rem; }
+p { margin: 0; }
+.kicker { font: 500 .78rem var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--tile); }
+
+/* Demo bar */
+.demo { background: var(--demo); color: var(--demo-ink); font-size: .88rem; }
+.demo .wrap { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; min-height: 44px; padding-block: 6px; }
+.demo a { color: var(--demo-ink); font-weight: 900; text-decoration: none; }
+.demo .msg { flex: 1 1 220px; }
+.lang { display: inline-flex; border: 1.5px solid var(--demo-ink); border-radius: 999px; overflow: hidden; }
+.lang button { font: 700 .76rem var(--mono); padding: 5px 10px; border: 0; background: transparent; color: var(--demo-ink); cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--demo-ink); color: var(--demo); }
+
+/* Tile band */
+.band { height: 26px; background:
+  linear-gradient(45deg, var(--tile) 25%, transparent 25% 75%, var(--tile) 75%) 0 0 / 26px 26px,
+  linear-gradient(45deg, var(--tile) 25%, transparent 25% 75%, var(--tile) 75%) 13px 13px / 26px 26px,
+  #E9F0E6; }
+
+/* Nav */
+.nav { background: var(--wall); border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; }
+.nav .wrap { display: flex; align-items: center; gap: 18px; min-height: 60px; flex-wrap: wrap; }
+.logo { font-family: var(--display); color: var(--red); font-size: 1.45rem; text-decoration: none; }
+.nav nav { margin-left: auto; display: flex; gap: 18px; flex-wrap: wrap; }
+.nav nav a { color: var(--ink); text-decoration: none; font-weight: 700; font-size: .95rem; }
+.nav nav a:hover { color: var(--red); }
+@media (max-width: 680px) { .nav nav { display: none; } }
+
+/* Hero */
+.hero { padding-block: 52px 60px; overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 40px; align-items: center; }
+@media (max-width: 820px) { .hero .wrap { grid-template-columns: 1fr; } }
+.hero h1 { font-size: clamp(3.2rem, 9vw, 6rem); transform: rotate(-2deg); transform-origin: left; }
+.hero .lead { font-size: 1.15rem; color: var(--dim); margin-top: 18px; max-width: 30em; }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 22px; border-radius: 999px; font: 900 1rem var(--body); text-decoration: none; border: 2px solid var(--red); cursor: pointer; }
+.btn.solid { background: var(--red); color: #fff; }
+.btn.ghost { background: transparent; color: var(--red); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.today-card { background: var(--card); border: 2px solid var(--ink); border-radius: 20px; padding: 24px; display: grid; gap: 12px; box-shadow: 8px 8px 0 var(--plantain); }
+.today-card .kicker { color: var(--red); }
+.today-card .dish { font-weight: 900; font-size: 1.35rem; line-height: 1.2; }
+.today-card .px { font-family: var(--display); color: var(--tile); font-size: 2.2rem; line-height: 1; }
+.open-now { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--tile); }
+.open-now::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+
+section.s { padding-block: 68px; border-top: 1px solid var(--line); }
+.s-head { display: grid; gap: 10px; margin-bottom: 30px; }
+.s-head p { color: var(--dim); max-width: 38em; }
+
+/* Menu + ticket */
+.menu-grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 36px; align-items: start; }
+@media (max-width: 900px) { .menu-grid { grid-template-columns: 1fr; } }
+.cat { margin-bottom: 30px; }
+.cat h3 { font-family: var(--display); font-weight: 400; color: var(--tile); font-size: 1.5rem; margin-bottom: 8px; }
+.item { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 14px; align-items: center; padding-block: 14px; border-bottom: 1px dashed var(--line); }
+.item .n { font-weight: 900; }
+.item .d { display: block; color: var(--dim); font-size: .9rem; font-weight: 400; }
+.item .p { font-weight: 900; font-variant-numeric: tabular-nums; }
+.qty { display: inline-flex; align-items: center; border: 1.5px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--card); }
+.qty button { width: 36px; height: 36px; border: 0; background: transparent; font: 900 1.15rem var(--body); color: var(--red); cursor: pointer; }
+.qty button:disabled { color: var(--line); cursor: default; }
+.qty span { min-width: 22px; text-align: center; font-weight: 900; font-variant-numeric: tabular-nums; }
+.ticket { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 76px); background: var(--card); border: 2px solid var(--ink); border-radius: 6px; padding: 22px; display: grid; gap: 14px; }
+.ticket::after { content: ""; position: absolute; left: -2px; right: -2px; bottom: -12px; height: 12px; background: radial-gradient(circle at 8px 0, var(--card) 7px, transparent 7.5px) -2px 0 / 16px 12px repeat-x; }
+.ticket h3 { font-family: var(--mono); font-weight: 500; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; }
+.lines { display: grid; gap: 6px; font-size: .95rem; }
+.lines div { display: flex; justify-content: space-between; gap: 10px; font-variant-numeric: tabular-nums; }
+.empty { color: var(--dim); font-size: .95rem; }
+.total { display: flex; justify-content: space-between; border-top: 2px dashed var(--line); padding-top: 12px; font-weight: 900; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.f { display: grid; gap: 6px; }
+.f label { font-weight: 700; font-size: .88rem; }
+.f input, .f select { font: inherit; font-size: 1rem; padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--wall); color: var(--ink); width: 100%; }
+.f input:focus, .f select:focus { border-color: var(--tile); outline: none; }
+.small { font-size: .82rem; color: var(--dim); }
+.bar { display: none; }
+@media (max-width: 900px) {
+  .ticket { position: relative; top: auto; }
+  .bar:not([hidden]) { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: #fff; justify-content: space-between; align-items: center; gap: 12px; font-weight: 900; }
+  .bar a { color: var(--plantain); text-decoration: none; }
+}
+
+/* Gallery */
+.gal { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 720px) { .gal { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tile { aspect-ratio: 1; max-width: 100%; border-radius: 16px; position: relative; overflow: hidden; display: grid; place-items: center; }
+.tile svg { width: 46%; height: auto; }
+.tile .cap { position: absolute; left: 10px; bottom: 10px; right: 10px; background: rgba(255,255,255,.92); border-radius: 10px; padding: 8px 10px; font-weight: 900; font-size: .92rem; color: var(--ink); }
+.tile .cap span { display: block; font: 500 .66rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--dim); }
+
+/* Visit */
+.visit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 40px; }
+@media (max-width: 820px) { .visit { grid-template-columns: 1fr; } }
+.hours { display: grid; grid-template-columns: auto 1fr; gap: 10px 24px; }
+.hours span:nth-child(odd) { font-weight: 900; }
+.today { color: var(--red); }
+.map { border-radius: 16px; overflow: hidden; border: 2px solid var(--ink); background: #EAF0E4; display: grid; }
+.map svg { width: 100%; height: auto; display: block; }
+.map .mbar { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 14px 16px; background: var(--card); border-top: 2px solid var(--ink); }
+
+/* FAQ */
+.faq { display: grid; gap: 10px; max-width: 46em; }
+.faq details { background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; padding: 2px 18px; }
+.faq summary { cursor: pointer; font-weight: 900; padding: 14px 0; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--red); font-weight: 900; font-size: 1.3rem; line-height: 1; }
+.faq details[open] summary::after { content: "–"; }
+.faq p { color: var(--dim); padding-bottom: 16px; }
+
+footer { background: var(--tile); color: #F3F6EF; padding-block: 36px 90px; margin-top: 20px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: center; }
+footer .logo { color: #fff; }
+.social { display: flex; gap: 10px; }
+.social button { font: 900 .9rem var(--body); padding: 10px 16px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,.6); background: transparent; color: #fff; cursor: pointer; }
+.made { font-size: .85rem; opacity: .9; color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.made:hover { opacity: 1; }
+
+.modal { position: fixed; inset: 0; background: rgba(20,25,20,.55); display: grid; place-items: center; padding: 20px; z-index: 50; }
+.sheet { background: #fff; color: #12233A; border-radius: 16px; max-width: 420px; width: 100%; padding: 22px; display: grid; gap: 14px; }
+.sheet h3 { font-size: 1.1rem; }
+.bubble { background: #DCF8C6; color: #0B2A12; border-radius: 12px 12px 2px 12px; padding: 12px 14px; font-size: .96rem; justify-self: end; max-width: 92%; white-space: pre-wrap; overflow-wrap: anywhere; }
+.sheet p { font-size: .9rem; color: #4A5668; }
+.sheet button { justify-self: start; font: 900 .95rem var(--body); padding: 10px 18px; border-radius: 10px; border: 0; background: #12233A; color: #fff; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div class="demo">
+  <div class="wrap">
+    <a href="../index.html" data-i18n="demo.back">← Small Shop Web</a>
+    <span class="msg" data-i18n="demo.msg">Sitio de ejemplo · El Fogón de Titi es un negocio ficticio.</span>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">El Fogón de Titi</a>
+    <nav aria-label="Secciones">
+      <a href="#menu" data-i18n="nav.menu">Menú</a>
+      <a href="#galeria" data-i18n="nav.gallery">Galería</a>
+      <a href="#visitanos" data-i18n="nav.visit">Horario</a>
+      <a href="#preguntas" data-i18n="nav.faq">Preguntas</a>
+    </nav>
+  </div>
+</header>
+<div class="band" aria-hidden="true"></div>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="kicker" data-i18n="hero.kicker">Comida criolla · Las Piedras</span>
+        <h1>El Fogón<br>de Titi</h1>
+        <p class="lead" data-i18n="hero.lead">Mofongo, arroz con habichuelas y frituras hechas al momento. Pide por WhatsApp y recoge sin hacer fila.</p>
+        <div class="btns">
+          <a class="btn solid" href="#menu" data-i18n="hero.order">Hacer pedido</a>
+          <a class="btn ghost" href="#visitanos" data-i18n="hero.hours">Ver horario</a>
+        </div>
+      </div>
+      <aside class="today-card">
+        <span class="kicker" data-i18n="today.k">Plato del día</span>
+        <span class="dish" data-i18n="today.dish">Mofongo con pollo frito y ensalada</span>
+        <span class="px">$12</span>
+        <span class="open-now" id="open-now"></span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="s" id="menu">
+    <div class="wrap">
+      <div class="s-head">
+        <span class="kicker" data-i18n="nav.menu">Menú</span>
+        <h2 data-i18n="menu.title">¿Qué te preparamos?</h2>
+        <p data-i18n="menu.lead">Escoge tus platos y envía el pedido por WhatsApp. Te avisamos cuando esté listo para recoger.</p>
+      </div>
+      <div class="menu-grid">
+        <div id="menu-list"></div>
+        <form class="ticket" id="ticket" autocomplete="off">
+          <h3 data-i18n="t.title">Tu pedido</h3>
+          <div class="lines" id="lines"></div>
+          <div class="total"><span>Total</span><span id="total">$0.00</span></div>
+          <div class="f">
+            <label for="o-name" data-i18n="t.name">Nombre para el pedido</label>
+            <input id="o-name" type="text" maxlength="40" value="María">
+          </div>
+          <div class="f">
+            <label for="o-time" data-i18n="t.time">Hora para recoger</label>
+            <select id="o-time"></select>
+          </div>
+          <button class="btn solid" type="submit" id="o-send" data-i18n="t.send">Ordenar por WhatsApp</button>
+          <p class="small" data-i18n="t.note">Pagas al recoger, en efectivo o ATH Móvil.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="galeria">
+    <div class="wrap">
+      <div class="s-head">
+        <span class="kicker" data-i18n="nav.gallery">Galería</span>
+        <h2 data-i18n="gal.title">Recién salido del fogón</h2>
+        <p data-i18n="gal.lead">En el sitio real aquí van fotos de tus platos y de tu local.</p>
+      </div>
+      <div class="gal" id="gal"></div>
+    </div>
+  </section>
+
+  <section class="s" id="visitanos">
+    <div class="wrap visit">
+      <div class="s-head">
+        <span class="kicker" data-i18n="nav.visit">Horario</span>
+        <h2 data-i18n="visit.title">Ven a buscar tu comida</h2>
+        <div class="hours" id="hours"></div>
+      </div>
+      <div class="map">
+        <svg viewBox="0 0 600 300" role="img" aria-label="Mapa">
+          <rect width="600" height="300" fill="#EAF0E4"/>
+          <g fill="#DCE5D3"><rect x="20" y="20" width="150" height="90" rx="6"/><rect x="200" y="20" width="170" height="90" rx="6"/><rect x="400" y="20" width="180" height="90" rx="6"/><rect x="20" y="150" width="150" height="130" rx="6"/><rect x="200" y="150" width="170" height="130" rx="6"/><rect x="400" y="150" width="180" height="130" rx="6"/></g>
+          <g stroke="#FFFFFF" stroke-width="16"><path d="M0 130H600"/><path d="M185 0V300"/><path d="M385 0V300"/></g>
+          <circle cx="480" cy="215" r="38" fill="#C9DDBF"/>
+          <g transform="translate(300 118)"><path d="M0 0c-14-18-22-28-22-40a22 22 0 0 1 44 0c0 12-8 22-22 40z" fill="#C8372D"/><circle cx="0" cy="-40" r="8" fill="#fff"/></g>
+          <text x="300" y="160" text-anchor="middle" fill="#1E2A22" font-family="Nunito Sans, sans-serif" font-weight="900" font-size="16">El Fogón de Titi</text>
+        </svg>
+        <div class="mbar">
+          <span data-i18n="visit.addr">Carr. Ficticia km 3.2, Las Piedras, PR 00771</span>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Las+Piedras,+Puerto+Rico" target="_blank" rel="noopener" data-i18n="visit.maps">Abrir en Google Maps →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="preguntas">
+    <div class="wrap">
+      <div class="s-head">
+        <span class="kicker" data-i18n="nav.faq">Preguntas</span>
+        <h2 data-i18n="faq.title">Preguntas frecuentes</h2>
+      </div>
+      <div class="faq">
+        <details><summary data-i18n="faq.1q">¿Hacen entregas?</summary><p data-i18n="faq.1a">Por ahora solo para recoger. Pide por WhatsApp y te avisamos cuando esté listo.</p></details>
+        <details><summary data-i18n="faq.2q">¿Aceptan ATH Móvil?</summary><p data-i18n="faq.2a">Sí, ATH Móvil y efectivo.</p></details>
+        <details><summary data-i18n="faq.3q">¿Tienen opciones vegetarianas?</summary><p data-i18n="faq.3a">Sí. El mofongo de vegetales y las frituras de bacalaíto son las más pedidas.</p></details>
+        <details><summary data-i18n="faq.4q">¿Hacen pedidos para actividades?</summary><p data-i18n="faq.4a">Sí, con 2 días de anticipación. Escríbenos por WhatsApp con la cantidad de personas.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo">El Fogón de Titi</span>
+    <div class="social">
+      <button type="button" data-social="Instagram">Instagram</button>
+      <button type="button" data-social="Facebook">Facebook</button>
+    </div>
+    <a class="made" href="../index.html" data-i18n="foot.made">Sitio hecho por Small Shop Web</a>
+  </div>
+</footer>
+
+<div class="bar" id="bar" hidden><span id="bar-text"></span><a href="#ticket" data-i18n="bar.see">Ver pedido →</a></div>
+
+<div class="modal" id="modal" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="m-title">
+    <h3 id="m-title"></h3>
+    <div class="bubble" id="m-bubble"></div>
+    <p id="m-note"></p>
+    <button type="button" id="m-close"></button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var T = {
+    es: {
+      "demo.back": "← Small Shop Web", "demo.msg": "Sitio de ejemplo · El Fogón de Titi es un negocio ficticio.",
+      "nav.menu": "Menú", "nav.gallery": "Galería", "nav.visit": "Horario", "nav.faq": "Preguntas",
+      "hero.kicker": "Comida criolla · Las Piedras", "hero.lead": "Mofongo, arroz con habichuelas y frituras hechas al momento. Pide por WhatsApp y recoge sin hacer fila.",
+      "hero.order": "Hacer pedido", "hero.hours": "Ver horario",
+      "today.k": "Plato del día", "today.dish": "Mofongo con pollo frito y ensalada",
+      "open": "Abierto ahora", "closed": "Cerrado ahora",
+      "menu.title": "¿Qué te preparamos?", "menu.lead": "Escoge tus platos y envía el pedido por WhatsApp. Te avisamos cuando esté listo para recoger.",
+      "t.title": "Tu pedido", "t.empty": "Todavía no has escogido nada. Usa los botones + del menú.", "t.name": "Nombre para el pedido", "t.time": "Hora para recoger",
+      "t.send": "Ordenar por WhatsApp", "t.note": "Pagas al recoger, en efectivo o ATH Móvil.", "t.asap": "Lo antes posible",
+      "bar.see": "Ver pedido →", "bar.items": function (n, t) { return n + (n === 1 ? " artículo" : " artículos") + " · " + t; },
+      "gal.title": "Recién salido del fogón", "gal.lead": "En el sitio real aquí van fotos de tus platos y de tu local.", "gal.tag": "Foto de ejemplo",
+      "visit.title": "Ven a buscar tu comida", "visit.addr": "Carr. Ficticia km 3.2, Las Piedras, PR 00771", "visit.maps": "Abrir en Google Maps →",
+      "faq.title": "Preguntas frecuentes",
+      "faq.1q": "¿Hacen entregas?", "faq.1a": "Por ahora solo para recoger. Pide por WhatsApp y te avisamos cuando esté listo.",
+      "faq.2q": "¿Aceptan ATH Móvil?", "faq.2a": "Sí, ATH Móvil y efectivo.",
+      "faq.3q": "¿Tienen opciones vegetarianas?", "faq.3a": "Sí. El mofongo de vegetales y las frituras de bacalaíto son las más pedidas.",
+      "faq.4q": "¿Hacen pedidos para actividades?", "faq.4a": "Sí, con 2 días de anticipación. Escríbenos por WhatsApp con la cantidad de personas.",
+      "foot.made": "Sitio hecho por Small Shop Web",
+      "m.title": "Así llega el pedido", "m.note": "En un sitio real, este botón abre el WhatsApp del negocio con este pedido listo para enviar. En este ejemplo no se envía nada.",
+      "m.social": "En un sitio real, este botón abre el {x} del negocio.", "m.socialTitle": "Enlace a redes", "m.close": "Entendido",
+      "m.emptyTitle": "Tu pedido está vacío", "m.emptyNote": "Añade algo del menú con los botones + y vuelve a intentarlo.",
+      "msg.hi": function (n) { return "Hola, soy " + n + ". Quiero ordenar para recoger:"; }, "msg.total": "Total", "msg.pickup": "Recojo:", "anon": "un cliente",
+      "cats": ["Platos", "Frituras", "Bebidas", "Postres"]
+    },
+    en: {
+      "demo.back": "← Small Shop Web", "demo.msg": "Example site · El Fogón de Titi is a fictional business.",
+      "nav.menu": "Menu", "nav.gallery": "Gallery", "nav.visit": "Hours", "nav.faq": "FAQ",
+      "hero.kicker": "Puerto Rican food · Las Piedras", "hero.lead": "Mofongo, rice and beans, and fritters made to order. Order on WhatsApp and pick up without waiting in line.",
+      "hero.order": "Place an order", "hero.hours": "See hours",
+      "today.k": "Today's special", "today.dish": "Mofongo with fried chicken and salad",
+      "open": "Open now", "closed": "Closed now",
+      "menu.title": "What can we make you?", "menu.lead": "Pick your dishes and send the order on WhatsApp. We'll let you know when it's ready for pickup.",
+      "t.title": "Your order", "t.empty": "Nothing picked yet. Use the + buttons on the menu.", "t.name": "Name for the order", "t.time": "Pickup time",
+      "t.send": "Order on WhatsApp", "t.note": "Pay at pickup, cash or ATH Móvil.", "t.asap": "As soon as possible",
+      "bar.see": "See order →", "bar.items": function (n, t) { return n + (n === 1 ? " item" : " items") + " · " + t; },
+      "gal.title": "Fresh off the stove", "gal.lead": "On a real site, this is where photos of your dishes and your place go.", "gal.tag": "Sample photo",
+      "visit.title": "Come pick up your food", "visit.addr": "Fictional Rd. km 3.2, Las Piedras, PR 00771", "visit.maps": "Open in Google Maps →",
+      "faq.title": "FAQ",
+      "faq.1q": "Do you deliver?", "faq.1a": "Pickup only for now. Order on WhatsApp and we'll tell you when it's ready.",
+      "faq.2q": "Do you take ATH Móvil?", "faq.2a": "Yes, ATH Móvil and cash.",
+      "faq.3q": "Do you have vegetarian options?", "faq.3a": "Yes. The vegetable mofongo and the cod fritters are the most popular.",
+      "faq.4q": "Do you take orders for events?", "faq.4a": "Yes, with 2 days' notice. Message us on WhatsApp with the number of people.",
+      "foot.made": "Site made by Small Shop Web",
+      "m.title": "This is the order that gets sent", "m.note": "On a real site, this button opens the business's WhatsApp with this order ready to send. Nothing is sent from this example.",
+      "m.social": "On a real site, this button opens the business's {x}.", "m.socialTitle": "Social link", "m.close": "Got it",
+      "m.emptyTitle": "Your order is empty", "m.emptyNote": "Add something from the menu with the + buttons and try again.",
+      "msg.hi": function (n) { return "Hi, I'm " + n + ". I'd like to order for pickup:"; }, "msg.total": "Total", "msg.pickup": "Pickup:", "anon": "a customer",
+      "cats": ["Mains", "Fritters", "Drinks", "Desserts"]
+    }
+  };
+  var MENU = [
+    [ { es: "Mofongo con pollo frito", en: "Mofongo with fried chicken", des: "Con caldo y ensalada", den: "With broth and salad", p: 12 },
+      { es: "Mofongo de vegetales", en: "Vegetable mofongo", des: "Relleno de vegetales salteados", den: "Filled with sautéed vegetables", p: 10 },
+      { es: "Arroz con habichuelas y chuleta", en: "Rice, beans and pork chop", des: "Con tostones o amarillos", den: "With tostones or sweet plantains", p: 10 },
+      { es: "Pechuga a la plancha", en: "Grilled chicken breast", des: "Con tostones y ensalada", den: "With tostones and salad", p: 11 } ],
+    [ { es: "Alcapurria", en: "Alcapurria", des: "De carne", den: "Beef filling", p: 2.5 },
+      { es: "Pastelillo de carne", en: "Beef turnover", des: "Recién frito", den: "Freshly fried", p: 2.5 },
+      { es: "Bacalaíto", en: "Bacalaíto (cod fritter)", des: "Grande y crujiente", den: "Big and crispy", p: 2 } ],
+    [ { es: "Jugo de parcha", en: "Passion fruit juice", des: "Natural", den: "Fresh", p: 3 },
+      { es: "Malta", en: "Malta", des: "Fría", den: "Cold", p: 2 },
+      { es: "Café colao", en: "Café colao", des: "Con leche o negro", den: "With milk or black", p: 1.5 } ],
+    [ { es: "Flan de queso", en: "Cheese flan", des: "Hecho en casa", den: "Homemade", p: 3.5 },
+      { es: "Tembleque", en: "Tembleque", des: "De coco", den: "Coconut pudding", p: 3 } ]
+  ];
+  var HOURS = {
+    es: [["Lunes", "11:00 a.m. – 8:00 p.m."], ["Martes", "11:00 a.m. – 8:00 p.m."], ["Miércoles", "11:00 a.m. – 8:00 p.m."], ["Jueves", "11:00 a.m. – 8:00 p.m."], ["Viernes", "11:00 a.m. – 9:00 p.m."], ["Sábado", "11:00 a.m. – 9:00 p.m."], ["Domingo", "11:00 a.m. – 4:00 p.m."]],
+    en: [["Monday", "11:00 a.m. – 8:00 p.m."], ["Tuesday", "11:00 a.m. – 8:00 p.m."], ["Wednesday", "11:00 a.m. – 8:00 p.m."], ["Thursday", "11:00 a.m. – 8:00 p.m."], ["Friday", "11:00 a.m. – 9:00 p.m."], ["Saturday", "11:00 a.m. – 9:00 p.m."], ["Sunday", "11:00 a.m. – 4:00 p.m."]]
+  };
+  var CLOSE = [20, 20, 20, 20, 21, 21, 16];
+  var TIMES = ["12:00 p.m.", "12:30 p.m.", "1:00 p.m.", "1:30 p.m.", "5:00 p.m.", "5:30 p.m.", "6:00 p.m.", "6:30 p.m."];
+  var GAL = [
+    { es: "Mofongo", en: "Mofongo", icon: "bowl", bg: "#F6E3B8" },
+    { es: "Frituras", en: "Fritters", icon: "fritter", bg: "#F3D2C4" },
+    { es: "Arroz con habichuelas", en: "Rice and beans", icon: "plate", bg: "#DCE9D3" },
+    { es: "Café colao", en: "Café colao", icon: "cup", bg: "#E9DCCB" },
+    { es: "Flan de queso", en: "Cheese flan", icon: "flan", bg: "#F8E7C2" },
+    { es: "El local", en: "Our place", icon: "store", bg: "#D7E6E0" }
+  ];
+  var ICON = {
+    bowl: '<svg viewBox="0 0 64 64" fill="none" stroke="#C8372D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 30h48a24 24 0 0 1-48 0z"/><path d="M22 30c0-8 4-14 10-14s10 6 10 14M24 12c2-2 2-4 0-6M32 12c2-2 2-4 0-6M40 12c2-2 2-4 0-6"/></svg>',
+    fritter: '<svg viewBox="0 0 64 64" fill="none" stroke="#C8372D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 40c0-12 10-22 22-22s22 10 22 22z"/><path d="M8 40h48M20 30l3 3M32 26v4M44 30l-3 3"/></svg>',
+    plate: '<svg viewBox="0 0 64 64" fill="none" stroke="#2F6B3A" stroke-width="3.5" stroke-linecap="round"><circle cx="32" cy="34" r="22"/><circle cx="32" cy="34" r="12"/><circle cx="28" cy="32" r="1.5" fill="#2F6B3A"/><circle cx="35" cy="30" r="1.5" fill="#2F6B3A"/><circle cx="34" cy="38" r="1.5" fill="#2F6B3A"/></svg>',
+    cup: '<svg viewBox="0 0 64 64" fill="none" stroke="#6B4423" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 24h34v14a14 14 0 0 1-14 14h-6a14 14 0 0 1-14-14z"/><path d="M46 28h4a6 6 0 0 1 0 12h-4M22 16c2-2 2-4 0-6M32 16c2-2 2-4 0-6"/></svg>',
+    flan: '<svg viewBox="0 0 64 64" fill="none" stroke="#C8372D" stroke-width="3.5" stroke-linejoin="round"><path d="M18 24h28l6 22H12z"/><path d="M18 24c2 4 6 5 14 5s12-1 14-5" /><path d="M8 50h48" stroke-linecap="round"/></svg>',
+    store: '<svg viewBox="0 0 64 64" fill="none" stroke="#2F6B3A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 26 14 10h36l6 16"/><path d="M8 26c0 4 3 6 6 6s6-2 6-6c0 4 3 6 6 6s6-2 6-6c0 4 3 6 6 6s6-2 6-6c0 4 3 6 6 6s6-2 6-6"/><path d="M12 32v22h40V32M26 54V40h12v14"/></svg>'
+  };
+
+  var lang = "es", qty = {};
+  try { var s = localStorage.getItem("ssw-lang"); if (s === "en" || s === "es") lang = s; } catch (e) {}
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(v) { return String(v).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function money(n) { return "$" + n.toFixed(2); }
+  function key(c, i) { return c + "-" + i; }
+
+  function renderMenu() {
+    var d = T[lang];
+    $("menu-list").innerHTML = MENU.map(function (cat, c) {
+      return '<div class="cat"><h3>' + d.cats[c] + "</h3>" + cat.map(function (it, i) {
+        var k = key(c, i), q = qty[k] || 0;
+        return '<div class="item"><span class="n">' + esc(it[lang]) + '<span class="d">' + esc(lang === "es" ? it.des : it.den) + '</span></span><span class="p">' + money(it.p) + '</span>' +
+          '<span class="qty"><button type="button" data-k="' + k + '" data-d="-1" aria-label="−"' + (q ? "" : " disabled") + '>−</button><span>' + q + '</span><button type="button" data-k="' + k + '" data-d="1" aria-label="+">+</button></span></div>';
+      }).join("") + "</div>";
+    }).join("");
+  }
+
+  function order() {
+    var lines = [], total = 0, count = 0;
+    MENU.forEach(function (cat, c) { cat.forEach(function (it, i) { var q = qty[key(c, i)] || 0; if (q) { lines.push({ n: it[lang], q: q, sub: q * it.p }); total += q * it.p; count += q; } }); });
+    return { lines: lines, total: total, count: count };
+  }
+
+  function renderTicket() {
+    var d = T[lang], o = order();
+    $("lines").innerHTML = o.lines.length ? o.lines.map(function (l) { return "<div><span>" + l.q + " × " + esc(l.n) + "</span><span>" + money(l.sub) + "</span></div>"; }).join("") : '<p class="empty">' + d["t.empty"] + "</p>";
+    $("total").textContent = money(o.total);
+    $("bar").hidden = o.count === 0;
+    $("bar-text").textContent = d["bar.items"](o.count, money(o.total));
+  }
+
+  function renderStatic() {
+    var d = T[lang];
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) { var k = el.getAttribute("data-i18n"); if (typeof d[k] === "string") el.textContent = d[k]; });
+    document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false"); });
+    var now = new Date(), day = (now.getDay() + 6) % 7, h = now.getHours();
+    $("open-now").textContent = h >= 11 && h < CLOSE[day] ? d.open : d.closed;
+    $("hours").innerHTML = HOURS[lang].map(function (r, i) { var c = i === day ? ' class="today"' : ""; return "<span" + c + ">" + r[0] + "</span><span" + c + ">" + r[1] + "</span>"; }).join("");
+    $("gal").innerHTML = GAL.map(function (g) { return '<div class="tile" style="background:' + g.bg + '">' + ICON[g.icon] + '<div class="cap"><span>' + d["gal.tag"] + "</span>" + esc(g[lang]) + "</div></div>"; }).join("");
+    var sel = $("o-time"), i = sel.selectedIndex;
+    sel.innerHTML = [d["t.asap"]].concat(TIMES).map(function (t) { return "<option>" + esc(t) + "</option>"; }).join("");
+    sel.selectedIndex = Math.max(0, i);
+  }
+
+  function renderAll() { renderStatic(); renderMenu(); renderTicket(); }
+
+  $("menu-list").addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-k]"); if (!b) return;
+    var k = b.getAttribute("data-k"); qty[k] = Math.max(0, Math.min(20, (qty[k] || 0) + Number(b.getAttribute("data-d"))));
+    renderMenu(); renderTicket();
+    var again = document.querySelector('button[data-k="' + k + '"][data-d="' + b.getAttribute("data-d") + '"]');
+    if (again && !again.disabled) again.focus();
+  });
+
+  function openModal(title, bubble, note) {
+    $("m-title").textContent = title; $("m-bubble").textContent = bubble; $("m-bubble").hidden = !bubble;
+    $("m-note").textContent = note; $("m-close").textContent = T[lang]["m.close"]; $("modal").hidden = false; $("m-close").focus();
+  }
+  $("m-close").addEventListener("click", function () { $("modal").hidden = true; });
+  $("modal").addEventListener("click", function (e) { if (e.target === $("modal")) $("modal").hidden = true; });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") $("modal").hidden = true; });
+
+  $("ticket").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var d = T[lang], o = order();
+    if (!o.count) { openModal(d["m.emptyTitle"], "", d["m.emptyNote"]); return; }
+    var name = $("o-name").value.trim() || d.anon;
+    var msg = d["msg.hi"](name) + "\n" + o.lines.map(function (l) { return "• " + l.q + " × " + l.n + " (" + money(l.sub) + ")"; }).join("\n") +
+      "\n" + d["msg.total"] + ": " + money(o.total) + "\n" + d["msg.pickup"] + " " + $("o-time").value;
+    openModal(d["m.title"], msg, d["m.note"]);
+  });
+  document.querySelectorAll("[data-social]").forEach(function (b) {
+    b.addEventListener("click", function () { var d = T[lang]; openModal(d["m.socialTitle"], "", d["m.social"].replace("{x}", b.getAttribute("data-social"))); });
+  });
+  document.querySelectorAll(".lang button").forEach(function (b) {
+    b.addEventListener("click", function () { lang = b.getAttribute("data-lang"); try { localStorage.setItem("ssw-lang", lang); } catch (e) {} renderAll(); });
+  });
+
+  qty["0-0"] = 1; qty["1-0"] = 2; qty["2-0"] = 1;
+  renderAll();
+})();
+</script>
+</body>
+</html>
