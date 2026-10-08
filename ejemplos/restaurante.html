@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,900&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
-/* Layout: a neighborhood fonda. White tile wall with a green tile band, a hand-painted red sign for the name, the menu as the main event with a running order ticket. Single light look by design. */
+/* Layout: a neighborhood fonda. White tile wall with a green tile band, a hand-painted red sign for the name, the menu as the main event with a running order total. Single light look by design. Grande package: Spanish only, plain WhatsApp button. */
 :root {
   --wall: #FBFAF6;
   --tile: #2F6B3A;
@@ -45,9 +45,6 @@ p { margin: 0; }
 .demo .wrap { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; min-height: 44px; padding-block: 6px; }
 .demo a { color: var(--demo-ink); font-weight: 900; text-decoration: none; }
 .demo .msg { flex: 1 1 220px; }
-.lang { display: inline-flex; border: 1.5px solid var(--demo-ink); border-radius: 999px; overflow: hidden; }
-.lang button { font: 700 .76rem var(--mono); padding: 5px 10px; border: 0; background: transparent; color: var(--demo-ink); cursor: pointer; }
-.lang button[aria-pressed="true"] { background: var(--demo-ink); color: var(--demo); }
 
 /* Tile band */
 .band { height: 26px; background:
@@ -79,8 +76,6 @@ p { margin: 0; }
 .today-card .kicker { color: var(--red); }
 .today-card .dish { font-weight: 900; font-size: 1.35rem; line-height: 1.2; }
 .today-card .px { font-family: var(--display); color: var(--tile); font-size: 2.2rem; line-height: 1; }
-.open-now { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--tile); }
-.open-now::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
 
 section.s { padding-block: 68px; border-top: 1px solid var(--line); }
 .s-head { display: grid; gap: 10px; margin-bottom: 30px; }
@@ -106,10 +101,6 @@ section.s { padding-block: 68px; border-top: 1px solid var(--line); }
 .lines div { display: flex; justify-content: space-between; gap: 10px; font-variant-numeric: tabular-nums; }
 .empty { color: var(--dim); font-size: .95rem; }
 .total { display: flex; justify-content: space-between; border-top: 2px dashed var(--line); padding-top: 12px; font-weight: 900; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
-.f { display: grid; gap: 6px; }
-.f label { font-weight: 700; font-size: .88rem; }
-.f input, .f select { font: inherit; font-size: 1rem; padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--wall); color: var(--ink); width: 100%; }
-.f input:focus, .f select:focus { border-color: var(--tile); outline: none; }
 .small { font-size: .82rem; color: var(--dim); }
 .bar { display: none; }
 @media (max-width: 900px) {
@@ -166,11 +157,7 @@ footer .logo { color: #fff; }
 <div class="demo">
   <div class="wrap">
     <a href="../index.html" data-i18n="demo.back">← Small Shop Web</a>
-    <span class="msg" data-i18n="demo.msg">Sitio de ejemplo · El Fogón de Titi es un negocio ficticio.</span>
-    <div class="lang" role="group" aria-label="Idioma / Language">
-      <button type="button" data-lang="es" aria-pressed="true">ES</button>
-      <button type="button" data-lang="en" aria-pressed="false">EN</button>
-    </div>
+    <span class="msg" data-i18n="demo.msg">Sitio de ejemplo del paquete Grande · El Fogón de Titi es un negocio ficticio.</span>
   </div>
 </div>
 
@@ -203,7 +190,6 @@ footer .logo { color: #fff; }
         <span class="kicker" data-i18n="today.k">Plato del día</span>
         <span class="dish" data-i18n="today.dish">Mofongo con pollo frito y ensalada</span>
         <span class="px">$12</span>
-        <span class="open-now" id="open-now"></span>
       </aside>
     </div>
   </section>
@@ -213,25 +199,18 @@ footer .logo { color: #fff; }
       <div class="s-head">
         <span class="kicker" data-i18n="nav.menu">Menú</span>
         <h2 data-i18n="menu.title">¿Qué te preparamos?</h2>
-        <p data-i18n="menu.lead">Escoge tus platos y envía el pedido por WhatsApp. Te avisamos cuando esté listo para recoger.</p>
+        <p data-i18n="menu.lead">Suma tu pedido con los botones + y escríbenos por WhatsApp para ordenar. Te avisamos cuando esté listo para recoger.</p>
       </div>
       <div class="menu-grid">
         <div id="menu-list"></div>
-        <form class="ticket" id="ticket" autocomplete="off">
+        <div class="ticket" id="ticket">
           <h3 data-i18n="t.title">Tu pedido</h3>
           <div class="lines" id="lines"></div>
           <div class="total"><span>Total</span><span id="total">$0.00</span></div>
-          <div class="f">
-            <label for="o-name" data-i18n="t.name">Nombre para el pedido</label>
-            <input id="o-name" type="text" maxlength="40" value="María">
-          </div>
-          <div class="f">
-            <label for="o-time" data-i18n="t.time">Hora para recoger</label>
-            <select id="o-time"></select>
-          </div>
-          <button class="btn solid" type="submit" id="o-send" data-i18n="t.send">Ordenar por WhatsApp</button>
+          <p class="small" data-i18n="t.how">Para ordenar, escríbenos por WhatsApp con tu pedido.</p>
+          <button class="btn solid" type="button" id="o-wa" data-i18n="t.wa">Escribir por WhatsApp</button>
           <p class="small" data-i18n="t.note">Pagas al recoger, en efectivo o ATH Móvil.</p>
-        </form>
+        </div>
       </div>
     </div>
   </section>
@@ -313,15 +292,14 @@ footer .logo { color: #fff; }
 (function () {
   var T = {
     es: {
-      "demo.back": "← Small Shop Web", "demo.msg": "Sitio de ejemplo · El Fogón de Titi es un negocio ficticio.",
+      "demo.back": "← Small Shop Web", "demo.msg": "Sitio de ejemplo del paquete Grande · El Fogón de Titi es un negocio ficticio.",
       "nav.menu": "Menú", "nav.gallery": "Galería", "nav.visit": "Horario", "nav.faq": "Preguntas",
       "hero.kicker": "Comida criolla · Las Piedras", "hero.lead": "Mofongo, arroz con habichuelas y frituras hechas al momento. Pide por WhatsApp y recoge sin hacer fila.",
       "hero.order": "Hacer pedido", "hero.hours": "Ver horario",
       "today.k": "Plato del día", "today.dish": "Mofongo con pollo frito y ensalada",
-      "open": "Abierto ahora", "closed": "Cerrado ahora",
-      "menu.title": "¿Qué te preparamos?", "menu.lead": "Escoge tus platos y envía el pedido por WhatsApp. Te avisamos cuando esté listo para recoger.",
-      "t.title": "Tu pedido", "t.empty": "Todavía no has escogido nada. Usa los botones + del menú.", "t.name": "Nombre para el pedido", "t.time": "Hora para recoger",
-      "t.send": "Ordenar por WhatsApp", "t.note": "Pagas al recoger, en efectivo o ATH Móvil.", "t.asap": "Lo antes posible",
+      "menu.title": "¿Qué te preparamos?", "menu.lead": "Suma tu pedido con los botones + y escríbenos por WhatsApp para ordenar. Te avisamos cuando esté listo para recoger.",
+      "t.title": "Tu pedido", "t.empty": "Todavía no has escogido nada. Usa los botones + del menú.",
+      "t.how": "Para ordenar, escríbenos por WhatsApp con tu pedido.", "t.wa": "Escribir por WhatsApp", "t.note": "Pagas al recoger, en efectivo o ATH Móvil.",
       "bar.see": "Ver pedido →", "bar.items": function (n, t) { return n + (n === 1 ? " artículo" : " artículos") + " · " + t; },
       "gal.title": "Recién salido del fogón", "gal.lead": "En el sitio real aquí van fotos de tus platos y de tu local.", "gal.tag": "Foto de ejemplo",
       "visit.title": "Ven a buscar tu comida", "visit.addr": "Carr. Ficticia km 3.2, Las Piedras, PR 00771", "visit.maps": "Abrir en Google Maps →",
@@ -331,36 +309,10 @@ footer .logo { color: #fff; }
       "faq.3q": "¿Tienen opciones vegetarianas?", "faq.3a": "Sí. El mofongo de vegetales y las frituras de bacalaíto son las más pedidas.",
       "faq.4q": "¿Hacen pedidos para actividades?", "faq.4a": "Sí, con 2 días de anticipación. Escríbenos por WhatsApp con la cantidad de personas.",
       "foot.made": "Sitio hecho por Small Shop Web",
-      "m.title": "Así llega el pedido", "m.note": "En un sitio real, este botón abre el WhatsApp del negocio con este pedido listo para enviar. En este ejemplo no se envía nada.",
+      "m.title": "Así se abre el chat", "m.note": "En un sitio real, este botón abre el WhatsApp del negocio con este saludo listo y ahí escribes tu pedido. En este ejemplo no se envía nada.",
+      "wa.msg": "Hola, quiero hacer un pedido para recoger.",
       "m.social": "En un sitio real, este botón abre el {x} del negocio.", "m.socialTitle": "Enlace a redes", "m.close": "Entendido",
-      "m.emptyTitle": "Tu pedido está vacío", "m.emptyNote": "Añade algo del menú con los botones + y vuelve a intentarlo.",
-      "msg.hi": function (n) { return "Hola, soy " + n + ". Quiero ordenar para recoger:"; }, "msg.total": "Total", "msg.pickup": "Recojo:", "anon": "un cliente",
       "cats": ["Platos", "Frituras", "Bebidas", "Postres"]
-    },
-    en: {
-      "demo.back": "← Small Shop Web", "demo.msg": "Example site · El Fogón de Titi is a fictional business.",
-      "nav.menu": "Menu", "nav.gallery": "Gallery", "nav.visit": "Hours", "nav.faq": "FAQ",
-      "hero.kicker": "Puerto Rican food · Las Piedras", "hero.lead": "Mofongo, rice and beans, and fritters made to order. Order on WhatsApp and pick up without waiting in line.",
-      "hero.order": "Place an order", "hero.hours": "See hours",
-      "today.k": "Today's special", "today.dish": "Mofongo with fried chicken and salad",
-      "open": "Open now", "closed": "Closed now",
-      "menu.title": "What can we make you?", "menu.lead": "Pick your dishes and send the order on WhatsApp. We'll let you know when it's ready for pickup.",
-      "t.title": "Your order", "t.empty": "Nothing picked yet. Use the + buttons on the menu.", "t.name": "Name for the order", "t.time": "Pickup time",
-      "t.send": "Order on WhatsApp", "t.note": "Pay at pickup, cash or ATH Móvil.", "t.asap": "As soon as possible",
-      "bar.see": "See order →", "bar.items": function (n, t) { return n + (n === 1 ? " item" : " items") + " · " + t; },
-      "gal.title": "Fresh off the stove", "gal.lead": "On a real site, this is where photos of your dishes and your place go.", "gal.tag": "Sample photo",
-      "visit.title": "Come pick up your food", "visit.addr": "Fictional Rd. km 3.2, Las Piedras, PR 00771", "visit.maps": "Open in Google Maps →",
-      "faq.title": "FAQ",
-      "faq.1q": "Do you deliver?", "faq.1a": "Pickup only for now. Order on WhatsApp and we'll tell you when it's ready.",
-      "faq.2q": "Do you take ATH Móvil?", "faq.2a": "Yes, ATH Móvil and cash.",
-      "faq.3q": "Do you have vegetarian options?", "faq.3a": "Yes. The vegetable mofongo and the cod fritters are the most popular.",
-      "faq.4q": "Do you take orders for events?", "faq.4a": "Yes, with 2 days' notice. Message us on WhatsApp with the number of people.",
-      "foot.made": "Site made by Small Shop Web",
-      "m.title": "This is the order that gets sent", "m.note": "On a real site, this button opens the business's WhatsApp with this order ready to send. Nothing is sent from this example.",
-      "m.social": "On a real site, this button opens the business's {x}.", "m.socialTitle": "Social link", "m.close": "Got it",
-      "m.emptyTitle": "Your order is empty", "m.emptyNote": "Add something from the menu with the + buttons and try again.",
-      "msg.hi": function (n) { return "Hi, I'm " + n + ". I'd like to order for pickup:"; }, "msg.total": "Total", "msg.pickup": "Pickup:", "anon": "a customer",
-      "cats": ["Mains", "Fritters", "Drinks", "Desserts"]
     }
   };
   var MENU = [
@@ -378,11 +330,8 @@ footer .logo { color: #fff; }
       { es: "Tembleque", en: "Tembleque", des: "De coco", den: "Coconut pudding", p: 3 } ]
   ];
   var HOURS = {
-    es: [["Lunes", "11:00 a.m. – 8:00 p.m."], ["Martes", "11:00 a.m. – 8:00 p.m."], ["Miércoles", "11:00 a.m. – 8:00 p.m."], ["Jueves", "11:00 a.m. – 8:00 p.m."], ["Viernes", "11:00 a.m. – 9:00 p.m."], ["Sábado", "11:00 a.m. – 9:00 p.m."], ["Domingo", "11:00 a.m. – 4:00 p.m."]],
-    en: [["Monday", "11:00 a.m. – 8:00 p.m."], ["Tuesday", "11:00 a.m. – 8:00 p.m."], ["Wednesday", "11:00 a.m. – 8:00 p.m."], ["Thursday", "11:00 a.m. – 8:00 p.m."], ["Friday", "11:00 a.m. – 9:00 p.m."], ["Saturday", "11:00 a.m. – 9:00 p.m."], ["Sunday", "11:00 a.m. – 4:00 p.m."]]
+    es: [["Lunes", "11:00 a.m. – 8:00 p.m."], ["Martes", "11:00 a.m. – 8:00 p.m."], ["Miércoles", "11:00 a.m. – 8:00 p.m."], ["Jueves", "11:00 a.m. – 8:00 p.m."], ["Viernes", "11:00 a.m. – 9:00 p.m."], ["Sábado", "11:00 a.m. – 9:00 p.m."], ["Domingo", "11:00 a.m. – 4:00 p.m."]]
   };
-  var CLOSE = [20, 20, 20, 20, 21, 21, 16];
-  var TIMES = ["12:00 p.m.", "12:30 p.m.", "1:00 p.m.", "1:30 p.m.", "5:00 p.m.", "5:30 p.m.", "6:00 p.m.", "6:30 p.m."];
   var GAL = [
     { es: "Mofongo", en: "Mofongo", icon: "bowl", bg: "#F6E3B8" },
     { es: "Frituras", en: "Fritters", icon: "fritter", bg: "#F3D2C4" },
@@ -401,7 +350,6 @@ footer .logo { color: #fff; }
   };
 
   var lang = "es", qty = {};
-  try { var s = localStorage.getItem("ssw-lang"); if (s === "en" || s === "es") lang = s; } catch (e) {}
   var $ = function (id) { return document.getElementById(id); };
   function esc(v) { return String(v).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function money(n) { return "$" + n.toFixed(2); }
@@ -436,14 +384,9 @@ footer .logo { color: #fff; }
     var d = T[lang];
     document.documentElement.lang = lang;
     document.querySelectorAll("[data-i18n]").forEach(function (el) { var k = el.getAttribute("data-i18n"); if (typeof d[k] === "string") el.textContent = d[k]; });
-    document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false"); });
-    var now = new Date(), day = (now.getDay() + 6) % 7, h = now.getHours();
-    $("open-now").textContent = h >= 11 && h < CLOSE[day] ? d.open : d.closed;
+    var day = (new Date().getDay() + 6) % 7;
     $("hours").innerHTML = HOURS[lang].map(function (r, i) { var c = i === day ? ' class="today"' : ""; return "<span" + c + ">" + r[0] + "</span><span" + c + ">" + r[1] + "</span>"; }).join("");
     $("gal").innerHTML = GAL.map(function (g) { return '<div class="tile" style="background:' + g.bg + '">' + ICON[g.icon] + '<div class="cap"><span>' + d["gal.tag"] + "</span>" + esc(g[lang]) + "</div></div>"; }).join("");
-    var sel = $("o-time"), i = sel.selectedIndex;
-    sel.innerHTML = [d["t.asap"]].concat(TIMES).map(function (t) { return "<option>" + esc(t) + "</option>"; }).join("");
-    sel.selectedIndex = Math.max(0, i);
   }
 
   function renderAll() { renderStatic(); renderMenu(); renderTicket(); }
@@ -464,20 +407,9 @@ footer .logo { color: #fff; }
   $("modal").addEventListener("click", function (e) { if (e.target === $("modal")) $("modal").hidden = true; });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") $("modal").hidden = true; });
 
-  $("ticket").addEventListener("submit", function (e) {
-    e.preventDefault();
-    var d = T[lang], o = order();
-    if (!o.count) { openModal(d["m.emptyTitle"], "", d["m.emptyNote"]); return; }
-    var name = $("o-name").value.trim() || d.anon;
-    var msg = d["msg.hi"](name) + "\n" + o.lines.map(function (l) { return "• " + l.q + " × " + l.n + " (" + money(l.sub) + ")"; }).join("\n") +
-      "\n" + d["msg.total"] + ": " + money(o.total) + "\n" + d["msg.pickup"] + " " + $("o-time").value;
-    openModal(d["m.title"], msg, d["m.note"]);
-  });
+  $("o-wa").addEventListener("click", function () { var d = T[lang]; openModal(d["m.title"], d["wa.msg"], d["m.note"]); });
   document.querySelectorAll("[data-social]").forEach(function (b) {
     b.addEventListener("click", function () { var d = T[lang]; openModal(d["m.socialTitle"], "", d["m.social"].replace("{x}", b.getAttribute("data-social"))); });
-  });
-  document.querySelectorAll(".lang button").forEach(function (b) {
-    b.addEventListener("click", function () { lang = b.getAttribute("data-lang"); try { localStorage.setItem("ssw-lang", lang); } catch (e) {} renderAll(); });
   });
 
   qty["0-0"] = 1; qty["1-0"] = 2; qty["2-0"] = 1;

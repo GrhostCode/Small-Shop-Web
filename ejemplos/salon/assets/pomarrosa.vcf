@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:;Salón Pomarrosa;;;
+FN:Salón Pomarrosa
+ORG:Salón Pomarrosa
+TEL;TYPE=WORK,VOICE:+1-787-555-0142
+ADR;TYPE=WORK:;;Calle Ficticia #45;Las Piedras;PR;00771;Puerto Rico
+URL:https://smallshopweb.com/ejemplos/salon/
+NOTE:Negocio ficticio (ejemplo de Small Shop Web). Martes a viernes 9:00 a.m. – 6:00 p.m.\, sábado 8:00 a.m. – 4:00 p.m.
+END:VCARD

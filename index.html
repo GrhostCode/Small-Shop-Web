@@ -96,8 +96,10 @@ p { margin: 0; }
 .swatches { display: flex; gap: 8px; flex-wrap: wrap; }
 .swatch { width: 34px; height: 34px; border-radius: 50%; border: 3px solid var(--card); box-shadow: 0 0 0 1.5px var(--line); cursor: pointer; padding: 0; }
 .swatch[aria-checked="true"] { box-shadow: 0 0 0 2.5px var(--ink); }
-.seg { display: inline-grid; grid-template-columns: 1fr 1fr; border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
-.seg button { font: 700 .9rem var(--body); padding: 10px 8px; white-space: nowrap; border: 0; background: var(--paper); color: var(--ink); cursor: pointer; }
+.seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
+.seg button { display: grid; justify-items: center; gap: 1px; font: 700 .9rem var(--body); line-height: 1.2; padding: 8px 4px; white-space: nowrap; border: 0; background: var(--paper); color: var(--ink); cursor: pointer; }
+.seg button + button { border-left: 1.5px solid var(--line); }
+.seg button span { font-weight: 400; font-size: .82rem; }
 .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 .note { font-size: .85rem; color: var(--muted); }
 .cta { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 20px; border-radius: 12px; background: var(--sea); color: #fff; font-weight: 700; font-size: 1.05rem; text-decoration: none; border: 0; cursor: pointer; }
@@ -136,6 +138,33 @@ p { margin: 0; }
 .pv-social { display: flex; gap: 8px; }
 .pv-social span { padding: 6px 12px; border-radius: 999px; font-size: .8rem; font-weight: 700; color: #fff; }
 .pv-foot { padding: 14px 18px 26px; font-size: .75rem; color: #7A7F88; text-align: center; }
+/* Pro preview: a site with pages */
+.pv-top { padding: 46px 16px 12px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.pv-top-name { font-family: var(--display); font-weight: 900; font-stretch: 105%; font-size: 1rem; line-height: 1.1; overflow-wrap: anywhere; }
+.pv-lang { display: inline-flex; border: 1.5px solid rgba(255,255,255,.75); border-radius: 999px; overflow: hidden; flex: none; }
+.pv-lang b { font: 700 .62rem var(--mono); padding: 3px 7px; }
+.pv-lang b.on { background: #fff; color: #1B1F27; }
+.pv-tabs { display: flex; gap: 4px; padding: 8px 10px; overflow-x: auto; scrollbar-width: none; background: #fff; border-bottom: 1px solid #ECECE8; }
+.pv-tabs::-webkit-scrollbar { display: none; }
+.pv-tabs button { flex: none; font: 700 .72rem var(--body); padding: 6px 10px; border-radius: 999px; border: 0; background: #F0F0EC; color: #1B1F27; cursor: pointer; }
+.pv-tabs button[aria-pressed="true"] { color: #fff; }
+.pv-open { justify-self: start; display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px; background: #EEEEEA; color: #555B66; font-size: .72rem; font-weight: 700; }
+.pv-open::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #9AA0A8; }
+.pv-open.is-open { background: #E3F2E8; color: #1E6B3C; }
+.pv-open.is-open::before { background: #2E8B57; }
+.pv-tag2 { color: #555B66; font-size: .88rem; }
+.pv-solid { color: #fff; }
+.pv-item.pv-pick { align-items: center; }
+.pv-item.pv-pick span { flex: 1; }
+.pv-add { flex: none; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid; background: transparent; font: 800 .9rem var(--body); line-height: 1; cursor: pointer; display: grid; place-items: center; padding: 0; }
+.pv-quote { margin: 12px 18px 6px; padding: 12px; border: 2px solid; border-radius: 12px; display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; font-size: .85rem; font-weight: 700; }
+.pv-quote b { font-variant-numeric: tabular-nums; }
+.pv-quote .pv-btn { grid-column: 1 / -1; margin: 0; }
+.pv-rev { background: #F5F5F1; border-radius: 10px; padding: 10px 12px; display: grid; gap: 4px; font-size: .84rem; }
+.pv-rev p { margin: 0; }
+.pv-rev small { color: #7A7F88; font-size: .72rem; }
+.pv-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.pv-btns span { padding: 6px 10px; border-radius: 999px; font-size: .74rem; font-weight: 700; border: 1.5px solid transparent; color: #fff; }
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; gap: 36px; }
   .window { position: static; }
@@ -151,8 +180,13 @@ section.block { padding-block: 72px; border-top: 1px solid var(--line); }
 .why p { color: var(--muted); }
 
 /* Price board */
-.board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
-@media (max-width: 900px) { .board { grid-template-columns: 1fr; } }
+.board-h { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 12px; margin: 0 0 16px; font-size: 1.5rem; }
+.board-h small { font-family: var(--body); font-weight: 700; font-size: .95rem; font-stretch: 100%; color: var(--muted); letter-spacing: 0; }
+.board + .board-h { margin-top: 48px; }
+.board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.board.maint { align-items: stretch; }
+.board.maint { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 900px) { .board, .board.maint { grid-template-columns: 1fr; } }
 .plan { background: var(--card); border: 1.5px solid var(--line); border-radius: 18px; padding: 26px; display: grid; gap: 14px; align-content: start; }
 .plan.feature { border: 2.5px solid var(--ink); }
 .plan .tag { justify-self: start; font: 500 .74rem var(--mono); letter-spacing: .06em; text-transform: uppercase; background: var(--sun); color: var(--sun-ink); padding: 4px 10px; border-radius: 6px; }
@@ -164,12 +198,13 @@ section.block { padding-block: 72px; border-top: 1px solid var(--line); }
 .fine { margin-top: 22px; display: grid; gap: 8px; color: var(--muted); font-size: .98rem; max-width: 52em; }
 
 /* Examples */
-.examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-@media (max-width: 760px) { .examples { grid-template-columns: 1fr; } }
-.ex { display: grid; background: var(--card); border: 1.5px solid var(--line); border-radius: 18px; overflow: hidden; text-decoration: none; color: var(--ink); transition: transform .2s ease, box-shadow .2s ease; }
+.examples { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 980px) { .examples { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .examples { grid-template-columns: 1fr; } }
+.ex { display: grid; grid-template-rows: auto 1fr; background: var(--card); border: 1.5px solid var(--line); border-radius: 18px; overflow: hidden; text-decoration: none; color: var(--ink); transition: transform .2s ease, box-shadow .2s ease; }
 .ex:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
 .ex-art { height: 210px; position: relative; overflow: hidden; display: grid; place-items: center; }
-.ex-body { padding: 20px 22px 22px; display: grid; gap: 8px; }
+.ex-body { padding: 20px 22px 22px; display: grid; gap: 8px; align-content: start; }
 .ex-body p { color: var(--muted); }
 .ex-go { font-weight: 700; color: var(--sea); }
 .art-barber { background: #141414; }
@@ -182,6 +217,10 @@ section.block { padding-block: 72px; border-top: 1px solid var(--line); }
   linear-gradient(45deg, #2F6B3A 25%, transparent 25% 75%, #2F6B3A 75%) 14px 14px / 28px 28px; opacity: .12; }
 .art-food .t { position: relative; font-family: "Archivo", sans-serif; font-weight: 900; font-stretch: 125%; font-size: 2.3rem; color: #C8372D; text-align: center; line-height: 1; }
 .art-food .t span { display: block; font-size: .85rem; letter-spacing: .3em; color: #2F6B3A; font-weight: 800; margin-top: 10px; text-transform: uppercase; }
+.art-salon { background: #F7D9D6; }
+.art-salon .tufts { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 236px; height: auto; }
+.art-salon .t { position: absolute; left: 0; right: 0; bottom: 20px; font-family: "Archivo", sans-serif; font-weight: 900; font-stretch: 105%; font-size: 2.2rem; color: #1F4A3A; text-align: center; line-height: 1; }
+.art-salon .t span { display: block; font-size: .8rem; letter-spacing: .3em; color: #B3306A; font-weight: 800; margin-bottom: 6px; text-transform: uppercase; }
 .fict { font: 500 .72rem var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 
 /* Steps */
@@ -282,8 +321,9 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
             <div class="field">
               <span class="lbl" id="b-pkg-l" data-i18n="b.pkg">Paquete</span>
               <div class="seg" role="group" aria-labelledby="b-pkg-l">
-                <button type="button" id="pkg-basico" data-pkg="basico" aria-pressed="true" data-i18n="pk.basico">Básico · $200</button>
-                <button type="button" id="pkg-grande" data-pkg="grande" aria-pressed="false" data-i18n="pk.grande">Grande · $300</button>
+                <button type="button" id="pkg-basico" data-pkg="basico" aria-pressed="true"><b data-i18n="pn.basico">Básico</b><span>$200</span></button>
+                <button type="button" id="pkg-grande" data-pkg="grande" aria-pressed="false"><b data-i18n="pn.grande">Grande</b><span>$300</span></button>
+                <button type="button" id="pkg-pro" data-pkg="pro" aria-pressed="false"><b data-i18n="pn.pro">Pro</b><span>$400</span></button>
               </div>
             </div>
           </div>
@@ -329,6 +369,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
         <span class="eyebrow" data-i18n="nav.prices">Precios</span>
         <h2 data-i18n="p.title">Un solo pago por tu sitio. El plan mensual es opcional.</h2>
       </div>
+      <h3 class="board-h"><span data-i18n="p.siteH">Tu sitio</span><small data-i18n="p.once">pago único</small></h3>
       <div class="board">
         <article class="plan">
           <h3 data-i18n="pn.basico">Básico</h3>
@@ -342,7 +383,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
             <li data-i18n="p.b5">Se ve bien en el teléfono y en la computadora</li>
           </ul>
         </article>
-        <article class="plan feature">
+        <article class="plan">
           <span class="tag" data-i18n="p.full">Sitio completo</span>
           <h3 data-i18n="pn.grande">Grande</h3>
           <div class="price">$300<small data-i18n="p.once">pago único</small></div>
@@ -354,11 +395,43 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
             <li data-i18n="p.g4">Enlaces a tus redes sociales</li>
           </ul>
         </article>
+        <article class="plan feature">
+          <span class="tag" data-i18n="p.proTag">Varias páginas</span>
+          <h3 data-i18n="pn.pro">Pro</h3>
+          <div class="price">$400<small data-i18n="p.once">pago único</small></div>
+          <p data-i18n="p.pro">Lo del Grande, en un sitio de varias páginas y en español e inglés.</p>
+          <ul>
+            <li data-i18n="p.p1">Todo lo del Grande</li>
+            <li data-i18n="p.p2">Varias páginas, cada una con su propio link</li>
+            <li data-i18n="p.p3">Botón para cambiar entre español e inglés</li>
+            <li data-i18n="p.p4">Aviso de “Abierto ahora” según tu horario</li>
+            <li data-i18n="p.p5">Citas o pedidos por WhatsApp con el mensaje armado</li>
+            <li data-i18n="p.p6">Cotizador: escogen servicios, ven el total y te lo envían</li>
+            <li data-i18n="p.p7">Servicios o menú por categorías</li>
+            <li data-i18n="p.p8">Fotos que se abren en grande</li>
+            <li data-i18n="p.p9">Mapa con botón de “Cómo llegar”</li>
+            <li data-i18n="p.p10">Página de reseñas de tus clientes</li>
+            <li data-i18n="p.p11">Botones para guardar tu contacto y compartir tu sitio</li>
+            <li data-i18n="p.p12">Precios listos para imprimir y código QR para tu negocio</li>
+          </ul>
+        </article>
+      </div>
+      <h3 class="board-h"><span data-i18n="p.maintH">Mantenimiento</span><small data-i18n="p.maintSub">mensual y opcional</small></h3>
+      <div class="board maint">
         <article class="plan">
-          <span class="tag" data-i18n="p.optional">Opcional</span>
-          <h3 data-i18n="p.maint">Mantenimiento</h3>
+          <h3 data-i18n="p.maintA">Para Básico y Grande</h3>
           <div class="price">$15<small data-i18n="p.month">al mes</small></div>
           <p data-i18n="p.maintd">Hasta 3 cambios al mes: precios, horario, textos.</p>
+          <ul>
+            <li data-i18n="p.m1">Me mandas el cambio por mensaje</li>
+            <li data-i18n="p.m2">Lo cancelas cuando quieras, sin penalidad</li>
+            <li data-i18n="p.m3">El sitio sigue siendo tuyo</li>
+          </ul>
+        </article>
+        <article class="plan">
+          <h3 data-i18n="p.maintB">Para Pro</h3>
+          <div class="price">$25<small data-i18n="p.month">al mes</small></div>
+          <p data-i18n="p.maintdPro">Hasta 3 cambios al mes en cualquiera de tus páginas, en español y en inglés.</p>
           <ul>
             <li data-i18n="p.m1">Me mandas el cambio por mensaje</li>
             <li data-i18n="p.m2">Lo cancelas cuando quieras, sin penalidad</li>
@@ -379,7 +452,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       <div class="head">
         <span class="eyebrow" data-i18n="nav.examples">Ejemplos</span>
         <h2 data-i18n="ex.title">Así se ve un sitio terminado</h2>
-        <p data-i18n="ex.lead">Dos sitios completos del paquete Grande. Ábrelos en tu teléfono y prueba los botones. Los dos negocios son inventados.</p>
+        <p data-i18n="ex.lead">Dos sitios del paquete Grande y uno del Pro, con varias páginas. Ábrelos en tu teléfono y prueba los botones. Los tres negocios son inventados.</p>
       </div>
       <div class="examples">
         <a class="ex" href="ejemplos/barberia.html">
@@ -387,7 +460,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
           <div class="ex-body">
             <span class="fict" data-i18n="ex.fict">Negocio ficticio · Paquete Grande</span>
             <h3>Barbería El Filo</h3>
-            <p data-i18n="ex.barber">Servicios con precios, citas por WhatsApp, galería, horario, mapa y preguntas frecuentes.</p>
+            <p data-i18n="ex.barber">Servicios con precios, botón de WhatsApp, galería, horario, mapa y preguntas frecuentes.</p>
             <span class="ex-go" data-i18n="ex.open">Ver sitio completo →</span>
           </div>
         </a>
@@ -396,7 +469,39 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
           <div class="ex-body">
             <span class="fict" data-i18n="ex.fict">Negocio ficticio · Paquete Grande</span>
             <h3>El Fogón de Titi</h3>
-            <p data-i18n="ex.food">Menú con precios, pedidos por WhatsApp, galería, horario, mapa y preguntas frecuentes.</p>
+            <p data-i18n="ex.food">Menú con precios y total del pedido, botón de WhatsApp, galería, horario, mapa y preguntas frecuentes.</p>
+            <span class="ex-go" data-i18n="ex.open">Ver sitio completo →</span>
+          </div>
+        </a>
+        <a class="ex" id="ex-salon" href="ejemplos/salon/">
+          <div class="ex-art art-salon" aria-hidden="true">
+            <svg class="tufts" viewBox="0 0 236 118" focusable="false">
+              <defs>
+                <linearGradient id="st0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14100E"/><stop offset="1" stop-color="#4A3A33"/></linearGradient>
+                <linearGradient id="st1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E1A10"/><stop offset="1" stop-color="#6A4128"/></linearGradient>
+                <linearGradient id="st2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A381F"/><stop offset="1" stop-color="#A97A4F"/></linearGradient>
+                <linearGradient id="st3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8E5222"/><stop offset="1" stop-color="#DDA765"/></linearGradient>
+                <linearGradient id="st4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7E2C14"/><stop offset="1" stop-color="#DB7442"/></linearGradient>
+                <linearGradient id="st5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B08648"/><stop offset="1" stop-color="#F0DDA8"/></linearGradient>
+                <linearGradient id="st6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8E2353"/><stop offset="1" stop-color="#F2A9C4"/></linearGradient>
+                <linearGradient id="st7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#351A31"/><stop offset="1" stop-color="#8E4C80"/></linearGradient>
+              </defs>
+              <path d="M14 8h16v72c0 12-4 20-8 20s-8-8-8-20z" fill="url(#st0)"/>
+              <path d="M41 8h16v84c0 12-4 20-8 20s-8-8-8-20z" fill="url(#st1)"/>
+              <path d="M68 8h16v66c0 12-4 20-8 20s-8-8-8-20z" fill="url(#st2)"/>
+              <path d="M95 8h16v80c0 12-4 20-8 20s-8-8-8-20z" fill="url(#st3)"/>
+              <path d="M122 8h16v74c0 12-4 20-8 20s-8-8-8-20z" fill="url(#st4)"/>
+              <path d="M149 8h16v86c0 12-4 20-8 20s-8-8-8-20z" fill="url(#st5)"/>
+              <path d="M176 8h16v70c0 12-4 20-8 20s-8-8-8-20z" fill="url(#st6)"/>
+              <path d="M203 8h16v78c0 12-4 20-8 20s-8-8-8-20z" fill="url(#st7)"/>
+              <rect x="4" y="2" width="228" height="12" rx="6" fill="#1F4A3A"/>
+            </svg>
+            <div class="t"><span>Salón</span>Pomarrosa</div>
+          </div>
+          <div class="ex-body">
+            <span class="fict" data-i18n="ex.fictPro">Negocio ficticio · Paquete Pro</span>
+            <h3>Salón Pomarrosa</h3>
+            <p data-i18n="ex.salon">Varias páginas en español e inglés, “Abierto ahora”, cotizador y citas por WhatsApp, reseñas, guardar contacto e imprimir precios.</p>
             <span class="ex-go" data-i18n="ex.open">Ver sitio completo →</span>
           </div>
         </a>
@@ -491,17 +596,25 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "p.title": "Un solo pago por tu sitio. El plan mensual es opcional.", "p.once": "pago único", "p.month": "al mes",
       "p.basic": "1 página con servicios, precios, horario, mapa y botón de WhatsApp.",
       "p.b1": "Tu nombre, tu logo y tus colores", "p.b2": "Servicios con sus precios", "p.b3": "Horario, dirección y mapa de Google", "p.b4": "Botón de WhatsApp o mensaje de texto", "p.b5": "Se ve bien en el teléfono y en la computadora",
-      "pk.basico": "Básico · $200", "pk.grande": "Grande · $300", "pn.basico": "Básico", "pn.grande": "Grande", "pn.msg.basico": "Básico ($200)", "pn.msg.grande": "Grande ($300)",
+      "pn.basico": "Básico", "pn.grande": "Grande", "pn.pro": "Pro", "pn.msg.basico": "Básico ($200)", "pn.msg.grande": "Grande ($300)", "pn.msg.pro": "Pro ($400)",
+      "p.siteH": "Tu sitio", "p.proTag": "Varias páginas", "p.pro": "Lo del Grande, en un sitio de varias páginas y en español e inglés.",
+      "p.p1": "Todo lo del Grande", "p.p2": "Varias páginas, cada una con su propio link", "p.p3": "Botón para cambiar entre español e inglés",
+      "p.p4": "Aviso de “Abierto ahora” según tu horario", "p.p5": "Citas o pedidos por WhatsApp con el mensaje armado",
+      "p.p6": "Cotizador: escogen servicios, ven el total y te lo envían", "p.p7": "Servicios o menú por categorías", "p.p8": "Fotos que se abren en grande",
+      "p.p9": "Mapa con botón de “Cómo llegar”", "p.p10": "Página de reseñas de tus clientes", "p.p11": "Botones para guardar tu contacto y compartir tu sitio",
+      "p.p12": "Precios listos para imprimir y código QR para tu negocio",
       "p.full": "Sitio completo", "p.grande": "Lo del Básico, más galería de fotos, preguntas frecuentes y enlaces a tus redes.",
       "p.g1": "Todo lo del Básico", "p.g2": "Galería de fotos de tu trabajo", "p.g3": "Preguntas frecuentes", "p.g4": "Enlaces a tus redes sociales",
-      "p.optional": "Opcional", "p.maint": "Mantenimiento", "p.maintd": "Hasta 3 cambios al mes: precios, horario, textos.",
+      "p.maintH": "Mantenimiento", "p.maintSub": "mensual y opcional", "p.maintA": "Para Básico y Grande", "p.maintB": "Para Pro",
+      "p.maintd": "Hasta 3 cambios al mes: precios, horario, textos.", "p.maintdPro": "Hasta 3 cambios al mes en cualquiera de tus páginas, en español y en inglés.",
       "p.m1": "Me mandas el cambio por mensaje", "p.m2": "Lo cancelas cuando quieras, sin penalidad", "p.m3": "El sitio sigue siendo tuyo",
       "p.draft": "Antes de pagar ves un primer borrador gratis y pides los cambios que quieras.",
       "p.domain": "El dominio (tunegocio.com) lo compras tú, a tu nombre, por unos $10 a $15 al año. Yo te guío.",
       "p.extra": "Cualquier trabajo extra se acuerda y se cotiza contigo antes de hacerlo.",
-      "ex.title": "Así se ve un sitio terminado", "ex.lead": "Dos sitios completos del paquete Grande. Ábrelos en tu teléfono y prueba los botones. Los dos negocios son inventados.",
-      "ex.fict": "Negocio ficticio · Paquete Grande", "ex.barber": "Servicios con precios, citas por WhatsApp, galería, horario, mapa y preguntas frecuentes.",
-      "ex.food": "Menú con precios, pedidos por WhatsApp, galería, horario, mapa y preguntas frecuentes.", "ex.open": "Ver sitio completo →",
+      "ex.title": "Así se ve un sitio terminado", "ex.lead": "Dos sitios del paquete Grande y uno del Pro, con varias páginas. Ábrelos en tu teléfono y prueba los botones. Los tres negocios son inventados.",
+      "ex.fict": "Negocio ficticio · Paquete Grande", "ex.fictPro": "Negocio ficticio · Paquete Pro", "ex.barber": "Servicios con precios, botón de WhatsApp, galería, horario, mapa y preguntas frecuentes.",
+      "ex.food": "Menú con precios y total del pedido, botón de WhatsApp, galería, horario, mapa y preguntas frecuentes.",
+      "ex.salon": "Varias páginas en español e inglés, “Abierto ahora”, cotizador y citas por WhatsApp, reseñas, guardar contacto e imprimir precios.", "ex.open": "Ver sitio completo →",
       "how.title": "Cuatro pasos, sin saber nada de tecnología",
       "how.1t": "Conversamos", "how.1": "Me dices tus servicios, precios y horario, y me das tus fotos y tu logo.",
       "how.2t": "Te muestro un borrador gratis", "how.2": "Lo ves en tu teléfono y me dices qué cambiar.",
@@ -520,6 +633,10 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "pv.services": "Servicios", "pv.menu": "Menú", "pv.hours": "Horario", "pv.where": "Ubicación", "pv.gallery": "Galería", "pv.faq": "Preguntas frecuentes", "pv.made": "Sitio hecho por Small Shop Web",
       "pv.days": [["Lun – Vie", "9:00 a.m. – 6:00 p.m."], ["Sábado", "9:00 a.m. – 3:00 p.m."], ["Domingo", "Cerrado"]],
       "pv.faq1": "¿Aceptan ATH Móvil?", "pv.faq2": "¿Tienen estacionamiento?",
+      "pv.tabs": ["Inicio", "Servicios", "Galería", "Reseñas", "Contacto"], "pv.open": "Abierto ahora", "pv.closed": "Cerrado ahora", "pv.fav": "Lo más pedido",
+      "pv.quote": "Total estimado", "pv.from": "desde", "pv.send": "Enviar por WhatsApp", "pv.add": "Añadir", "pv.added": "Añadido", "pv.sample": "Reseña de ejemplo",
+      "pv.revs": [["Me atendieron rápido y con mucha amabilidad.", "M. R."], ["Los precios son claros y el trabajo quedó excelente.", "J. L."]],
+      "pv.dir": "Cómo llegar", "pv.save": "Guardar contacto", "pv.share": "Compartir",
       "msg": function (n, p, t) { return "Hola Adrian, vi Small Shop Web y me interesa el paquete " + p + " para mi negocio \"" + n + "\" (" + t + ")."; },
       "colors": ["Azul", "Rojo", "Verde", "Morado", "Anaranjado", "Turquesa", "Negro"]
     },
@@ -542,17 +659,25 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "p.title": "One payment for your site. The monthly plan is optional.", "p.once": "one-time", "p.month": "per month",
       "p.basic": "1 page with services, prices, hours, map and a WhatsApp button.",
       "p.b1": "Your name, logo and colors", "p.b2": "Services with prices", "p.b3": "Hours, address and Google map", "p.b4": "WhatsApp or text message button", "p.b5": "Looks good on phones and computers",
-      "pk.basico": "Basic · $200", "pk.grande": "Large · $300", "pn.basico": "Basic", "pn.grande": "Large", "pn.msg.basico": "Basic ($200)", "pn.msg.grande": "Large ($300)",
+      "pn.basico": "Basic", "pn.grande": "Large", "pn.pro": "Pro", "pn.msg.basico": "Basic ($200)", "pn.msg.grande": "Large ($300)", "pn.msg.pro": "Pro ($400)",
+      "p.siteH": "Your site", "p.proTag": "Multiple pages", "p.pro": "Everything in Large, as a multi-page site in Spanish and English.",
+      "p.p1": "Everything in Large", "p.p2": "Multiple pages, each with its own link", "p.p3": "A button to switch between Spanish and English",
+      "p.p4": "An “Open now” notice based on your hours", "p.p5": "WhatsApp bookings or orders with the message filled in",
+      "p.p6": "Quote tool: customers pick services, see the total and send it to you", "p.p7": "Services or menu sorted by category", "p.p8": "Photos that open full size",
+      "p.p9": "Map with a “Get directions” button", "p.p10": "A page for your customers' reviews", "p.p11": "Buttons to save your contact and share your site",
+      "p.p12": "Print-ready prices and a QR code for your shop",
       "p.full": "Complete site", "p.grande": "Everything in Basic, plus a photo gallery, FAQ and links to your social media.",
       "p.g1": "Everything in Basic", "p.g2": "Photo gallery of your work", "p.g3": "Frequently asked questions", "p.g4": "Links to your social media",
-      "p.optional": "Optional", "p.maint": "Maintenance", "p.maintd": "Up to 3 changes a month: prices, hours, text.",
+      "p.maintH": "Maintenance", "p.maintSub": "monthly, optional", "p.maintA": "For Basic and Large", "p.maintB": "For Pro",
+      "p.maintd": "Up to 3 changes a month: prices, hours, text.", "p.maintdPro": "Up to 3 changes a month on any of your pages, in Spanish and English.",
       "p.m1": "Send me the change by message", "p.m2": "Cancel any time, no penalty", "p.m3": "The site stays yours",
       "p.draft": "Before you pay, you see a free first draft and ask for any changes you want.",
       "p.domain": "You buy the domain (yourbusiness.com) in your own name, for about $10 to $15 a year. I'll walk you through it.",
       "p.extra": "Any extra work is agreed and quoted with you before I do it.",
-      "ex.title": "What a finished site looks like", "ex.lead": "Two complete sites from the Large package. Open them on your phone and try the buttons. Both businesses are made up.",
-      "ex.fict": "Fictional business · Large package", "ex.barber": "Services with prices, WhatsApp booking, gallery, hours, map and FAQ.",
-      "ex.food": "Menu with prices, WhatsApp ordering, gallery, hours, map and FAQ.", "ex.open": "See the full site →",
+      "ex.title": "What a finished site looks like", "ex.lead": "Two sites from the Large package and one from Pro, with multiple pages. Open them on your phone and try the buttons. All three businesses are made up.",
+      "ex.fict": "Fictional business · Large package (in Spanish)", "ex.fictPro": "Fictional business · Pro package", "ex.barber": "Services with prices, WhatsApp button, gallery, hours, map and FAQ.",
+      "ex.food": "Menu with prices and an order total, WhatsApp button, gallery, hours, map and FAQ.",
+      "ex.salon": "Multiple pages in Spanish and English, “Open now”, quote tool and WhatsApp booking, reviews, save contact and print prices.", "ex.open": "See the full site →",
       "how.title": "Four steps, no tech skills needed",
       "how.1t": "We talk", "how.1": "You tell me your services, prices and hours, and send me your photos and logo.",
       "how.2t": "I show you a free draft", "how.2": "You look at it on your phone and tell me what to change.",
@@ -571,6 +696,10 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "pv.services": "Services", "pv.menu": "Menu", "pv.hours": "Hours", "pv.where": "Location", "pv.gallery": "Gallery", "pv.faq": "FAQ", "pv.made": "Site made by Small Shop Web",
       "pv.days": [["Mon – Fri", "9:00 a.m. – 6:00 p.m."], ["Saturday", "9:00 a.m. – 3:00 p.m."], ["Sunday", "Closed"]],
       "pv.faq1": "Do you take ATH Móvil?", "pv.faq2": "Is there parking?",
+      "pv.tabs": ["Home", "Services", "Gallery", "Reviews", "Contact"], "pv.open": "Open now", "pv.closed": "Closed now", "pv.fav": "Most requested",
+      "pv.quote": "Estimated total", "pv.from": "from", "pv.send": "Send on WhatsApp", "pv.add": "Add", "pv.added": "Added", "pv.sample": "Sample review",
+      "pv.revs": [["They helped me fast and were very friendly.", "M. R."], ["Clear prices, and the work came out great.", "J. L."]],
+      "pv.dir": "Get directions", "pv.save": "Save contact", "pv.share": "Share",
       "msg": function (n, p, t) { return "Hi Adrian, I saw Small Shop Web and I'm interested in the " + p + " package for my business \"" + n + "\" (" + t + ")."; },
       "colors": ["Blue", "Red", "Green", "Purple", "Orange", "Teal", "Black"]
     }
@@ -600,7 +729,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     wrench: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3a5 5 0 0 0-4.6 7L3 17.4V21h3.6l7.4-7.4A5 5 0 0 0 21 9l-3 3-3-1-1-3z"/></svg>'
   };
 
-  var state = { lang: "es", pkg: "basico", color: 0 };
+  var state = { lang: "es", pkg: "basico", color: 0, page: "inicio", quote: [0, 1] };
   try { var saved = localStorage.getItem("ssw-lang"); if (saved === "en" || saved === "es") state.lang = saved; } catch (e) {}
 
   var $ = function (id) { return document.getElementById(id); };
@@ -611,14 +740,69 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
   function pick(pair) { return pair[state.lang === "es" ? 0 : 1]; }
   function priceText(p) { if (p.indexOf("|") > -1) { var s = p.split("|"); return state.lang === "es" ? s[0] : s[1]; } return p; }
 
+  // Hora de Puerto Rico (UTC-4 todo el año) contra el horario del ejemplo.
+  function prOpen() {
+    var d = new Date(Date.now() - 4 * 3600000), day = d.getUTCDay(), h = d.getUTCHours() + d.getUTCMinutes() / 60;
+    return (day >= 1 && day <= 5 && h >= 9 && h < 18) || (day === 6 && h >= 9 && h < 15);
+  }
+  function num(p) { var m = String(p).match(/[\d.]+/); return m ? parseFloat(m[0]) : 0; }
+
+  // Vista previa del Pro: un sitio con páginas que se pueden tocar.
+  function renderPro(t, c, l, name, tag) {
+    var keys = ["inicio", "servicios", "galeria", "resenas", "contacto"], tabs = l["pv.tabs"].slice();
+    if (t.menu) tabs[1] = l["pv.menu"];
+    var item = function (it) { return '<div class="pv-item"><span>' + esc(pick(it)) + '</span><b>' + esc(priceText(it[2])) + '</b></div>'; };
+    var html = '<div class="pv-top" style="background:' + c + '"><span class="pv-top-name">' + esc(name) + '</span>' +
+      '<span class="pv-lang" aria-hidden="true"><b' + (state.lang === "es" ? ' class="on"' : "") + '>ES</b><b' + (state.lang === "en" ? ' class="on"' : "") + '>EN</b></span></div>';
+    html += '<div class="pv-tabs">' + keys.map(function (k, i) {
+      var on = state.page === k;
+      return '<button type="button" data-pv-page="' + k + '" aria-pressed="' + on + '"' + (on ? ' style="background:' + c + '"' : "") + '>' + esc(tabs[i]) + '</button>';
+    }).join("") + '</div>';
+    if (state.page === "inicio") {
+      var open = prOpen();
+      html += '<div class="pv-sec"><span class="pv-open' + (open ? " is-open" : "") + '">' + esc(open ? l["pv.open"] : l["pv.closed"]) + '</span>' +
+        '<div class="pv-name" style="color:' + c + '">' + esc(name) + '</div><div class="pv-tag2">' + esc(tag) + '</div>' +
+        '<span class="pv-btn pv-solid" style="background:' + c + '">' + esc(pick(t.cta)) + '</span></div>';
+      html += '<div class="pv-sec"><div class="pv-h">' + l["pv.fav"] + '</div>' + t.items.slice(0, 2).map(item).join("") + '</div>';
+    } else if (state.page === "servicios") {
+      html += '<div class="pv-sec"><div class="pv-h">' + (t.menu ? l["pv.menu"] : l["pv.services"]) + '</div>' + t.items.map(function (it, i) {
+        var on = state.quote.indexOf(i) > -1;
+        return '<div class="pv-item pv-pick"><span>' + esc(pick(it)) + '</span><b>' + esc(priceText(it[2])) + '</b>' +
+          '<button type="button" class="pv-add" data-pv-add="' + i + '" aria-pressed="' + on + '" aria-label="' + esc((on ? l["pv.added"] : l["pv.add"]) + ": " + pick(it)) + '" style="' +
+          (on ? "background:" + c + ";border-color:" + c + ";color:#fff" : "color:" + c + ";border-color:" + c) + '">' + (on ? "✓" : "+") + '</button></div>';
+      }).join("") + '</div>';
+      var sum = 0, from = false, dec = /\.\d\d/.test(t.items[0][2]);
+      state.quote.forEach(function (i) { var pt = priceText(t.items[i][2]); sum += num(pt); if (/desde|from/.test(pt)) from = true; });
+      html += '<div class="pv-quote" style="border-color:' + c + '"><span>' + l["pv.quote"] + '</span><b>' + (from ? l["pv.from"] + " " : "") + "$" + (dec ? sum.toFixed(2) : sum) + '</b>' +
+        '<span class="pv-btn pv-solid" style="background:' + c + '">' + l["pv.send"] + '</span></div>';
+    } else if (state.page === "galeria") {
+      html += '<div class="pv-sec"><div class="pv-h">' + l["pv.gallery"] + '</div><div class="pv-gal">';
+      [0.95, 0.7, 0.5, 0.6, 0.85, 0.4, 0.75, 0.55, 0.9].forEach(function (o) { html += '<div style="background:' + c + ';opacity:' + o + '"></div>'; });
+      html += '</div></div>';
+    } else if (state.page === "resenas") {
+      html += '<div class="pv-sec"><div class="pv-h">' + esc(tabs[3]) + '</div>' + l["pv.revs"].map(function (r) {
+        return '<div class="pv-rev"><span style="color:' + c + '">★★★★★</span><p>“' + esc(r[0]) + '”</p><small>' + esc(r[1]) + " · " + esc(l["pv.sample"]) + '</small></div>';
+      }).join("") + '</div>';
+    } else {
+      html += '<div class="pv-sec"><div class="pv-h">' + l["pv.hours"] + '</div><div class="pv-hours">';
+      l["pv.days"].forEach(function (d) { html += '<span>' + d[0] + '</span><span>' + d[1] + '</span>'; });
+      html += '</div></div><div class="pv-sec"><div class="pv-h">' + l["pv.where"] + '</div><div class="pv-map" style="--pin:' + c + '"></div>' +
+        '<div class="pv-btns"><span style="background:' + c + '">' + l["pv.dir"] + '</span><span style="color:' + c + ';border-color:' + c + '">' + l["pv.save"] + '</span>' +
+        '<span style="color:' + c + ';border-color:' + c + '">' + l["pv.share"] + '</span></div></div>';
+    }
+    return html + '<div class="pv-foot">' + l["pv.made"] + '</div>';
+  }
+
   function render() {
     var t = TYPES[typeEl.value], c = COLORS[state.color], l = L();
     var name = nameEl.value.trim() || (state.lang === "es" ? "Tu negocio" : "Your business");
+    var tag = t.tag ? pick(t.tag) : (otherEl.value.trim() || l["otro.tag"]);
     var grande = state.pkg === "grande";
+    if (state.pkg === "pro") { screen.innerHTML = renderPro(t, c, l, name, tag); setCta(l, name); return; }
     var html = '<div class="pv-hero" style="background:' + c + '">' +
       '<div class="pv-icon">' + ICONS[t.icon] + '</div>' +
       '<div class="pv-name">' + esc(name) + '</div>' +
-      '<div class="pv-tag">' + esc(t.tag ? pick(t.tag) : (otherEl.value.trim() || l["otro.tag"])) + '</div>' +
+      '<div class="pv-tag">' + esc(tag) + '</div>' +
       '<span class="pv-btn" style="color:' + c + '">' + esc(pick(t.cta)) + '</span></div>';
     html += '<div class="pv-sec"><div class="pv-h">' + (t.menu ? l["pv.menu"] : l["pv.services"]) + '</div>';
     t.items.forEach(function (it) { html += '<div class="pv-item"><span>' + esc(pick(it)) + '</span><b>' + esc(priceText(it[2])) + '</b></div>'; });
@@ -638,8 +822,11 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     }
     html += '<div class="pv-foot">' + l["pv.made"] + '</div>';
     screen.innerHTML = html;
+    setCta(l, name);
+  }
 
-    var pkgName = l[grande ? "pn.msg.grande" : "pn.msg.basico"];
+  function setCta(l, name) {
+    var pkgName = l["pn.msg." + state.pkg];
     var typeName = typeEl.value === "otro" ? (otherEl.value.trim() || l["t.otro"]) : typeEl.options[typeEl.selectedIndex].textContent;
     var msg = l.msg(name, pkgName, typeName) + " Color: " + l.colors[state.color] + ".";
     cta.href = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg);
@@ -669,16 +856,28 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     if (tag) tag.setAttribute("content", lang === "es" ? "Sitios web para negocios pequeños en Puerto Rico. Primer borrador gratis." : "Websites for small businesses in Puerto Rico. Free first draft.");
     var wa = $("c-wa");
     wa.href = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(lang === "es" ? "Hola Adrian, vi Small Shop Web y quiero información sobre un sitio web para mi negocio." : "Hi Adrian, I saw Small Shop Web and I'd like information about a website for my business.");
+    $("ex-salon").href = "ejemplos/salon/?lang=" + lang;
     buildSwatches(); render();
   }
 
   document.querySelectorAll(".lang button").forEach(function (b) { b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); }); });
   document.querySelectorAll(".seg button").forEach(function (b) {
     b.addEventListener("click", function () {
-      state.pkg = b.getAttribute("data-pkg");
+      state.pkg = b.getAttribute("data-pkg"); state.page = "inicio";
       document.querySelectorAll(".seg button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
       render();
     });
+  });
+  screen.addEventListener("click", function (e) {
+    var tab = e.target.closest("[data-pv-page]"), add = e.target.closest("[data-pv-add]"), sel;
+    if (tab) { state.page = tab.getAttribute("data-pv-page"); screen.scrollTop = 0; sel = '[data-pv-page="' + state.page + '"]'; }
+    else if (add) {
+      var i = Number(add.getAttribute("data-pv-add")), k = state.quote.indexOf(i);
+      if (k > -1) state.quote.splice(k, 1); else state.quote.push(i);
+      sel = '[data-pv-add="' + i + '"]';
+    } else return;
+    render();
+    var again = screen.querySelector(sel); if (again) again.focus();
   });
   nameEl.addEventListener("input", render);
   typeEl.addEventListener("change", function () { otherWrap.hidden = typeEl.value !== "otro"; if (!otherWrap.hidden) otherEl.focus(); render(); });

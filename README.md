@@ -1,12 +1,13 @@
 # Small Shop Web
 
-Sitio de Small Shop Web con dos ejemplos terminados. Es HTML, CSS y JavaScript sin nada que instalar, así que funciona tal cual en GitHub Pages.
+Sitio de Small Shop Web con tres ejemplos terminados. Es HTML, CSS y JavaScript sin nada que instalar, así que funciona tal cual en GitHub Pages.
 
 ```
-index.html               Página principal (ES/EN, vista previa en vivo, precios, contacto)
-ejemplos/barberia.html   Ejemplo: Barbería El Filo (negocio ficticio)
-ejemplos/restaurante.html Ejemplo: El Fogón de Titi (negocio ficticio)
-.nojekyll                Le dice a GitHub Pages que publique los archivos tal cual
+index.html                 Página principal (ES/EN, vista previa en vivo, precios, contacto)
+ejemplos/barberia.html     Ejemplo del paquete Grande: Barbería El Filo (negocio ficticio, solo en español)
+ejemplos/restaurante.html  Ejemplo del paquete Grande: El Fogón de Titi (negocio ficticio, solo en español)
+ejemplos/salon/            Ejemplo del paquete Pro: Salón Pomarrosa, 5 páginas en español e inglés (negocio ficticio)
+.nojekyll                  Le dice a GitHub Pages que publique los archivos tal cual
 ```
 
 ## Publicarlo en GitHub Pages
@@ -27,3 +28,4 @@ ejemplos/restaurante.html Ejemplo: El Fogón de Titi (negocio ficticio)
 
 - Teléfono de WhatsApp: busca `19394086784` en `index.html` (aparece en `PHONE` y en los enlaces `wa.me`).
 - Precios y textos: están en `index.html`, en el HTML y en el objeto `T` del script (una versión `es` y otra `en`).
+- Ejemplo Pro (salón): cada página está en su carpeta (`servicios/`, `galeria/`, `resenas/`, `contacto/`). El texto en español está en el HTML de cada página; el inglés, los servicios, el horario y las reseñas están en `ejemplos/salon/assets/salon.js`. Si cambias un texto, cámbialo en los dos idiomas.
