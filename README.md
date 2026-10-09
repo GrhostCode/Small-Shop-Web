@@ -26,6 +26,6 @@ ejemplos/salon/            Ejemplo del paquete Pro: Salón Pomarrosa, 5 páginas
 
 ## Cambiar datos
 
-- Teléfono de WhatsApp: busca `19394086784` en `index.html` (aparece en `PHONE` y en los enlaces `wa.me`).
+- Teléfono y correo: en `index.html`, en el script, `PHONE` y `MAIL` están guardados al revés y en base64 para que los bots no los recojan. Para cambiarlos, codifica el valor al revés en base64 (por ejemplo `printf %s "NUMERO" | rev | base64`).
 - Precios y textos: están en `index.html`, en el HTML y en el objeto `T` del script (una versión `es` y otra `en`).
 - Ejemplo Pro (salón): cada página está en su carpeta (`servicios/`, `galeria/`, `resenas/`, `contacto/`). El texto en español está en el HTML de cada página; el inglés, los servicios, el horario y las reseñas están en `ejemplos/salon/assets/salon.js`. Si cambias un texto, cámbialo en los dos idiomas.
