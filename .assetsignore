@@ -1,0 +1,8 @@
+# files in the repo root that should NOT be published on the website
+wrangler.jsonc
+.assetsignore
+README.md
+CNAME
+.nojekyll
+.git
+node_modules
