@@ -321,9 +321,9 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
             <div class="field">
               <span class="lbl" id="b-pkg-l" data-i18n="b.pkg">Paquete</span>
               <div class="seg" role="group" aria-labelledby="b-pkg-l">
-                <button type="button" id="pkg-basico" data-pkg="basico" aria-pressed="true"><b data-i18n="pn.basico">Básico</b><span>$199</span></button>
-                <button type="button" id="pkg-grande" data-pkg="grande" aria-pressed="false"><b data-i18n="pn.grande">Grande</b><span>$299</span></button>
-                <button type="button" id="pkg-pro" data-pkg="pro" aria-pressed="false"><b data-i18n="pn.pro">Pro</b><span>$399</span></button>
+                <button type="button" id="pkg-basico" data-pkg="basico" aria-pressed="true"><b data-i18n="pn.basico">Básico</b><span>$199.99</span></button>
+                <button type="button" id="pkg-grande" data-pkg="grande" aria-pressed="false"><b data-i18n="pn.grande">Grande</b><span>$299.99</span></button>
+                <button type="button" id="pkg-pro" data-pkg="pro" aria-pressed="false"><b data-i18n="pn.pro">Pro</b><span>$399.99</span></button>
               </div>
             </div>
           </div>
@@ -367,13 +367,14 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     <div class="wrap">
       <div class="head">
         <span class="eyebrow" data-i18n="nav.prices">Precios</span>
-        <h2 data-i18n="p.title">Un solo pago por tu sitio. El plan mensual es opcional.</h2>
+        <h2 data-i18n="p.title">Un solo pago por tu sitio, y una mensualidad sencilla.</h2>
+        <p data-i18n="p.lead">La mensualidad es $5 de hospedaje para mantener tu sitio en línea, más los cambios al mes que tú escojas (de 0 a 5).</p>
       </div>
       <h3 class="board-h"><span data-i18n="p.siteH">Tu sitio</span><small data-i18n="p.once">pago único</small></h3>
       <div class="board">
         <article class="plan">
           <h3 data-i18n="pn.basico">Básico</h3>
-          <div class="price">$199<small data-i18n="p.once">pago único</small></div>
+          <div class="price">$199.99<small data-i18n="p.once">pago único</small></div>
           <p data-i18n="p.basic">1 página con servicios, precios, horario, mapa y botón de WhatsApp.</p>
           <ul>
             <li data-i18n="p.b1">Tu nombre, tu logo y tus colores</li>
@@ -381,24 +382,26 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
             <li data-i18n="p.b3">Horario, dirección y mapa de Google</li>
             <li data-i18n="p.b4">Botón de WhatsApp o mensaje de texto</li>
             <li data-i18n="p.b5">Se ve bien en el teléfono y en la computadora</li>
+            <li data-i18n="p.rev2">2 rondas de cambios en el borrador</li>
           </ul>
         </article>
         <article class="plan">
           <span class="tag" data-i18n="p.full">Sitio completo</span>
           <h3 data-i18n="pn.grande">Grande</h3>
-          <div class="price">$299<small data-i18n="p.once">pago único</small></div>
+          <div class="price">$299.99<small data-i18n="p.once">pago único</small></div>
           <p data-i18n="p.grande">Lo del Básico, más galería de fotos, preguntas frecuentes y enlaces a tus redes.</p>
           <ul>
             <li data-i18n="p.g1">Todo lo del Básico</li>
             <li data-i18n="p.g2">Galería de fotos de tu trabajo</li>
             <li data-i18n="p.g3">Preguntas frecuentes</li>
             <li data-i18n="p.g4">Enlaces a tus redes sociales</li>
+            <li data-i18n="p.rev3">3 rondas de cambios en el borrador</li>
           </ul>
         </article>
         <article class="plan feature">
           <span class="tag" data-i18n="p.proTag">Varias páginas</span>
           <h3 data-i18n="pn.pro">Pro</h3>
-          <div class="price">$399<small data-i18n="p.once">pago único</small></div>
+          <div class="price">$399.99<small data-i18n="p.once">pago único</small></div>
           <p data-i18n="p.pro">Lo del Grande, en un sitio de varias páginas y en español e inglés.</p>
           <ul>
             <li data-i18n="p.p1">Todo lo del Grande</li>
@@ -413,36 +416,49 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
             <li data-i18n="p.p10">Página de reseñas de tus clientes</li>
             <li data-i18n="p.p11">Botones para guardar tu contacto y compartir tu sitio</li>
             <li data-i18n="p.p12">Precios listos para imprimir y código QR para tu negocio</li>
+            <li data-i18n="p.rev5">5 rondas de cambios en el borrador</li>
           </ul>
         </article>
       </div>
-      <h3 class="board-h"><span data-i18n="p.maintH">Mantenimiento</span><small data-i18n="p.maintSub">mensual y opcional</small></h3>
-      <div class="board maint">
+      <h3 class="board-h"><span data-i18n="p.maintH">Mensualidad</span><small data-i18n="p.maintSub">$5 de hospedaje + los cambios que escojas</small></h3>
+      <div class="board">
         <article class="plan">
-          <h3 data-i18n="p.maintA">Para Básico y Grande</h3>
-          <div class="price">$15<small data-i18n="p.month">al mes</small></div>
-          <p data-i18n="p.maintd">Hasta 3 cambios al mes: precios, horario, textos.</p>
+          <h3 data-i18n="pn.basico">Básico</h3>
+          <div class="price">$7<small data-i18n="p.perChange">por cambio al mes</small></div>
           <ul>
-            <li data-i18n="p.m1">Me mandas el cambio por mensaje</li>
-            <li data-i18n="p.m2">Lo cancelas cuando quieras, sin penalidad</li>
-            <li data-i18n="p.m3">El sitio sigue siendo tuyo</li>
+            <li data-i18n="p.exB0">Solo hospedaje: $5 al mes</li>
+            <li data-i18n="p.exB2">2 cambios: $19 al mes</li>
+            <li data-i18n="p.exB5">5 cambios: $40 al mes</li>
+            <li data-i18n="p.looseB">Cambio suelto sin mensualidad: $10.50</li>
           </ul>
         </article>
         <article class="plan">
-          <h3 data-i18n="p.maintB">Para Pro</h3>
-          <div class="price">$25<small data-i18n="p.month">al mes</small></div>
-          <p data-i18n="p.maintdPro">Hasta 3 cambios al mes en cualquiera de tus páginas, en español y en inglés.</p>
+          <h3 data-i18n="pn.grande">Grande</h3>
+          <div class="price">$9<small data-i18n="p.perChange">por cambio al mes</small></div>
           <ul>
-            <li data-i18n="p.m1">Me mandas el cambio por mensaje</li>
-            <li data-i18n="p.m2">Lo cancelas cuando quieras, sin penalidad</li>
-            <li data-i18n="p.m3">El sitio sigue siendo tuyo</li>
+            <li data-i18n="p.exG0">Solo hospedaje: $5 al mes</li>
+            <li data-i18n="p.exG2">2 cambios: $23 al mes</li>
+            <li data-i18n="p.exG5">5 cambios: $50 al mes</li>
+            <li data-i18n="p.looseG">Cambio suelto sin mensualidad: $13.50</li>
+          </ul>
+        </article>
+        <article class="plan">
+          <h3 data-i18n="pn.pro">Pro</h3>
+          <div class="price">$11<small data-i18n="p.perChange">por cambio al mes</small></div>
+          <ul>
+            <li data-i18n="p.exP0">Solo hospedaje: $5 al mes</li>
+            <li data-i18n="p.exP2">2 cambios: $27 al mes</li>
+            <li data-i18n="p.exP5">5 cambios: $60 al mes</li>
+            <li data-i18n="p.looseP">Cambio suelto sin mensualidad: $16.50</li>
           </ul>
         </article>
       </div>
       <div class="fine">
-        <p data-i18n="p.draft">Antes de pagar ves un primer borrador gratis y pides los cambios que quieras.</p>
+        <p data-i18n="p.draft">Antes de pagar ves un primer borrador gratis y pides cambios según las rondas de tu plan. Cada ronda extra o cambio fuera del plan cuesta $15.</p>
+        <p data-i18n="p.pay">Pagas cuando apruebas el sitio final: el precio del plan y tu primer mes, juntos. Todo se paga por adelantado.</p>
+        <p data-i18n="p.changes">Un cambio es algo pequeño: un texto, una foto, un precio, un horario o un enlace. Los cambios que no uses no pasan al mes siguiente. Puedes subir o bajar la cantidad cuando quieras y aplica el próximo mes, o pagas la diferencia para tenerlos de inmediato.</p>
+        <p data-i18n="p.speed">Los cambios se hacen en 3 días laborables. Si tu sitio se cae o algo principal no funciona, lo atiendo en 24 a 48 horas, y si fue error mío, lo arreglo gratis.</p>
         <p data-i18n="p.domain">El dominio (tunegocio.com) lo compras tú, a tu nombre, por unos $10 a $15 al año. Yo te guío.</p>
-        <p data-i18n="p.extra">Cualquier trabajo extra se acuerda y se cotiza contigo antes de hacerlo.</p>
       </div>
     </div>
   </section>
@@ -519,7 +535,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
         <li><h3 data-i18n="how.1t">Conversamos</h3><p data-i18n="how.1">Me dices tus servicios, precios y horario, y me das tus fotos y tu logo.</p></li>
         <li><h3 data-i18n="how.2t">Te muestro un borrador gratis</h3><p data-i18n="how.2">Lo ves en tu teléfono y me dices qué cambiar.</p></li>
         <li><h3 data-i18n="how.3t">Lo apruebas</h3><p data-i18n="how.3">Haces los cambios que quieras y me dices por mensaje cuándo está listo.</p></li>
-        <li><h3 data-i18n="how.4t">Lo publico</h3><p data-i18n="how.4">Pagas, compras tu dominio a tu nombre (yo te guío) y el sitio queda en línea.</p></li>
+        <li><h3 data-i18n="how.4t">Lo publico</h3><p data-i18n="how.4">Pagas el sitio y tu primer mes, compras tu dominio a tu nombre (yo te guío) y el sitio queda en línea.</p></li>
       </ol>
     </div>
   </section>
@@ -530,12 +546,14 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
         <h2 data-i18n="faq.title">Preguntas frecuentes</h2>
       </div>
       <div class="faq">
-        <details><summary data-i18n="faq.1q">¿El sitio es mío?</summary><p data-i18n="faq.1a">Sí. El dominio y las cuentas quedan a tu nombre, y cuando pagas el sitio completo es tuyo.</p></details>
+        <details><summary data-i18n="faq.1q">¿El sitio es mío?</summary><p data-i18n="faq.1a">Tu dominio, tus textos, fotos, logo y marca son tuyos. El código del sitio es mío y lo usas mientras tengas la mensualidad. Si te vas, puedes comprar una copia de los archivos por el 25% del precio de tu plan.</p></details>
         <details><summary data-i18n="faq.2q">¿Y si no me gusta?</summary><p data-i18n="faq.2a">Hacemos los cambios que pidas antes de publicar. No se publica nada sin que tú lo apruebes.</p></details>
-        <details><summary data-i18n="faq.3q">¿Tengo que pagar el plan mensual?</summary><p data-i18n="faq.3a">No, es opcional. Si lo tomas, lo puedes cancelar cuando quieras sin penalidad y el sitio sigue siendo tuyo.</p></details>
+        <details><summary data-i18n="faq.3q">¿Tengo que pagar una mensualidad?</summary><p data-i18n="faq.3a">Sí, mínimo $5 al mes de hospedaje para que el sitio siga en línea. Los cambios al mes son opcionales. Puedes cancelar cuando quieras: el servicio termina al final del mes pagado y el sitio se desactiva, a menos que compres los archivos.</p></details>
         <details><summary data-i18n="faq.4q">¿Me aseguran más clientes?</summary><p data-i18n="faq.4a">No te prometo resultados. El sitio hace que sea más fácil encontrarte y escribirte, y eso ayuda.</p></details>
         <details><summary data-i18n="faq.5q">¿Hay contrato?</summary><p data-i18n="faq.5a">Sí, uno sencillo y en español, para que los dos sepamos qué incluye el trabajo y cuánto cuesta.</p></details>
         <details><summary data-i18n="faq.6q">¿Y las fotos de mis clientes?</summary><p data-i18n="faq.6a">Solo se publican las de personas que dijeron que sí.</p></details>
+        <details><summary data-i18n="faq.7q">¿Usas inteligencia artificial?</summary><p data-i18n="faq.7a">Sí, uso herramientas de IA para diseñar y programar más rápido. Todo lo reviso y lo ajusto yo antes de entregártelo.</p></details>
+        <details><summary data-i18n="faq.8q">¿Y si no respondo durante el borrador?</summary><p data-i18n="faq.8a">Si pasan 30 días sin respuesta, puedo borrar el borrador y cerrar el proyecto, sin costo para ninguno de los dos.</p></details>
       </div>
     </div>
   </section>
@@ -605,10 +623,12 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "why.2t": "Se ve serio.", "why.2": "Un negocio con página propia da más confianza que uno que solo tiene redes.",
       "why.3t": "Pedir cita es fácil.", "why.3": "Un botón abre tu WhatsApp con el mensaje ya escrito. El cliente solo le da enviar.",
       "why.4t": "Es tuyo.", "why.4": "El dominio (tunegocio.com) queda a tu nombre. No depende de lo que haga o cambie una red social.",
-      "p.title": "Un solo pago por tu sitio. El plan mensual es opcional.", "p.once": "pago único", "p.month": "al mes",
+      "p.title": "Un solo pago por tu sitio, y una mensualidad sencilla.", "p.once": "pago único", "p.month": "al mes",
+      "p.lead": "La mensualidad es $5 de hospedaje para mantener tu sitio en línea, más los cambios al mes que tú escojas (de 0 a 5).",
+      "p.rev2": "2 rondas de cambios en el borrador", "p.rev3": "3 rondas de cambios en el borrador", "p.rev5": "5 rondas de cambios en el borrador",
       "p.basic": "1 página con servicios, precios, horario, mapa y botón de WhatsApp.",
       "p.b1": "Tu nombre, tu logo y tus colores", "p.b2": "Servicios con sus precios", "p.b3": "Horario, dirección y mapa de Google", "p.b4": "Botón de WhatsApp o mensaje de texto", "p.b5": "Se ve bien en el teléfono y en la computadora",
-      "pn.basico": "Básico", "pn.grande": "Grande", "pn.pro": "Pro", "pn.msg.basico": "Básico ($199)", "pn.msg.grande": "Grande ($299)", "pn.msg.pro": "Pro ($399)",
+      "pn.basico": "Básico", "pn.grande": "Grande", "pn.pro": "Pro", "pn.msg.basico": "Básico ($199.99)", "pn.msg.grande": "Grande ($299.99)", "pn.msg.pro": "Pro ($399.99)",
       "p.siteH": "Tu sitio", "p.proTag": "Varias páginas", "p.pro": "Lo del Grande, en un sitio de varias páginas y en español e inglés.",
       "p.p1": "Todo lo del Grande", "p.p2": "Varias páginas, cada una con su propio link", "p.p3": "Botón para cambiar entre español e inglés",
       "p.p4": "Aviso de “Abierto ahora” según tu horario", "p.p5": "Citas o pedidos por WhatsApp con el mensaje armado",
@@ -617,12 +637,15 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "p.p12": "Precios listos para imprimir y código QR para tu negocio",
       "p.full": "Sitio completo", "p.grande": "Lo del Básico, más galería de fotos, preguntas frecuentes y enlaces a tus redes.",
       "p.g1": "Todo lo del Básico", "p.g2": "Galería de fotos de tu trabajo", "p.g3": "Preguntas frecuentes", "p.g4": "Enlaces a tus redes sociales",
-      "p.maintH": "Mantenimiento", "p.maintSub": "mensual y opcional", "p.maintA": "Para Básico y Grande", "p.maintB": "Para Pro",
-      "p.maintd": "Hasta 3 cambios al mes: precios, horario, textos.", "p.maintdPro": "Hasta 3 cambios al mes en cualquiera de tus páginas, en español y en inglés.",
-      "p.m1": "Me mandas el cambio por mensaje", "p.m2": "Lo cancelas cuando quieras, sin penalidad", "p.m3": "El sitio sigue siendo tuyo",
-      "p.draft": "Antes de pagar ves un primer borrador gratis y pides los cambios que quieras.",
+      "p.maintH": "Mensualidad", "p.maintSub": "$5 de hospedaje + los cambios que escojas", "p.perChange": "por cambio al mes",
+      "p.exB0": "Solo hospedaje: $5 al mes", "p.exB2": "2 cambios: $19 al mes", "p.exB5": "5 cambios: $40 al mes", "p.looseB": "Cambio suelto sin mensualidad: $10.50",
+      "p.exG0": "Solo hospedaje: $5 al mes", "p.exG2": "2 cambios: $23 al mes", "p.exG5": "5 cambios: $50 al mes", "p.looseG": "Cambio suelto sin mensualidad: $13.50",
+      "p.exP0": "Solo hospedaje: $5 al mes", "p.exP2": "2 cambios: $27 al mes", "p.exP5": "5 cambios: $60 al mes", "p.looseP": "Cambio suelto sin mensualidad: $16.50",
+      "p.draft": "Antes de pagar ves un primer borrador gratis y pides cambios según las rondas de tu plan. Cada ronda extra o cambio fuera del plan cuesta $15.",
+      "p.pay": "Pagas cuando apruebas el sitio final: el precio del plan y tu primer mes, juntos. Todo se paga por adelantado.",
+      "p.changes": "Un cambio es algo pequeño: un texto, una foto, un precio, un horario o un enlace. Los cambios que no uses no pasan al mes siguiente. Puedes subir o bajar la cantidad cuando quieras y aplica el próximo mes, o pagas la diferencia para tenerlos de inmediato.",
+      "p.speed": "Los cambios se hacen en 3 días laborables. Si tu sitio se cae o algo principal no funciona, lo atiendo en 24 a 48 horas, y si fue error mío, lo arreglo gratis.",
       "p.domain": "El dominio (tunegocio.com) lo compras tú, a tu nombre, por unos $10 a $15 al año. Yo te guío.",
-      "p.extra": "Cualquier trabajo extra se acuerda y se cotiza contigo antes de hacerlo.",
       "ex.title": "Así se ve un sitio terminado", "ex.lead": "Dos sitios del paquete Grande y uno del Pro, con varias páginas. Ábrelos en tu teléfono y prueba los botones. Los tres negocios son inventados.",
       "ex.fict": "Negocio ficticio · Paquete Grande", "ex.fictPro": "Negocio ficticio · Paquete Pro", "ex.barber": "Servicios con precios, botón de WhatsApp, galería, horario, mapa y preguntas frecuentes.",
       "ex.food": "Menú con precios y total del pedido, botón de WhatsApp, galería, horario, mapa y preguntas frecuentes.",
@@ -631,14 +654,16 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "how.1t": "Conversamos", "how.1": "Me dices tus servicios, precios y horario, y me das tus fotos y tu logo.",
       "how.2t": "Te muestro un borrador gratis", "how.2": "Lo ves en tu teléfono y me dices qué cambiar.",
       "how.3t": "Lo apruebas", "how.3": "Haces los cambios que quieras y me dices por mensaje cuándo está listo.",
-      "how.4t": "Lo publico", "how.4": "Pagas, compras tu dominio a tu nombre (yo te guío) y el sitio queda en línea.",
+      "how.4t": "Lo publico", "how.4": "Pagas el sitio y tu primer mes, compras tu dominio a tu nombre (yo te guío) y el sitio queda en línea.",
       "faq.title": "Preguntas frecuentes",
-      "faq.1q": "¿El sitio es mío?", "faq.1a": "Sí. El dominio y las cuentas quedan a tu nombre, y cuando pagas el sitio completo es tuyo.",
+      "faq.1q": "¿El sitio es mío?", "faq.1a": "Tu dominio, tus textos, fotos, logo y marca son tuyos. El código del sitio es mío y lo usas mientras tengas la mensualidad. Si te vas, puedes comprar una copia de los archivos por el 25% del precio de tu plan.",
       "faq.2q": "¿Y si no me gusta?", "faq.2a": "Hacemos los cambios que pidas antes de publicar. No se publica nada sin que tú lo apruebes.",
-      "faq.3q": "¿Tengo que pagar el plan mensual?", "faq.3a": "No, es opcional. Si lo tomas, lo puedes cancelar cuando quieras sin penalidad y el sitio sigue siendo tuyo.",
+      "faq.3q": "¿Tengo que pagar una mensualidad?", "faq.3a": "Sí, mínimo $5 al mes de hospedaje para que el sitio siga en línea. Los cambios al mes son opcionales. Puedes cancelar cuando quieras: el servicio termina al final del mes pagado y el sitio se desactiva, a menos que compres los archivos.",
       "faq.4q": "¿Me aseguran más clientes?", "faq.4a": "No te prometo resultados. El sitio hace que sea más fácil encontrarte y escribirte, y eso ayuda.",
       "faq.5q": "¿Hay contrato?", "faq.5a": "Sí, uno sencillo y en español, para que los dos sepamos qué incluye el trabajo y cuánto cuesta.",
       "faq.6q": "¿Y las fotos de mis clientes?", "faq.6a": "Solo se publican las de personas que dijeron que sí.",
+      "faq.7q": "¿Usas inteligencia artificial?", "faq.7a": "Sí, uso herramientas de IA para diseñar y programar más rápido. Todo lo reviso y lo ajusto yo antes de entregártelo.",
+      "faq.8q": "¿Y si no respondo durante el borrador?", "faq.8a": "Si pasan 30 días sin respuesta, puedo borrar el borrador y cerrar el proyecto, sin costo para ninguno de los dos.",
       "c.title": "Hablemos de tu negocio", "c.lead": "El primer paso es una conversación corta: me cuentas de tu negocio, te enseño un ejemplo y te digo qué paquete te conviene.",
       "c.role": "Dueño de Small Shop Web", "c.wa": "Escribir por WhatsApp", "c.phone": "WhatsApp / teléfono", "c.email": "Correo", "c.copy": "Copiar", "c.copied": "Copiado",
       "f.tag": "Sitios web para negocios pequeños en Puerto Rico",
@@ -668,10 +693,12 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "why.2t": "It looks professional.", "why.2": "A business with its own page earns more trust than one that only has social media.",
       "why.3t": "Booking is easy.", "why.3": "A button opens your WhatsApp with the message already written. The customer just taps send.",
       "why.4t": "It's yours.", "why.4": "The domain (yourbusiness.com) is in your name. It doesn't depend on what a social network does or changes.",
-      "p.title": "One payment for your site. The monthly plan is optional.", "p.once": "one-time", "p.month": "per month",
+      "p.title": "One payment for your site, plus a simple monthly fee.", "p.once": "one-time", "p.month": "per month",
+      "p.lead": "The monthly fee is $5 for hosting to keep your site online, plus however many changes a month you choose (0 to 5).",
+      "p.rev2": "2 rounds of changes on the draft", "p.rev3": "3 rounds of changes on the draft", "p.rev5": "5 rounds of changes on the draft",
       "p.basic": "1 page with services, prices, hours, map and a WhatsApp button.",
       "p.b1": "Your name, logo and colors", "p.b2": "Services with prices", "p.b3": "Hours, address and Google map", "p.b4": "WhatsApp or text message button", "p.b5": "Looks good on phones and computers",
-      "pn.basico": "Basic", "pn.grande": "Large", "pn.pro": "Pro", "pn.msg.basico": "Basic ($199)", "pn.msg.grande": "Large ($299)", "pn.msg.pro": "Pro ($399)",
+      "pn.basico": "Basic", "pn.grande": "Large", "pn.pro": "Pro", "pn.msg.basico": "Basic ($199.99)", "pn.msg.grande": "Large ($299.99)", "pn.msg.pro": "Pro ($399.99)",
       "p.siteH": "Your site", "p.proTag": "Multiple pages", "p.pro": "Everything in Large, as a multi-page site in Spanish and English.",
       "p.p1": "Everything in Large", "p.p2": "Multiple pages, each with its own link", "p.p3": "A button to switch between Spanish and English",
       "p.p4": "An “Open now” notice based on your hours", "p.p5": "WhatsApp bookings or orders with the message filled in",
@@ -680,12 +707,15 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "p.p12": "Print-ready prices and a QR code for your shop",
       "p.full": "Complete site", "p.grande": "Everything in Basic, plus a photo gallery, FAQ and links to your social media.",
       "p.g1": "Everything in Basic", "p.g2": "Photo gallery of your work", "p.g3": "Frequently asked questions", "p.g4": "Links to your social media",
-      "p.maintH": "Maintenance", "p.maintSub": "monthly, optional", "p.maintA": "For Basic and Large", "p.maintB": "For Pro",
-      "p.maintd": "Up to 3 changes a month: prices, hours, text.", "p.maintdPro": "Up to 3 changes a month on any of your pages, in Spanish and English.",
-      "p.m1": "Send me the change by message", "p.m2": "Cancel any time, no penalty", "p.m3": "The site stays yours",
-      "p.draft": "Before you pay, you see a free first draft and ask for any changes you want.",
+      "p.maintH": "Monthly fee", "p.maintSub": "$5 hosting + the changes you choose", "p.perChange": "per change a month",
+      "p.exB0": "Hosting only: $5 a month", "p.exB2": "2 changes: $19 a month", "p.exB5": "5 changes: $40 a month", "p.looseB": "One-off change without a plan: $10.50",
+      "p.exG0": "Hosting only: $5 a month", "p.exG2": "2 changes: $23 a month", "p.exG5": "5 changes: $50 a month", "p.looseG": "One-off change without a plan: $13.50",
+      "p.exP0": "Hosting only: $5 a month", "p.exP2": "2 changes: $27 a month", "p.exP5": "5 changes: $60 a month", "p.looseP": "One-off change without a plan: $16.50",
+      "p.draft": "Before you pay, you see a free first draft and ask for changes based on your plan's rounds. Each extra round or out-of-plan change is $15.",
+      "p.pay": "You pay when you approve the final site: the plan price and your first month, together. Everything is paid upfront.",
+      "p.changes": "A change is something small: a text, a photo, a price, your hours or a link. Unused changes don't carry over. You can raise or lower your count any time and it applies next month, or pay the difference to get them right away.",
+      "p.speed": "Changes are done within 3 business days. If your site goes down or something important breaks, I respond within 24 to 48 hours, and if it was my mistake, I fix it for free.",
       "p.domain": "You buy the domain (yourbusiness.com) in your own name, for about $10 to $15 a year. I'll walk you through it.",
-      "p.extra": "Any extra work is agreed and quoted with you before I do it.",
       "ex.title": "What a finished site looks like", "ex.lead": "Two sites from the Large package and one from Pro, with multiple pages. Open them on your phone and try the buttons. All three businesses are made up.",
       "ex.fict": "Fictional business · Large package (in Spanish)", "ex.fictPro": "Fictional business · Pro package", "ex.barber": "Services with prices, WhatsApp button, gallery, hours, map and FAQ.",
       "ex.food": "Menu with prices and an order total, WhatsApp button, gallery, hours, map and FAQ.",
@@ -694,14 +724,16 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "how.1t": "We talk", "how.1": "You tell me your services, prices and hours, and send me your photos and logo.",
       "how.2t": "I show you a free draft", "how.2": "You look at it on your phone and tell me what to change.",
       "how.3t": "You approve it", "how.3": "You make any changes you want and message me when it's ready.",
-      "how.4t": "I publish it", "how.4": "You pay, buy your domain in your name (I'll guide you) and the site goes live.",
+      "how.4t": "I publish it", "how.4": "You pay for the site and your first month, buy your domain in your name (I'll guide you) and the site goes live.",
       "faq.title": "Frequently asked questions",
-      "faq.1q": "Is the site mine?", "faq.1a": "Yes. The domain and accounts are in your name, and once you pay in full the site is yours.",
+      "faq.1q": "Is the site mine?", "faq.1a": "Your domain, text, photos, logo and brand are yours. The site's code is mine, and you use it while you have the monthly plan. If you leave, you can buy a copy of the files for 25% of your plan's price.",
       "faq.2q": "What if I don't like it?", "faq.2a": "We make the changes you ask for before publishing. Nothing goes live without your approval.",
-      "faq.3q": "Do I have to pay for the monthly plan?", "faq.3a": "No, it's optional. If you take it, you can cancel any time with no penalty and the site stays yours.",
+      "faq.3q": "Is there a monthly fee?", "faq.3a": "Yes, at least $5 a month for hosting to keep the site online. Monthly changes are optional. You can cancel any time: service ends at the end of the paid month and the site goes offline, unless you buy the files.",
       "faq.4q": "Will I get more customers?", "faq.4a": "I don't promise results. The site makes it easier for people to find you and message you, and that helps.",
       "faq.5q": "Is there a contract?", "faq.5a": "Yes, a simple one in Spanish, so we both know what the work includes and what it costs.",
       "faq.6q": "What about photos of my customers?", "faq.6a": "Only photos of people who said yes get published.",
+      "faq.7q": "Do you use AI?", "faq.7a": "Yes, I use AI tools to design and code faster. I review and adjust everything myself before handing it over.",
+      "faq.8q": "What if I don't reply during the draft?", "faq.8a": "If 30 days go by with no reply, I may delete the draft and close the project, at no cost to either of us.",
       "c.title": "Let's talk about your business", "c.lead": "The first step is a short conversation: you tell me about your business, I show you an example and tell you which package fits.",
       "c.role": "Owner, Small Shop Web", "c.wa": "Message on WhatsApp", "c.phone": "WhatsApp / phone", "c.email": "Email", "c.copy": "Copy", "c.copied": "Copied",
       "f.tag": "Websites for small businesses in Puerto Rico",
