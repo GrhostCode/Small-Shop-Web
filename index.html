@@ -195,6 +195,14 @@ section.block { padding-block: 72px; border-top: 1px solid var(--line); }
 .plan ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
 .plan li { display: grid; grid-template-columns: 20px 1fr; gap: 8px; }
 .plan li::before { content: ""; width: 14px; height: 8px; border-left: 3px solid var(--sea); border-bottom: 3px solid var(--sea); transform: rotate(-45deg) translate(1px, 6px); }
+.diy { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 14px 18px; border: 1.5px dashed var(--line); border-radius: 14px; }
+.diy p { flex: 1 1 18em; color: var(--muted); }
+.diy p b { color: var(--ink); }
+.go { font-weight: 700; text-decoration: none; white-space: nowrap; }
+.go:hover { text-decoration: underline; }
+.paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+@media (max-width: 900px) { .paths { grid-template-columns: 1fr; } }
+.paths .plan .go { margin-top: auto; }
 .fine { margin-top: 22px; display: grid; gap: 8px; color: var(--muted); font-size: .98rem; max-width: 52em; }
 
 /* Examples */
@@ -340,6 +348,11 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
             <span class="note" data-i18n="b.ctaSub">Abre WhatsApp con tu mensaje ya escrito.</span>
           </div>
         </form>
+
+        <div class="diy">
+          <p><b data-i18n="diy.t">¿Quieres hacerlo tú mismo?</b> <span data-i18n="diy.p">Crea el sitio de tu negocio con la ayuda de Limp AI.</span></p>
+          <a class="go" href="https://site.smallshopweb.com/" data-i18n="diy.cta">Ver el creador →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -454,6 +467,38 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
         <p data-i18n="p.changes">Un cambio es algo pequeño: un texto, una foto, un precio, un horario o un enlace. Los cambios que no uses no pasan al mes siguiente. Puedes subir o bajar la cantidad cuando quieras y aplica el próximo mes, o pagas la diferencia para tenerlos de inmediato.</p>
         <p data-i18n="p.speed">Los cambios se hacen en 3 días laborables. Si tu sitio se cae o algo principal no funciona, lo atiendo en 24 a 48 horas, y si fue error mío, lo arreglo gratis.</p>
         <p data-i18n="p.domain">El dominio (tunegocio.com) lo compras tú, a tu nombre, por unos $10 a $15 al año. Yo te guío.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="limp-ai">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow" data-i18n="vs.eyebrow">Dos maneras de tener tu sitio</span>
+        <h2 data-i18n="vs.title">Diseño a la medida o creador con Limp AI</h2>
+        <p data-i18n="vs.lead">Puedes contratarme para que haga tu sitio, o usar Limp AI, el creador de Small Shop Web, para crearlo y editarlo tú mismo.</p>
+      </div>
+      <div class="paths">
+        <article class="plan feature">
+          <span class="tag" data-i18n="vs.customTag">Lo hago yo</span>
+          <h3 data-i18n="vs.customT">Diseño a la medida</h3>
+          <ul>
+            <li data-i18n="vs.c1">Te hago el sitio con tus fotos, precios y colores</li>
+            <li data-i18n="vs.c2">Primer borrador gratis y rondas de cambios</li>
+            <li data-i18n="vs.c3">Hospedaje y cambios al mes, sin que tengas que tocar nada</li>
+          </ul>
+          <a class="go" href="#precios" data-i18n="vs.customCta">Ver precios →</a>
+        </article>
+        <article class="plan">
+          <span class="tag" data-i18n="vs.diyTag">Lo haces tú</span>
+          <h3 data-i18n="vs.diyT">Creador con Limp AI</h3>
+          <ul>
+            <li data-i18n="vs.d1">Describes tu negocio y Limp AI arma el sitio</li>
+            <li data-i18n="vs.d2">Lo editas tú cuando quieras</li>
+            <li data-i18n="vs.d3">Para quien prefiere hacerlo por su cuenta</li>
+          </ul>
+          <a class="go" href="https://site.smallshopweb.com/" data-i18n="vs.diyCta">Ver el creador →</a>
+        </article>
       </div>
     </div>
   </section>
@@ -641,6 +686,11 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "p.changes": "Un cambio es algo pequeño: un texto, una foto, un precio, un horario o un enlace. Los cambios que no uses no pasan al mes siguiente. Puedes subir o bajar la cantidad cuando quieras y aplica el próximo mes, o pagas la diferencia para tenerlos de inmediato.",
       "p.speed": "Los cambios se hacen en 3 días laborables. Si tu sitio se cae o algo principal no funciona, lo atiendo en 24 a 48 horas, y si fue error mío, lo arreglo gratis.",
       "p.domain": "El dominio (tunegocio.com) lo compras tú, a tu nombre, por unos $10 a $15 al año. Yo te guío.",
+      "diy.t": "¿Quieres hacerlo tú mismo?", "diy.p": "Crea el sitio de tu negocio con la ayuda de Limp AI.", "diy.cta": "Ver el creador →",
+      "vs.eyebrow": "Dos maneras de tener tu sitio", "vs.title": "Diseño a la medida o creador con Limp AI",
+      "vs.lead": "Puedes contratarme para que haga tu sitio, o usar Limp AI, el creador de Small Shop Web, para crearlo y editarlo tú mismo.",
+      "vs.customTag": "Lo hago yo", "vs.customT": "Diseño a la medida", "vs.c1": "Te hago el sitio con tus fotos, precios y colores", "vs.c2": "Primer borrador gratis y rondas de cambios", "vs.c3": "Hospedaje y cambios al mes, sin que tengas que tocar nada", "vs.customCta": "Ver precios →",
+      "vs.diyTag": "Lo haces tú", "vs.diyT": "Creador con Limp AI", "vs.d1": "Describes tu negocio y Limp AI arma el sitio", "vs.d2": "Lo editas tú cuando quieras", "vs.d3": "Para quien prefiere hacerlo por su cuenta", "vs.diyCta": "Ver el creador →",
       "ex.title": "Así se ve un sitio terminado", "ex.lead": "Dos sitios del paquete Grande y uno del Pro, con varias páginas. Ábrelos en tu teléfono y prueba los botones. Los tres negocios son inventados.",
       "ex.fict": "Negocio ficticio · Paquete Grande", "ex.fictPro": "Negocio ficticio · Paquete Pro", "ex.barber": "Servicios con precios, botón de WhatsApp, galería, horario, mapa y preguntas frecuentes.",
       "ex.food": "Menú con precios y total del pedido, botón de WhatsApp, galería, horario, mapa y preguntas frecuentes.",
@@ -711,6 +761,11 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       "p.changes": "A change is something small: a text, a photo, a price, your hours or a link. Unused changes don't carry over. You can raise or lower your count any time and it applies next month, or pay the difference to get them right away.",
       "p.speed": "Changes are done within 3 business days. If your site goes down or something important breaks, I respond within 24 to 48 hours, and if it was my mistake, I fix it for free.",
       "p.domain": "You buy the domain (yourbusiness.com) in your own name, for about $10 to $15 a year. I'll walk you through it.",
+      "diy.t": "Want to build it yourself?", "diy.p": "Create your small business website with help from Limp AI.", "diy.cta": "Preview the builder →",
+      "vs.eyebrow": "Two ways to get your site", "vs.title": "Custom design or the Limp AI builder",
+      "vs.lead": "You can hire me to build your site, or use Limp AI, the Small Shop Web builder, to create and edit it yourself.",
+      "vs.customTag": "I build it", "vs.customT": "Custom design", "vs.c1": "I build your site with your photos, prices and colors", "vs.c2": "Free first draft and rounds of changes", "vs.c3": "Hosting and monthly changes, without you touching a thing", "vs.customCta": "See prices →",
+      "vs.diyTag": "You build it", "vs.diyT": "Limp AI builder", "vs.d1": "Describe your business and Limp AI puts the site together", "vs.d2": "Edit it yourself whenever you want", "vs.d3": "For people who'd rather do it on their own", "vs.diyCta": "Preview the builder →",
       "ex.title": "What a finished site looks like", "ex.lead": "Two sites from the Large package and one from Pro, with multiple pages. Open them on your phone and try the buttons. All three businesses are made up.",
       "ex.fict": "Fictional business · Large package (in Spanish)", "ex.fictPro": "Fictional business · Pro package", "ex.barber": "Services with prices, WhatsApp button, gallery, hours, map and FAQ.",
       "ex.food": "Menu with prices and an order total, WhatsApp button, gallery, hours, map and FAQ.",
