@@ -9,3 +9,5 @@ node_modules
 worker
 docs
 setup-ai.sh
+.wrangler
+.gitignore

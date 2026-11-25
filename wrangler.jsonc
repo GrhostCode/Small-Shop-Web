@@ -4,9 +4,8 @@
   "compatibility_date": "2026-10-01",
   // Claude API gateway (/api/ai/*, /api/admin/*). Every other path is the static site.
   "main": "worker/index.js",
-  // To turn on Small Shop Web keys, create the database (README, "Claude API para clientes")
-  // and uncomment the next line with your database_id.
-  // "d1_databases": [{ "binding": "DB", "database_name": "small-shop-web-ai", "database_id": "PASTE-ID-HERE" }],
+  // Usage database for Small Shop Web keys (README, "Claude API para clientes").
+  "d1_databases": [{ "binding": "DB", "database_name": "small-shop-web-ai", "database_id": "14ff717b-bf33-400d-9445-0e4cbe654ef0" }],
   "assets": {
     "directory": "./",
     "binding": "ASSETS"
