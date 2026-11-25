@@ -6,3 +6,5 @@ CNAME
 .nojekyll
 .git
 node_modules
+worker
+docs
